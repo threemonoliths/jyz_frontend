@@ -1,0 +1,12 @@
+
+<pro-header>
+    <ng-template #breadcrumb>
+        <nz-breadcrumb>
+            <nz-breadcrumb-item *ngFor="let item of globalService.breadcrumbItems" ><a [routerLink]="[item.routerLink]">{{item.label}}</a></nz-breadcrumb-item>
+        </nz-breadcrumb>
+    </ng-template>
+</pro-header>
+<router-outlet></router-outlet>
+<nz-footer style="text-align: center;">
+    <div nz-col [class.text-center]="true">马钢汽运公司加油站 ©2017 Powered By Ng-zorro, Angular, Phoenix.</div>
+</nz-footer>

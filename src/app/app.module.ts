@@ -5,6 +5,7 @@ import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-transla
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LocalStorageService } from 'angular-web-storage';
+import {HttpModule}    from '@angular/http';
 
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
@@ -19,6 +20,11 @@ import { TokenInterceptor } from '@core/net/token/token.interceptor';
 
 import { registerLocaleData } from '@angular/common';
 import localeZhHans from '@angular/common/locales/zh-Hans';
+
+import { AuthenticationService } from './services/login.service';
+import { AuthGuard } from './routes/auth.guard';
+import { GlobalService } from './services/global.service';
+
 registerLocaleData(localeZhHans);
 
 // AoT requires an exported function for factories
@@ -41,6 +47,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         CoreModule,
         LayoutModule,
         RoutesModule,
+        HttpModule,
         // i18n
         TranslateModule.forRoot({
             loader: {
@@ -54,6 +61,9 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         { provide: LOCALE_ID, useValue: 'zh-Hans' },
         { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
         StartupService,
+        AuthenticationService,
+        GlobalService,
+        AuthGuard,
         {
             provide: APP_INITIALIZER,
             useFactory: StartupServiceFactory,

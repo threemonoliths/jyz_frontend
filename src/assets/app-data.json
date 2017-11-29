@@ -8,7 +8,9 @@
         "avatar": "./assets/img/zorro.svg",
         "email": "cipchk@qq.com"
     },
-    "menu": [{
+    "menu": [
+       
+    {
         "text": "主导航",
         "translate": "main_navigation",
         "group": true,

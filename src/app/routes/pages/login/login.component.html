@@ -6,13 +6,13 @@
             </ng-template>
             <form nz-form [formGroup]="valForm" (ngSubmit)="submit()" role="form">
                 <div nz-form-item>
-                    <div nz-form-control [nzValidateStatus]="valForm.controls.email">
-                        <nz-input formControlName="email" [nzPlaceHolder]="'邮箱'" [nzSize]="'large'">
+                    <div nz-form-control [nzValidateStatus]="valForm.controls.username">
+                        <nz-input formControlName="username" [nzPlaceHolder]="'邮箱'" [nzSize]="'large'">
                             <ng-template #suffix>
-                                <i class="anticon anticon-mail"></i>
+                                <i class="anticon anticon-username"></i>
                             </ng-template>
                         </nz-input>
-                        <div nz-form-explain *ngIf="valForm.controls.email.dirty&&valForm.controls.email.hasError('required')">邮箱必填</div>
+                        <div nz-form-explain *ngIf="valForm.controls.username.dirty&&valForm.controls.username.hasError('required')">用户名必填</div>
                     </div>
                 </div>
                 <div nz-form-item>

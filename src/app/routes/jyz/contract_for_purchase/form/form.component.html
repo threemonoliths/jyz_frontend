@@ -1,0 +1,228 @@
+<form nz-form [formGroup]="form" (ngSubmit)="_submitForm()" [nzLayout]="'vertical'">
+    <nz-card [nzBordered]="false" nzTitle="采购合同">
+        <div nz-row [nzGutter]="16">
+            <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col><label>合同编号</label></div>
+                    <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="cno">
+                        <nz-input formControlName="cno" nzPlaceHolder="请输入合同编号" nzSize="large"></nz-input>
+                        
+                        <p nz-form-explain *ngIf="form.controls['cno'].invalid && (form.controls['cno'].dirty || form.controls['cno'].touched) && form.controls['cno'].errors.required">
+                            请输入合同编号
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div nz-col [nzMd]="6" nzSm="12" nzXs="24">
+                    <div nz-form-item nz-row>
+                        <div nz-form-label nz-col><label>签订日期</label></div>
+                        <div nz-form-control>
+                            <div nz-col [nzSpan]="11">
+                                <div nz-form-item nz-row>
+                                    <div nz-form-control [nzValidateStatus]="date">
+                                        <nz-datepicker formControlName="date" [nzPlaceHolder]="'签订日期'"></nz-datepicker>
+                                        <p nz-form-explain *ngIf="form.controls['date'].invalid && (form.controls['date'].dirty || form.controls['date'].touched) && form.controls['date'].errors.required">
+                                            请选择签订
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+            </div>
+            <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col><label>签订地点</label></div>
+                    <div nz-form-control nz-col [nzValidateStatus]="location">
+                            <nz-input formControlName="location" nzPlaceHolder="请输入签订地点" nzSize="large"></nz-input>
+                        
+                        <p nz-form-explain *ngIf="form.controls['location'].invalid && (form.controls['location'].dirty || form.controls['location'].touched) && form.controls['location'].errors.required">
+                            请输入签订地点
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                    <div nz-form-item nz-row>
+                        <div nz-form-label nz-col><label>金额</label></div>
+                        <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="amount">
+                            <nz-input formControlName="amount" nzPlaceHolder="请输入金额" nzSize="large"></nz-input>
+                            
+                            <p nz-form-explain *ngIf="form.controls['amount'].invalid && (form.controls['amount'].dirty || form.controls['amount'].touched) && form.controls['amount'].errors.required">
+                                请输入金额
+                            </p>
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+
+        <div nz-row [nzGutter]="16">
+                
+                <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                    <div nz-form-item nz-row>
+                        <div nz-form-label nz-col><label>甲方</label></div>
+                        <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="partya">
+                            <nz-input formControlName="partya" nzPlaceHolder="请输入甲方" nzSize="large"></nz-input>
+                            
+                            <p nz-form-explain *ngIf="form.controls['partya'].invalid && (form.controls['partya'].dirty || form.controls['partya'].touched) && form.controls['partya'].errors.required">
+                                请输入甲方
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                    <div nz-form-item nz-row>
+                        <div nz-form-label nz-col><label>乙方</label></div>
+                        <div nz-form-control nz-col [nzValidateStatus]="partyb">
+                                <nz-input formControlName="partyb" nzPlaceHolder="请输入乙方" nzSize="large"></nz-input>
+                            
+                            <p nz-form-explain *ngIf="form.controls['partyb'].invalid && (form.controls['partyb'].dirty || form.controls['partyb'].touched) && form.controls['partyb'].errors.required">
+                                请输入乙方
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col><label>审核状态</label></div>
+                            <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="audited">
+                                <nz-input formControlName="audited" nzPlaceHolder="审核状态" nzSize="large" nzReadonly="true"></nz-input>
+
+                            </div>
+                        </div>
+                </div>
+                <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col><label>审核时间</label></div>
+                            <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="audit_time">
+                                <nz-input formControlName="audit_time" nzPlaceHolder="审核时间" nzSize="large" nzReadonly="true"></nz-input>
+  
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+
+
+            <div nz-row [nzGutter]="16">
+                    
+                    
+                    <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                        <div nz-form-item nz-row>
+                            <div nz-form-label nz-col><label>审核人</label></div>
+                            <div nz-form-control nz-col [nzValidateStatus]="audit_user">
+                                    <nz-input formControlName="audit_user" nzPlaceHolder="审核人" nzSize="large" nzReadonly="true"></nz-input>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                            <div nz-form-item nz-row>
+                                <div nz-form-label nz-col><label>创建人</label></div>
+                                <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="create_user">
+                                    <nz-input formControlName="create_user" nzPlaceHolder="创建人" nzSize="large" nzReadonly="true"></nz-input>
+    
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            
+
+
+        
+    </nz-card>
+    
+    <nz-card [nzBordered]="false" nzTitle="合同明细">
+        <nz-table formArrayName="details" [nzDataSource]="details.value" [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>产品</th>
+                    <th nz-th>型号</th>
+                    <th nz-th>生产商</th>
+                    <th nz-th>数量</th>
+                    <th nz-th>单位</th>
+                    <th nz-th>价格</th>
+                    <th nz-th>总价</th>
+                    
+                    <th nz-th>操作</th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let item of details.controls; let i = index" [formGroupName]="i">
+                    <td nz-td>
+                        <span *ngIf="editIndex!==i">{{details.value[i].product}}</span>
+                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.product">
+                            <nz-input formControlName="product" nzPlaceHolder="请输入产品" nzSize="large"></nz-input>
+                        </span>
+                    </td>
+                    <td nz-td>
+                        <span *ngIf="editIndex!==i">{{details.value[i].model}}</span>
+                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.model">
+                            <nz-input formControlName="model" nzPlaceHolder="请输入型号" nzSize="large"></nz-input>
+                        </span>
+                    </td>
+                    <td nz-td>
+                        <span *ngIf="editIndex!==i">{{details.value[i].producer}}</span>
+                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.producer">
+                            <nz-input formControlName="producer" nzPlaceHolder="请输入生产商" nzSize="large"></nz-input>
+                        </span>
+                    </td>
+                    <td nz-td>
+                            <span *ngIf="editIndex!==i">{{details.value[i].amount}}</span>
+                            <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.amount">
+                                <nz-input formControlName="amount" nzPlaceHolder="请输入数量" nzSize="large"></nz-input>
+                            </span>
+                        </td>
+                        <td nz-td>
+                            <span *ngIf="editIndex!==i">{{details.value[i].unit}}</span>
+                            <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.unit">
+                                <nz-input formControlName="unit" nzPlaceHolder="请输入单位" nzSize="large"></nz-input>
+                            </span>
+                        </td>
+                        <td nz-td>
+                            <span *ngIf="editIndex!==i">{{details.value[i].price}}</span>
+                            <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.price">
+                                <nz-input formControlName="price" nzPlaceHolder="请输入价格" nzSize="large"></nz-input>
+                            </span>
+                        </td>
+                        <td nz-td>
+                                <span *ngIf="editIndex!==i">{{details.value[i].totalprice}}</span>
+                                <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.totalprice">
+                                    <nz-input formControlName="totalprice" nzPlaceHolder="总价" nzSize="large"></nz-input>
+                                </span>
+                            </td>
+                    <td nz-td>
+                        <span *ngIf="editIndex!==i">
+                            <a (click)="edit(i)">编辑</a>
+                            <span nz-table-divider></span>
+                            <nz-popconfirm (nzOnConfirm)="del(i)" [nzTitle]="'是否要删除此行？'">
+                                <a nz-popconfirm>删除</a>
+                            </nz-popconfirm>
+                        </span>
+                        <span *ngIf="editIndex===i">
+                            <a (click)="save(i)">保存</a>
+                            <span nz-table-divider></span>
+                            <nz-popconfirm (nzOnConfirm)="cancel(i)" [nzTitle]="'是否要取消操作？'">
+                                <a nz-popconfirm>取消</a>
+                            </nz-popconfirm>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+        <button *ngIf="editIndex===-1" nz-button [nzType]="'dashed'" [nzSize]="'large'" (click)="add()" class="ant-btn__block mt-md">
+            <i class="anticon anticon-plus"></i>
+            <span>新增成员</span>
+        </button>
+
+    </nz-card>
+    <div >
+        <error-collect></error-collect>
+        <button nz-button [nzType]="'primary'" nzSize="large">提交</button>
+        <button nz-button [nzType]="'primary'" nzSize="large" (click)="goBack()">返回</button>
+    </div>
+</form>

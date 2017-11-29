@@ -17,12 +17,25 @@ import { ProUserLoginComponent } from './pro/user/login/login.component';
 import { ProUserRegisterComponent } from './pro/user/register/register.component';
 import { ProUserRegisterResultComponent } from './pro/user/register-result/register-result.component';
 
+import { AuthGuard } from './auth.guard';
+
 export const routes = [
     {
         path: '',
+        redirectTo: 'login',
+        pathMatch: 'full'
+    },
+    {
+		path: 'login',
+		component: LoginComponent
+    },    
+    
+
+    {
+        path: 'layout',
         component: LayoutComponent,
         children: [
-            { path: '', redirectTo: 'dashboard/v1', pathMatch: 'full' },
+            { path: '', redirectTo: 'content', pathMatch: 'full' },
             { path: 'dashboard', redirectTo: 'dashboard/v1', pathMatch: 'full' },
             { path: 'dashboard/v1', component: DashboardV1Component, data: { translate: 'dashboard_v1' } },
             { path: 'dashboard/analysis', component: DashboardAnalysisComponent, data: { translate: 'dashboard_analysis' } },
@@ -36,8 +49,12 @@ export const routes = [
             { path: 'maps', loadChildren: './maps/maps.module#MapsModule' },
             { path: 'logics', loadChildren: './logics/logics.module#LogicsModule' },
             { path: 'extras', loadChildren: './extras/extras.module#ExtrasModule' },
-            { path: 'pro', loadChildren: './pro/pro.module#ProModule' }
-        ]
+            { path: 'pro', loadChildren: './pro/pro.module#ProModule' },
+
+            // 加油站项目路由
+            { path: 'content', loadChildren: './jyz/content/content.module#ContentModule' },
+        ],
+        canActivate: [AuthGuard]
     },
     // 全屏布局
     {
@@ -65,5 +82,10 @@ export const routes = [
     { path: 'maintenance', component: MaintenanceComponent },
     { path: '404', component: Page404Component },
     { path: '500', component: Page500Component },
-    { path: '**', redirectTo: 'dashboard' }
+    { path: '**', redirectTo: 'dashboard' },
+
+    {
+		path: '**', // fallback router must in the last
+		component: LoginComponent
+	},
 ];
