@@ -36,44 +36,32 @@ export class ContractForPurchaseService {
 
   isUpdate = false;
   isAudit = false;
+
+  formOperation = '';
   updateContract : ContractForPurchase = null;
+
   //获取合同对象将提供给修改页面Form使用
-  initUpdate(c: ContractForPurchase){
-    let id = c.id;
-    this.updateContract = c;
-    return this.http.get(this.url + `/${id}`)
+  initUpdate(id){
+
+    return this.http.get(this.url + `/${id}`, getTokenOptions())
                .map(response => response.json()).toPromise();
-               //.then(result => this.updateContract.detail = result); 
+
   }
 
-  update(c: ContractForPurchase): Promise<any>{
-    //this.isAudit=false;
-    let details = JSON.stringify(this.parseDetails(c.details));
-    let params = new URLSearchParams();
-    // params.set('contractno', c.contractno);
-    // params.set('signdate', c.signdate);
-    // params.set('signplace', c.signplace);
-    // params.set('totalprice', c.totalprice ? String(c.totalprice) : '0');
-    // params.set('firstparty', c.firstparty);
-    // params.set('secondparty', c.secondparty);
-    // params.set('details', details);
-    let id = c.id;
-    return this.http.post(this.url + `/${id}`,params)
+  update(cid, v): Promise<any>{
+    let obj = { contractforpurchase: v} 
+    let param = JSON.stringify(obj);
+    return this.http.post(this.url + `/${cid}`,param, getTokenOptions())
                .map(response => response.json()).toPromise();
-              
-   
+  }
+
+  audit(cid): Promise<any>{
+
+    return this.http.get(this.url + `/audit/${cid}`, getTokenOptions())
+               .map(response => response.json()).toPromise();
   }
    
-   //过滤掉没有填写产品名称的明细
-   parseDetails(ds: Array<ContractForPurchaseDetail>) : any {
-     let results = new Array<ContractForPurchaseDetail>();
-     for ( let d of ds){
-       if (d.product!=null) {
-         results.push(d);
-       }
-     }
-     return results;
-   }
+
   
 
 }

@@ -25,6 +25,9 @@ import { AuthenticationService } from './services/login.service';
 import { AuthGuard } from './routes/auth.guard';
 import { GlobalService } from './services/global.service';
 
+//import { AuditPipe } from './pipes/pipes';
+//import { MainPipe } from './pipes/pipe.module';
+
 registerLocaleData(localeZhHans);
 
 // AoT requires an exported function for factories
@@ -39,6 +42,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
 @NgModule({
     declarations: [
         AppComponent
+        //AuditPipe
     ],
     imports: [
         BrowserModule,
@@ -48,6 +52,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         LayoutModule,
         RoutesModule,
         HttpModule,
+        //MainPipe,
         // i18n
         TranslateModule.forRoot({
             loader: {

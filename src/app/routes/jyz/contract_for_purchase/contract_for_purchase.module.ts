@@ -12,6 +12,8 @@ import { ContractForPurchaseListComponent } from './list/list.component';
 import { contractForPurchaseRoutes} from './contract_for_purchase.routes';
 
 import { ContractForPurchaseService } from '../../../services/contract_for_purchase.service';
+
+import { MainPipe } from '../../../pipes/pipe.module';
 //import { ContractService } from '../../_services/contract.service';
 //import { RoleService } from '../../_services/role.service';
 
@@ -22,6 +24,7 @@ import { ContractForPurchaseService } from '../../../services/contract_for_purch
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    MainPipe,
     RouterModule.forChild(contractForPurchaseRoutes)
   ],
   declarations: [

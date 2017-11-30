@@ -4,6 +4,8 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ContractForPurchaseService } from '../../../../services/contract_for_purchase.service';
+import { ContractForPurchase } from '../../../../domains/contract_for_purchase.domain'; 
+import { GlobalService } from '../../../../services/global.service';
 
 @Component({
     selector: 'contract_for_purchase-form',
@@ -15,24 +17,41 @@ export class ContractForPurchaseFormComponent implements OnInit {
 
     form: FormGroup;
 
-    constructor(private fb: FormBuilder, private router: Router, private contractForPurchaseService: ContractForPurchaseService) {}
+    title = '创建采购合同';
+    breadcrumbItem = {label: "采购合同", routerLink: "/layout/content/contract_for_purchase/form"}
+
+    contract: ContractForPurchase;
+
+    constructor(private fb: FormBuilder, private router: Router, private contractForPurchaseService: ContractForPurchaseService, 
+                private globalService: GlobalService) {}
 
     ngOnInit() {
+        let op = this.contractForPurchaseService.formOperation;
+        if (op == 'create') this.initCreate();
+        if (op == 'update') this.initUpdate();
+        if (op == 'audit') this.initAudit();
         this.form = this.fb.group({
-            cno: [null, [Validators.required]],
-            date: [null, [Validators.required]],
-            location: [null, [Validators.required]],
-            amount : [0, [Validators.required]],
-            partya : [null, [Validators.required]],
-            partyb : [null, [Validators.required]],
+            cno: [this.contract? this.contract.cno : '', [Validators.required]],
+            date: [this.contract? this.contract.date : '', [Validators.required]],
+            location: [this.contract? this.contract.location : '', [Validators.required]],
+            amount : [this.contract? this.contract.amount : 0, [Validators.required]],
+            partya : [this.contract? this.contract.partya : '', [Validators.required]],
+            partyb : [this.contract? this.contract.partyb : '', [Validators.required]],
 
-            audited : [null],
-            audit_time : [null],
-            audit_user : [null],
-            create_user : [null],
+            audited : [this.contract? this.contract.audited : ''],
+            audit_time : [this.contract? this.contract.audit_time : ''],
+            audit_user : [this.contract? this.contract.audit_user : ''],
+            create_user : [this.contract? this.contract.create_user : ''],
 
             details: this.fb.array([])
         });
+        if ((op == 'update') || (op=='audit')){
+        this.contract.details? this.contract.details.forEach(i => {
+            const field = this.createUser();
+            field.patchValue(i);
+            console.log(field);
+            this.details.push(field);
+        }) : console.log("tihs contract has no details.");}
     }
 
     createUser(): FormGroup {
@@ -101,11 +120,30 @@ export class ContractForPurchaseFormComponent implements OnInit {
         }
         if (this.form.invalid) return ;
         if (this.form.valid) {
-            this.contractForPurchaseService.add(this.form.value).then(resp => this.goBack());
+            let op = this.contractForPurchaseService.formOperation;
+            if (op == 'create') this.contractForPurchaseService.add(this.form.value).then(resp => this.goBack());
+            if (op == 'update') this.contractForPurchaseService.update(this.contract.id, this.form.value).then(resp => this.goBack());
+            if (op == 'audit') this.contractForPurchaseService.audit(this.contract.id).then(resp => this.goBack());
         }
     }
 
     goBack() {
         this.router.navigateByUrl('/layout/content/contract_for_purchase/page');
+    }
+
+    initCreate() {
+        this.title = '创建采购合同';
+        this.breadcrumbItem = {label: this.title, routerLink: "/layout/content/contract_for_purchase/form"};
+        this.globalService.addBreadcrumbItem(this.breadcrumbItem);
+    }
+
+    initUpdate() {
+        this.title = '修改采购合同';
+        this.contract = this.contractForPurchaseService.updateContract;
+    }
+
+    initAudit() {
+        this.title = '审核采购合同';
+        this.contract = this.contractForPurchaseService.updateContract;
     }
 }

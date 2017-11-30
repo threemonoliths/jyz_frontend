@@ -10,6 +10,7 @@ import { ContentComponent } from './content.component';
 import { contentRoutes} from './content.routes';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 
+
 // import { GlobalService } from '../../../services/global.service'; 
  
 @NgModule({
