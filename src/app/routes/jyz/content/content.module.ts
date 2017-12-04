@@ -10,6 +10,8 @@ import { ContentComponent } from './content.component';
 import { contentRoutes} from './content.routes';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 
+import { NzMessageService } from 'ng-zorro-antd';
+
 
 // import { GlobalService } from '../../../services/global.service'; 
  
@@ -27,6 +29,7 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 
   ],
   providers: [
+    NzMessageService
     // GlobalService
     // ContractService,
     // ConfirmationService

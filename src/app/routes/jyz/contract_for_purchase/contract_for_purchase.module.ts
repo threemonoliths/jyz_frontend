@@ -14,8 +14,6 @@ import { contractForPurchaseRoutes} from './contract_for_purchase.routes';
 import { ContractForPurchaseService } from '../../../services/contract_for_purchase.service';
 
 import { MainPipe } from '../../../pipes/pipe.module';
-//import { ContractService } from '../../_services/contract.service';
-//import { RoleService } from '../../_services/role.service';
 
  
 @NgModule({

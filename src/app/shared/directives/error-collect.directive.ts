@@ -36,6 +36,7 @@ export class ErrorCollectComponent implements OnInit, OnDestroy {
 
     private update() {
         this.count = this.formEl.querySelectorAll(ANTDERRORCLS).length;
+        //console.log(this.formEl.querySelectorAll('*'))
         this._hiden = this.count === 0;
     }
 

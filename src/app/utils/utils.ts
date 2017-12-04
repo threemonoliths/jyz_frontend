@@ -83,3 +83,14 @@ export function deepIndexOf(arr, obj) {
       });
     });
 }
+
+//日期转字符串
+export function dateToString(date) {
+    return date.getFullYear().toString()+'-'+((date.getMonth())+1).toString()+'-'+date.getDate().toString()
+}
+
+//字符串转日期
+export function stringToDate(str) {
+    return new Date(str) 
+}
+

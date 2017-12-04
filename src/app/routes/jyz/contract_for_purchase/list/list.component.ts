@@ -47,7 +47,7 @@ export class ContractForPurchaseListComponent implements OnInit {
     modalVisible = false;
     description = '';
 
-    constructor(public msg: NzMessageService, private globalService: GlobalService, 
+    constructor(public msg: NzMessageService, private globalService: GlobalService,
                 private contractForPurchaseService: ContractForPurchaseService, private router: Router) {}
 
     ngOnInit() {
@@ -63,7 +63,7 @@ export class ContractForPurchaseListComponent implements OnInit {
         this.loading = true;
         
         this.contractForPurchaseService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
-                                                     .catch((error) => {console.log(error); this.loading = false;})                                           
+                                                     .catch((error) => {this.msg.error(error); this.loading = false;})                                           
     }
 
     add() {
@@ -168,7 +168,13 @@ export class ContractForPurchaseListComponent implements OnInit {
     }
 
     delete(id) {
-        this.contractForPurchaseService.delete(id).then(resp => this.getData());
+        this.contractForPurchaseService.delete(id).then(resp =>  {
+            if ('error' in resp) { 
+                this.msg.error(resp.error);
+            } else {
+                this.msg.success('删除采购合同：'+resp.cno + '成功！');
+            }
+            this.getData()}).catch(error => this.msg.error(error));
     }
 
     //更新按钮事件
@@ -190,5 +196,14 @@ export class ContractForPurchaseListComponent implements OnInit {
                               this.contractForPurchaseService.updateContract.details = result.contract_for_purchase_details})
             .then(() => this.router.navigateByUrl('/layout/content/contract_for_purchase/form')).catch((error)=>
             console.log(error)); 
+    }
+
+    show(id) :void {
+        this.contractForPurchaseService.formOperation='show';
+        this.contractForPurchaseService.initUpdate(id)
+            .then(result => { this.contractForPurchaseService.updateContract = result; 
+                              this.contractForPurchaseService.updateContract.details = result.contract_for_purchase_details})
+            .then(() => this.router.navigateByUrl('/layout/content/contract_for_purchase/form')).catch((error)=>
+            console.log(error));
     }
 }

@@ -7,6 +7,8 @@ import 'rxjs/add/operator/toPromise';
 import { ContractForPurchase, ContractForPurchaseDetail } from '../domains/contract_for_purchase.domain';
 import { baseUrl } from './global.service';
 import { getTokenOptions } from './login.service';
+
+import { dateToString } from '../utils/utils'
 //import { setTokenOptions } from '../_services/authentication.service';
 @Injectable()
 export class ContractForPurchaseService {
@@ -21,8 +23,10 @@ export class ContractForPurchaseService {
   }
 
   add(v): Promise<any>{ 
-
+    this.getDate(v);
+    
     let obj = { contractforpurchase: v} 
+    console.log(obj);
     let param = JSON.stringify(obj);
     return this.http.post(this.url, param, getTokenOptions())
                .map(response => response.json()).toPromise();
@@ -31,13 +35,14 @@ export class ContractForPurchaseService {
   delete(id: any) {
 
     return this.http.delete(this.url + `/${id}`, getTokenOptions())
+               .map(response => response.json())
                .toPromise();
   }
 
   isUpdate = false;
   isAudit = false;
 
-  formOperation = '';
+  formOperation = 'create';
   updateContract : ContractForPurchase = null;
 
   //获取合同对象将提供给修改页面Form使用
@@ -49,6 +54,8 @@ export class ContractForPurchaseService {
   }
 
   update(cid, v): Promise<any>{
+    this.getDate(v);
+    
     let obj = { contractforpurchase: v} 
     let param = JSON.stringify(obj);
     return this.http.post(this.url + `/${cid}`,param, getTokenOptions())
@@ -60,6 +67,12 @@ export class ContractForPurchaseService {
     return this.http.get(this.url + `/audit/${cid}`, getTokenOptions())
                .map(response => response.json()).toPromise();
   }
+
+  getDate(v) {
+    v.date = dateToString(v.date)
+  }
+
+
    
 
   
