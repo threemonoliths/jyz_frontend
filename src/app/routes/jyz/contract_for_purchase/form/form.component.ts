@@ -113,8 +113,8 @@ export class ContractForPurchaseFormComponent implements OnInit {
         
         this.details.at(index).markAsDirty();
         if (this.details.at(index).invalid) return;
-        // let total = this.details.at(index)['price'].value * this.details.at(index)['amount'].value
-        // this.details.at(index)['totalprice'].setValue(total)
+        let total = this.details.at(index)['controls']['price'].value * this.details.at(index)['controls']['amount'].value
+        this.details.at(index)['controls']['totalprice'].setValue(total)
         this.editIndex = -1;
 
     }
