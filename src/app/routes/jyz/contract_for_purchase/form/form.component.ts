@@ -205,7 +205,7 @@ export class ContractForPurchaseFormComponent implements OnInit {
 
     // 自定义validator验证失败需调用该函数，为元素添加has-error类以显示红色高亮样式
     custom_validator() {
-        if (!this.form.controls['amount'].valid) { this.amount_error = 'has-error' }
+               if (!this.form.controls['amount'].valid) { this.amount_error = 'has-error' }
     }
 
 }

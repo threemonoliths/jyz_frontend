@@ -11,6 +11,7 @@ import { DashboardV1Component } from './dashboard/v1/v1.component';
 import { DashboardAnalysisComponent } from './dashboard/analysis/analysis.component';
 import { DashboardMonitorComponent } from './dashboard/monitor/monitor.component';
 import { DashboardWorkplaceComponent } from './dashboard/workplace/workplace.component';
+import { StationFormComponent} from './station/test/form.component';
 // pro
 import { ProUserLayoutComponent } from '../layout/pro/user/user.component';
 import { ProUserLoginComponent } from './pro/user/login/login.component';
@@ -38,10 +39,13 @@ export const routes = [
             { path: '', redirectTo: 'content', pathMatch: 'full' },
             { path: 'dashboard', redirectTo: 'dashboard/v1', pathMatch: 'full' },
             { path: 'dashboard/v1', component: DashboardV1Component, data: { translate: 'dashboard_v1' } },
+            { path: 'station', redirectTo: 'station/test', pathMatch: 'full' },
+            { path: 'station/test', component: StationFormComponent, data: {tanslate: 'test'} },
             { path: 'dashboard/analysis', component: DashboardAnalysisComponent, data: { translate: 'dashboard_analysis' } },
             { path: 'dashboard/monitor', component: DashboardMonitorComponent, data: { translate: 'dashboard_monitor' } },
             { path: 'dashboard/workplace', component: DashboardWorkplaceComponent, data: { translate: 'dashboard_workplace' } },
             { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' },
+            { path: 'contract', loadChildren:'./contract/contract.module#ContractModule' },
             { path: 'elements', loadChildren: './elements/elements.module#ElementsModule' },
             { path: 'forms', loadChildren: './forms/forms.module#FormsModule' },
             { path: 'charts', loadChildren: './charts/charts.module#ChartsModule' },

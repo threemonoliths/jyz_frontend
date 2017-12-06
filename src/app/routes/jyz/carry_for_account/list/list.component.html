@@ -1,0 +1,96 @@
+<nz-card [nzBordered]="false">
+        <form nz-form (ngSubmit)="getData()" [nzLayout]="'inline'">
+                <div nz-row [nzGutter]="24">
+                    <div *ngIf="expandForm" nz-col [nzSpan]="6" class="mb-md">
+                        <div nz-form-item class="d-flex">
+                            <div nz-form-label><label for="no">公司名称</label></div>
+                            <div nz-form-control class="flex-1">
+                                <nz-input [(ngModel)]="q.companyname" name="companyname" [nzSize]="'large'" [nzPlaceHolder]="'请输入'" nzId="companyname"></nz-input>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div nz-col [nzSpan]="expandForm ? 24 : 8" class="mb-md" [class.text-right]="expandForm">                         
+                        <button nz-button *ngIf="expandForm" type="button" (click)="search()" [nzType]="'primary'" [nzLoading]="loading" [nzSize]="'large'">查询</button>
+                        <!--<button nz-button *ngIf="expandForm" type="reset" (click)="getData()" [nzSize]="'large'" class="mx-sm">重置</button>-->
+                        <a (click)="expandForm=!expandForm">
+                            {{expandForm ? '收起查询' : '展开查询'}}
+                            <i class="anticon" [class.anticon-down]="!expandForm" [class.anticon-up]="expandForm"></i>
+                        </a>
+                    </div>
+                    
+                </div>
+            </form>
+    
+    <div class="mb-md">
+        <button nz-button (click)="add()" [nzType]="'primary'" [nzSize]="'large'">
+            <i class="anticon anticon-plus"></i><span>新建</span>
+        </button>
+
+        <ng-container *ngIf="selectedRows.length > 0">
+            <button nz-button [nzSize]="'large'">批量操作</button>
+            <nz-dropdown [nzPlacement]="'bottomLeft'">
+                <button nz-button nz-dropdown [nzSize]="'large'">
+                    更多操作 <i class="anticon anticon-down"></i>
+                </button>
+                <ul nz-menu>
+                    <li nz-menu-item (click)="remove()">删除</li>
+                    <li nz-menu-item (click)="approval()">批量审批</li>
+                </ul>
+            </nz-dropdown>
+        </ng-container>
+
+    </div>
+    
+    <nz-table #nzTable [nzAjaxData]="data" [nzTotal]="total" [nzPageSize]="q.ps" [nzLoading]="loading"
+                (nzDataChange)="dataChange($event)"
+                (nzPageIndexChange)="pageChange($event)">
+        <thead nz-thead>
+            <tr>               
+                <th nz-th><span>公司名称</span></th>
+                <th nz-th>
+                    <span>日期</span>
+                    <nz-table-sort [(nzValue)]="sortMap.date" (nzValueChange)="sort('date',$event)"></nz-table-sort>
+                </th>
+                <th nz-th><span>负责人</span></th>
+                <th nz-th><span>经办人</span></th>
+                <th nz-th>
+                    <span>审核状态</span>
+                    <nz-table-sort [(nzValue)]="sortMap.audited" (nzValueChange)="sort('audited',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>审核时间</span>
+                    <nz-table-sort [(nzValue)]="sortMap.audit_time" (nzValueChange)="sort('audit_time',$event)"></nz-table-sort>
+                </th>
+                <th nz-th><span>审核人</span></th>
+                <th nz-th><span>创建人</span></th>
+                <th nz-th><span>操作</span></th>
+            </tr>
+        </thead>
+        <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let i of nzTable.data">
+               
+                <td nz-td>{{i.companyname}}</td>
+                <td nz-td>{{i.date}}</td>
+                <td nz-td>{{i.responsibleperson}}</td>
+                <td nz-td>{{i.operator}}</td>
+                <td nz-td>{{i.audited | auditPipe}}</td>
+                <td nz-td>{{i.audit_time}}</td>
+                <td nz-td>{{i.audit_user}}</td>
+                <td nz-td>{{i.create_user}}</td>
+
+                <td nz-td *ngIf="!i.audited">
+                    <a (click)="audit(i.id)" >审核</a>
+                    <span nz-table-divider></span>
+                    <a (click)="update(i.id)">修改</a>
+                    <span nz-table-divider></span>
+                    <a (click)="delete(i.id)">删除</a>
+                </td>
+                <td nz-td *ngIf="i.audited">
+                    <a (click)="show(i.id)" >查看</a> 
+                </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</nz-card>
+

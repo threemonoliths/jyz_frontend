@@ -8,9 +8,63 @@
         "avatar": "./assets/img/zorro.svg",
         "email": "cipchk@qq.com"
     },
-    "menu": [
-       
-    {
+
+    "menu": [ {
+        "text": "gas station",
+        "translate": "汽运公司加油站",
+        "link":"",
+        "group": true,
+        "children": [ {"text": "form manage",
+            "translate": "表单管理",
+            "link":"",
+            "icon": "fa fa-cab",
+            "children":[{
+                "text":"采购合同",
+                "icon":"fa fa-briefcase",
+                "link":"/layout/content/contract_for_purchase/page",
+                "translate":"采购合同"
+            } ,{
+                "text":"油品入库校验单",
+                "icon":"fa fa-briefcase",
+                "link":"/layout/content/godownentry_for_acceptance/page",
+                "translate":"油品入库校验单"
+            } , {
+                "text":"销售油品提用表",
+                "icon":"fa fa-briefcase",
+                "link":"/layout/content/carry_for_account/page",
+                "translate":"销售油品提用表"
+            },{
+                "text":"油品回罐计量单",
+                "icon":"fa fa-briefcase",
+                "link":"/layout/content/metering_for_return/page",
+                "translate":"油品回罐计量单"
+            },{
+                "text":"油品配送出库单",
+                "icon":"fa fa-briefcase",
+                "link":"/layout/content/dispatch_for_purchase/page",
+                "translate":"油品配送出库单"
+            },{
+                "text":"油库调拨单",
+                "icon":"fa fa-briefcase",
+                "link":"/layout/content/oil_transfer/page",
+                "translate":"油库调拨单"
+            }
+
+        ]
+           },{
+            "text": "gas depot",
+            "translate": "加油站仓库",
+            "link":"",
+            "icon": "anticon anticon-inbox",
+            "children":[{
+                "text":"仓库表",
+                "icon":"fa fa-briefcase",
+                "link":"/layout/content/oil_depot/page",
+                "translate":"仓库表"
+                }]
+           }
+        ]
+    },  {
         "text": "主导航",
         "translate": "main_navigation",
         "group": true,
@@ -48,7 +102,15 @@
             "link": "/widgets",
             "icon": "icon-grid",
             "badge": 2
-        }]
+        },
+        {
+            "text": "合同",
+            "translate": "contract",
+            "link": "/contract",
+            "icon": "icon-grid",
+            "badge": 2
+        }
+    ]
     }, {
         "text": "组件",
         "translate": "component",
