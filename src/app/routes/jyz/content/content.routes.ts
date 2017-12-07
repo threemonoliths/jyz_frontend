@@ -10,6 +10,7 @@ export const contentRoutes = [{
 
         { path: '', redirectTo: 'contract_for_purchase', pathMatch: 'full' },
 		{ path: 'contract_for_purchase', loadChildren: '../contract_for_purchase/contract_for_purchase.module#ContractForPurchaseModule' },
+		{ path: 'oil_depot', loadChildren: '../oil_depot/oil_depot.module#OilDepotModule' },
 		{ path: 'dispatch_for_purchase', loadChildren: '../dispatch_for_purchase/dispatch_for_purchase.module#DispatchForPurchaseModule' },
 		{ path: 'metering_for_return', loadChildren: '../metering_for_return/metering_for_return.module#MeteringForReturnModule' },     
         { path: 'dashboard', component: DashboardComponent},
