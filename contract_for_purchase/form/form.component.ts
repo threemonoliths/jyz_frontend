@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd';
 
 import { ContractForPurchaseService } from '../../../../services/contract_for_purchase.service';
 import { ContractForPurchase } from '../../../../domains/contract_for_purchase.domain'; 
 import { GlobalService } from '../../../../services/global.service';
-
-import { stringToDate} from '../../../../utils/utils';
 
 @Component({
     selector: 'contract_for_purchase-form',
@@ -25,54 +22,46 @@ export class ContractForPurchaseFormComponent implements OnInit {
 
     contract: ContractForPurchase;
 
-
-    editable = true;
-
-    // 自定义验证器，验证失败时，需要手工添加class：has-error
-    amount_error = ''
-
     constructor(private fb: FormBuilder, private router: Router, private contractForPurchaseService: ContractForPurchaseService, 
-                private globalService: GlobalService, private msg: NzMessageService) {}
+                private globalService: GlobalService) {}
 
     ngOnInit() {
         let op = this.contractForPurchaseService.formOperation;
         if (op == 'create') this.initCreate();
         if (op == 'update') this.initUpdate();
         if (op == 'audit') this.initAudit();
-        if (op == 'show') this.initShow();
-        console.log(this.contract)
         this.form = this.fb.group({
-            cno: [this.contract? this.contract.cno : '', [Validators.required, Validators.minLength(4)]],
-            date: [this.contract? stringToDate(this.contract.date) : '', [Validators.required]],
+            cno: [this.contract? this.contract.cno : '', [Validators.required]],
+            date: [this.contract? this.contract.date : '', [Validators.required]],
             location: [this.contract? this.contract.location : '', [Validators.required]],
-            amount : [this.contract? this.contract.amount : '', [Validators.required, this.validateNumber.bind(this)]],
+            amount : [this.contract? this.contract.amount : 0, [Validators.required]],
             partya : [this.contract? this.contract.partya : '', [Validators.required]],
             partyb : [this.contract? this.contract.partyb : '', [Validators.required]],
 
-            audited : [this.contract? this.contract.audited : '未审核'],
+            audited : [this.contract? this.contract.audited : ''],
             audit_time : [this.contract? this.contract.audit_time : ''],
             audit_user : [this.contract? this.contract.audit_user : ''],
             create_user : [this.contract? this.contract.create_user : ''],
 
             details: this.fb.array([])
         });
-        if ((op == 'update') || (op=='audit'|| (op=='show'))){
+        if ((op == 'update') || (op=='audit')){
         this.contract.details? this.contract.details.forEach(i => {
-            const field = this.createDetail();
+            const field = this.createUser();
             field.patchValue(i);
+            console.log(field);
             this.details.push(field);
         }) : console.log("tihs contract has no details.");}
-
     }
 
-    createDetail(): FormGroup {
+    createUser(): FormGroup {
         return this.fb.group({
             product: [ null, [ Validators.required ] ],
             model: [ null, [ Validators.required ] ],
             producer: [ null, [ Validators.required ] ],
-            amount: [ null, [ Validators.required, this.validateNumber.bind(this)] ],
+            amount: [ 0, [ Validators.required ] ],
             unit: [ null, [ Validators.required ] ],
-            price: [ null, [ Validators.required, this.validateNumber.bind(this)] ],
+            price: [ 0, [ Validators.required ] ],
             totalprice: [ 0, [ Validators.required ] ]
         });
     }
@@ -93,7 +82,7 @@ export class ContractForPurchaseFormComponent implements OnInit {
     //#endregion
 
     add() {
-        this.details.push(this.createDetail());
+        this.details.push(this.createUser());
         this.edit(this.details.length - 1);
     }
 
@@ -110,29 +99,21 @@ export class ContractForPurchaseFormComponent implements OnInit {
     }
 
     save(index: number) {
-        
         this.details.at(index).markAsDirty();
-        if (this.details.at(index).invalid) return;
-        let total = this.details.at(index)['controls']['price'].value * this.details.at(index)['controls']['amount'].value
-        this.details.at(index)['controls']['totalprice'].setValue(total)
+        if (this.details.at(index).invalid) return ;
         this.editIndex = -1;
-
     }
 
     cancel(index: number) {
-        
         if (!this.details.at(index).value.key) {
             this.del(index);
         } else {
             this.details.at(index).patchValue(this.editObj);
         }
         this.editIndex = -1;
-
     }
 
     _submitForm() {
-        //this.msg.success(`Copied Success!`);
-        this.custom_validator();
 
         for (const i in this.form.controls) {
           this.form.controls[ i ].markAsDirty();
@@ -140,31 +121,10 @@ export class ContractForPurchaseFormComponent implements OnInit {
         if (this.form.invalid) return ;
         if (this.form.valid) {
             let op = this.contractForPurchaseService.formOperation;
-            if (op == 'create') this.contractForPurchaseService.add(this.form.value).then(resp => {
-                if (resp.error) { 
-                    this.msg.error(resp.error);
-                } else {
-                    this.msg.success('创建采购合同 ' + resp.cno + ' 成功！');
-                }
-                console.log(resp);this.goBack()}).catch(error => this.msg.error(error));
-            if (op == 'update') this.contractForPurchaseService.update(this.contract.id, this.form.value).then(resp => {
-                if (resp.error) { 
-                    this.msg.error(resp.error);
-                } else {
-                    this.msg.success('更新采购合同 ' + resp.cno + ' 成功！');
-                }
-                this.goBack();}).catch(error => this.msg.error(error));
-            if (op == 'audit') this.contractForPurchaseService.audit(this.contract.id).then(resp => {
-                if (resp.error) { 
-                    this.msg.error(resp.error);
-                } else {
-                    this.msg.success('审核采购合同 ' + resp.cno + ' 成功！');
-                }
-                console.log(resp.error);
-                if (resp.error) this.msg.error(resp.error);
-                this.goBack();}).catch(error => this.msg.error(error));
+            if (op == 'create') this.contractForPurchaseService.add(this.form.value).then(resp => this.goBack());
+            if (op == 'update') this.contractForPurchaseService.update(this.contract.id, this.form.value).then(resp => this.goBack());
+            if (op == 'audit') this.contractForPurchaseService.audit(this.contract.id).then(resp => this.goBack());
         }
-        
     }
 
     goBack() {
@@ -186,26 +146,4 @@ export class ContractForPurchaseFormComponent implements OnInit {
         this.title = '审核采购合同';
         this.contract = this.contractForPurchaseService.updateContract;
     }
-
-    initShow() {
-        this.title = '查看采购合同';
-        this.editable = false;
-        this.contract = this.contractForPurchaseService.updateContract;
-    }
-
-    //合同额数字验证
-    validateNumber(c: FormControl) {
-        if (c.value > 0) { 
-            this.amount_error='';
-        } else if(c.touched || c.dirty) {
-            this.amount_error='has-error';
-        }
-        return c.value > 0 ? null : {validateNumber: true}
-    };
-
-    // 自定义validator验证失败需调用该函数，为元素添加has-error类以显示红色高亮样式
-    custom_validator() {
-        if (!this.form.controls['amount'].valid) { this.amount_error = 'has-error' }
-    }
-
 }
