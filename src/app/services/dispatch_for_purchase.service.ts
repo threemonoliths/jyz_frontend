@@ -17,21 +17,21 @@ export class DispatchForPurchaseService {
    
   url = baseUrl+"dispatch_for_purchase"
 
-  // listOnePage(q) {
-  //   return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&billno=${q.billno}`, getTokenOptions() )
-  //              .toPromise().then(res => {return res.json()})           
-  // }
- listOnePage( q) {
-    let params = new URLSearchParams();
-    params.set('billno', q.billno);
-    params.set('date', q.date);
-    params.set('audited', q.audited);
-    // return this.http.get(this.url + `?page=${page}&per_page=${per_page}&sortfield=${sort.field}&sort=${sort.order}`, {search: params} )
-    //            .toPromise().catch(this.handleError)
-    //            .then(res => {return res.json()}) 
-    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&billno=${q.billno}&date=${q.date}&audited=&{audited}`, getTokenOptions() )
-             .toPromise().then(res => {return res.json()})          
+  listOnePage(q) {
+    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&billno=${q.billno}`, getTokenOptions() )
+               .toPromise().then(res => {return res.json()})           
   }
+//  listOnePage( q) {
+//     let params = new URLSearchParams();
+//     params.set('billno', q.billno);
+//     params.set('date', q.date);
+//     params.set('audited', q.audited);
+//     // return this.http.get(this.url + `?page=${page}&per_page=${per_page}&sortfield=${sort.field}&sort=${sort.order}`, {search: params} )
+//     //            .toPromise().catch(this.handleError)
+//     //            .then(res => {return res.json()}) 
+//     return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&billno=${q.billno}&date=${q.date}&audited=&{audited}`, getTokenOptions() )
+//              .toPromise().then(res => {return res.json()})          
+//   }
 
   add(v): Promise<any>{ 
     this.getDate(v);
@@ -64,7 +64,7 @@ export class DispatchForPurchaseService {
   }
 
   update(cid, v): Promise<any>{
-    //this.getDate(v);
+    this.getDate(v);
     
     let obj = { dispatchforpurchase: v} 
     let param = JSON.stringify(obj);
