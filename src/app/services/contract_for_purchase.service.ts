@@ -18,7 +18,8 @@ export class ContractForPurchaseService {
   url = baseUrl+"contract_for_purchase"
 
   listOnePage(q) {
-    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&cno=${q.cno}`, getTokenOptions() )
+    console.log(q.audited)
+    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&cno=${q.cno}&audited=${q.audited.value} `, getTokenOptions() )
                .toPromise().then(res => {return res.json()})           
   }
 

@@ -27,11 +27,19 @@ export class ContractForPurchaseListComponent implements OnInit {
             ps: 15,
             sf: "date",
             sd: "desc",
-            cno: ""
+            cno: "",
+            audited: "null"
         };
     
     // 记录总数
     total: number;
+
+    // 状态查询
+    options = [
+        { value: null, label: '--' },
+        { value: true, label: '已审核' },
+        { value: false, label: '未审核' }
+    ];
    
 
     data: any[] = [];
@@ -115,11 +123,6 @@ export class ContractForPurchaseListComponent implements OnInit {
     }
 
     sort(field: string, value: any) {
-        // this.sortMap = {};
-        // this.sortMap[field] = value;
-        // this.q.sorter = value ? `${field}_${value}` : '';
-        // this.sortMap
-        //this.loading = true;
         console.log("sort value is:")
         console.log(value);
         this.q.sf = field;
@@ -136,26 +139,14 @@ export class ContractForPurchaseListComponent implements OnInit {
 
     pageChange(pi: number) {
         this.q.pi = pi;
-        //this.loading = true;
         this.getData();
-        // return new Promise((resolve) => {
-        //     setTimeout(() => {
-        //         this.loading = false;
-        //         resolve();
-        //     }, 500);
-        // });
     }
 
     search() {
-        //this.loading = true;
         this.q.pi = 1;
         this.getData()
     }
 
-    // reset(ls: any[]) {
-    //     for (const item of ls) item.value = false;
-    //     this.getData();
-    // }
 
     getSortDirection(c: string) {
         if (c=="ascend") {
@@ -198,6 +189,7 @@ export class ContractForPurchaseListComponent implements OnInit {
             console.log(error)); 
     }
 
+    //查看按钮事件
     show(id) :void {
         this.contractForPurchaseService.formOperation='show';
         this.contractForPurchaseService.initUpdate(id)

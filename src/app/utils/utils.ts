@@ -86,7 +86,11 @@ export function deepIndexOf(arr, obj) {
 
 //日期转字符串
 export function dateToString(date) {
-    return date.getFullYear().toString()+'-'+((date.getMonth())+1).toString()+'-'+date.getDate().toString()
+    let m = ((date.getMonth())+1).toString()
+    if (m.length == 1) { m = '0' + m}
+    let d = date.getDate().toString()
+    if (d.length == 1) { d = '0' + d}
+    return date.getFullYear().toString()+'-'+m+'-'+d
 }
 
 //字符串转日期
