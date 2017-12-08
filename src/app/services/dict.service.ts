@@ -4,7 +4,7 @@ import { Subject } from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
-import { ContractForPurchase, ContractForPurchaseDetail } from '../domains/contract_for_purchase.domain';
+import { Dict  } from '../domains/dict.domain';
 import { baseUrl } from './global.service';
 import { getTokenOptions } from './login.service';
 
@@ -15,11 +15,10 @@ export class ContractForPurchaseService {
 
   constructor(private http: Http) {}
    
-  url = baseUrl+"contract_for_purchase"
+  url = baseUrl+"dict"
 
   listOnePage(q) {
-    console.log(q.audited)
-    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&cno=${q.cno}&audited=${q.audited.value} `, getTokenOptions() )
+    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&cno=${q.cno}`, getTokenOptions() )
                .toPromise().then(res => {return res.json()})           
   }
 
@@ -44,7 +43,7 @@ export class ContractForPurchaseService {
   isAudit = false;
 
   formOperation = 'create';
-  updateContract : ContractForPurchase = null;
+  // updateContract : ContractForPurchase = null;
 
   //获取合同对象将提供给修改页面Form使用
   initUpdate(id){

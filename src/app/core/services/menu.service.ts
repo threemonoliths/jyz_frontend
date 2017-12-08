@@ -120,11 +120,11 @@ export class MenuService {
      */
     private loadShortcut(shortcuts: Menu[]) {
         if (shortcuts.length === 0 || this.data.length === 0) return;
-
         const ls = this.data[0].children || [];
         let pos = ls.findIndex(w => w.shortcut_root === true);
         if (pos === -1) {
-            pos = ls.findIndex(w => w.link.includes('dashboard') || w.externalLink.includes('dashboard'));
+            // || w.externalLink.includes('dashboard')
+            pos = ls.findIndex(w => w.link.includes('dashboard'));
             pos = (pos !== -1 ? pos : 0) + 1;
             this.data[0].children.splice(pos, 0, {
                 text: '快捷菜单',

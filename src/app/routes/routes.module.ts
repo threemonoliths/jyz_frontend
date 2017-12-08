@@ -13,6 +13,7 @@ import { DashboardWorkplaceComponent } from './dashboard/workplace/workplace.com
 import { ProUserLoginComponent } from './pro/user/login/login.component';
 import { ProUserRegisterComponent } from './pro/user/register/register.component';
 import { ProUserRegisterResultComponent } from './pro/user/register-result/register-result.component';
+import { StationFormComponent } from 'app/routes/station/test/form.component';
 
 @NgModule({
     imports: [
@@ -25,6 +26,7 @@ import { ProUserRegisterResultComponent } from './pro/user/register-result/regis
         DashboardAnalysisComponent,
         DashboardMonitorComponent,
         DashboardWorkplaceComponent,
+        StationFormComponent,
         // pro
         ProUserLoginComponent,
         ProUserRegisterComponent,

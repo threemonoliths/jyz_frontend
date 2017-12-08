@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { NzMessageService } from 'ng-zorro-antd';
-
 import { GlobalService } from '../../../../services/global.service';
-import { ContractForPurchaseService } from '../../../../services/contract_for_purchase.service';
+import { CarryForAccountService } from '../../../../services/carry_for_account.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
 
 import { AuditPipe } from '../../../../pipes/pipes'; 
@@ -13,12 +11,10 @@ import { AuditPipe } from '../../../../pipes/pipes';
     selector: 'contract-table-list',
     templateUrl: './list.component.html'
 })
-export class ContractForPurchaseListComponent implements OnInit {
-
+export class CarryForAccountListComponent implements OnInit {
     testp = true
-
-    title = "采购合同管理";
-    breadcrumbItem = {label: "采购合同", routerLink: "/layout/content/contract_for_purchase/page"}
+    title = "销售油品提用表管理";
+    breadcrumbItem = {label: "销售油品提用表", routerLink: "/layout/content/carry_for_account/page"}
 
     // 查询对象，包括分页、排序和查询字段的值
     q: any = 
@@ -27,21 +23,11 @@ export class ContractForPurchaseListComponent implements OnInit {
             ps: 15,
             sf: "date",
             sd: "desc",
-            cno: "",
-            audited: "null"
+            companyname: ""
         };
     
     // 记录总数
     total: number;
-
-    // 状态查询
-    options = [
-        { value: null, label: '--' },
-        { value: true, label: '已审核' },
-        { value: false, label: '未审核' }
-    ];
-   
-
     data: any[] = [];
     loading = false;
     selectedRows: any[] = [];
@@ -49,14 +35,13 @@ export class ContractForPurchaseListComponent implements OnInit {
     totalCallNo = 0;
     allChecked = false;
     indeterminate = false;
-
     sortMap: any = {};
     expandForm = false;
     modalVisible = false;
     description = '';
 
     constructor(public msg: NzMessageService, private globalService: GlobalService,
-                private contractForPurchaseService: ContractForPurchaseService, private router: Router) {}
+                private contractForPurchaseService: CarryForAccountService, private router: Router) {}
 
     ngOnInit() {
         console.log(this.q);
@@ -68,8 +53,7 @@ export class ContractForPurchaseListComponent implements OnInit {
     getData() {
         console.log("in getData")
         console.log(this.q)
-        this.loading = true;
-        
+        this.loading = true;   
         this.contractForPurchaseService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
                                                      .catch((error) => {this.msg.error(error); this.loading = false;})                                           
     }
@@ -77,11 +61,9 @@ export class ContractForPurchaseListComponent implements OnInit {
     add() {
          //新增按钮事件
         this.contractForPurchaseService.formOperation = 'create';
-        //this.contractForPurchaseService.isUpdate=false;
-        this.router.navigateByUrl('/layout/content/contract_for_purchase/form');
+        this.router.navigateByUrl('/layout/content/carry_for_account/form');
     }
     
-
     save() {
         
         saveRule(this.description);
@@ -138,15 +120,14 @@ export class ContractForPurchaseListComponent implements OnInit {
     }
 
     pageChange(pi: number) {
-        this.q.pi = pi;
-        this.getData();
+        this.q.pi = pi;   
+        this.getData();   
     }
 
     search() {
         this.q.pi = 1;
         this.getData()
     }
-
 
     getSortDirection(c: string) {
         if (c=="ascend") {
@@ -163,7 +144,7 @@ export class ContractForPurchaseListComponent implements OnInit {
             if ('error' in resp) { 
                 this.msg.error(resp.error);
             } else {
-                this.msg.success('删除采购合同：'+resp.cno + '成功！');
+                this.msg.success('删除销售油品提用表：'+resp.companyname + '成功！');
             }
             this.getData()}).catch(error => this.msg.error(error));
     }
@@ -173,10 +154,9 @@ export class ContractForPurchaseListComponent implements OnInit {
         this.contractForPurchaseService.formOperation='update';
         this.contractForPurchaseService.initUpdate(id)
             .then(result => { this.contractForPurchaseService.updateContract = result; 
-                                this.contractForPurchaseService.updateContract.details = result.contract_for_purchase_details})
-            .then(() => this.router.navigateByUrl('/layout/content/contract_for_purchase/form')).catch((error)=>
+                                this.contractForPurchaseService.updateContract.details = result.carry_for_account_details})
+            .then(() => this.router.navigateByUrl('/layout/content/carry_for_account/form')).catch((error)=>
             console.log(error)); 
-
     }
 
     //审核按钮事件
@@ -184,18 +164,17 @@ export class ContractForPurchaseListComponent implements OnInit {
         this.contractForPurchaseService.formOperation='audit';
         this.contractForPurchaseService.initUpdate(id)
             .then(result => { this.contractForPurchaseService.updateContract = result; 
-                              this.contractForPurchaseService.updateContract.details = result.contract_for_purchase_details})
-            .then(() => this.router.navigateByUrl('/layout/content/contract_for_purchase/form')).catch((error)=>
+                              this.contractForPurchaseService.updateContract.details = result.carry_for_account_details})
+            .then(() => this.router.navigateByUrl('/layout/content/carry_for_account/form')).catch((error)=>
             console.log(error)); 
     }
 
-    //查看按钮事件
     show(id) :void {
         this.contractForPurchaseService.formOperation='show';
         this.contractForPurchaseService.initUpdate(id)
             .then(result => { this.contractForPurchaseService.updateContract = result; 
-                              this.contractForPurchaseService.updateContract.details = result.contract_for_purchase_details})
-            .then(() => this.router.navigateByUrl('/layout/content/contract_for_purchase/form')).catch((error)=>
+                              this.contractForPurchaseService.updateContract.details = result.carry_for_account_details})
+            .then(() => this.router.navigateByUrl('/layout/content/carry_for_account/form')).catch((error)=>
             console.log(error));
     }
 }

@@ -4,42 +4,39 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 
 import { GlobalService } from '../../../../services/global.service';
-import { ContractForPurchaseService } from '../../../../services/contract_for_purchase.service';
+import { GodownentryForAcceptanceService } from '../../../../services/godownentry_for_acceptance.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
 
 import { AuditPipe } from '../../../../pipes/pipes'; 
 
 @Component({
-    selector: 'contract-table-list',
+    selector: 'godownentry-table-list',
     templateUrl: './list.component.html'
 })
-export class ContractForPurchaseListComponent implements OnInit {
+export class GodownentryForAcceptanceListComponent implements OnInit {
 
     testp = true
 
-    title = "采购合同管理";
-    breadcrumbItem = {label: "采购合同", routerLink: "/layout/content/contract_for_purchase/page"}
+    title = "油品入库单管理";
+    breadcrumbItem = {label: "油品入库单", routerLink: "/layout/content/godownentry_for_acceptance/page"}
 
     // 查询对象，包括分页、排序和查询字段的值
     q: any = 
         {
             pi: 1,
             ps: 15,
-            sf: "date",
+            sf: "supplier",
             sd: "desc",
-            cno: "",
-            audited: "null"
+            bno: "",
+            supplier:"",
+            cno:"",
+            audited:"",
+            audit_time:"",
+            
         };
     
     // 记录总数
     total: number;
-
-    // 状态查询
-    options = [
-        { value: null, label: '--' },
-        { value: true, label: '已审核' },
-        { value: false, label: '未审核' }
-    ];
    
 
     data: any[] = [];
@@ -56,7 +53,7 @@ export class ContractForPurchaseListComponent implements OnInit {
     description = '';
 
     constructor(public msg: NzMessageService, private globalService: GlobalService,
-                private contractForPurchaseService: ContractForPurchaseService, private router: Router) {}
+                private godownentryForAcceptanceService: GodownentryForAcceptanceService, private router: Router) {}
 
     ngOnInit() {
         console.log(this.q);
@@ -70,15 +67,15 @@ export class ContractForPurchaseListComponent implements OnInit {
         console.log(this.q)
         this.loading = true;
         
-        this.contractForPurchaseService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
+        this.godownentryForAcceptanceService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
                                                      .catch((error) => {this.msg.error(error); this.loading = false;})                                           
     }
 
     add() {
          //新增按钮事件
-        this.contractForPurchaseService.formOperation = 'create';
-        //this.contractForPurchaseService.isUpdate=false;
-        this.router.navigateByUrl('/layout/content/contract_for_purchase/form');
+        this.godownentryForAcceptanceService.formOperation = 'create';
+        //this.godownentryForAcceptanceService.isUpdate=false;
+        this.router.navigateByUrl('/layout/content/godownentry_for_acceptance/form');
     }
     
 
@@ -123,6 +120,11 @@ export class ContractForPurchaseListComponent implements OnInit {
     }
 
     sort(field: string, value: any) {
+        // this.sortMap = {};
+        // this.sortMap[field] = value;
+        // this.q.sorter = value ? `${field}_${value}` : '';
+        // this.sortMap
+        //this.loading = true;
         console.log("sort value is:")
         console.log(value);
         this.q.sf = field;
@@ -139,14 +141,26 @@ export class ContractForPurchaseListComponent implements OnInit {
 
     pageChange(pi: number) {
         this.q.pi = pi;
+        //this.loading = true;
         this.getData();
+        // return new Promise((resolve) => {
+        //     setTimeout(() => {
+        //         this.loading = false;
+        //         resolve();
+        //     }, 500);
+        // });
     }
 
     search() {
+        //this.loading = true;
         this.q.pi = 1;
         this.getData()
     }
 
+    // reset(ls: any[]) {
+    //     for (const item of ls) item.value = false;
+    //     this.getData();
+    // }
 
     getSortDirection(c: string) {
         if (c=="ascend") {
@@ -159,43 +173,42 @@ export class ContractForPurchaseListComponent implements OnInit {
     }
 
     delete(id) {
-        this.contractForPurchaseService.delete(id).then(resp =>  {
+        this.godownentryForAcceptanceService.delete(id).then(resp =>  {
             if ('error' in resp) { 
                 this.msg.error(resp.error);
             } else {
-                this.msg.success('删除采购合同：'+resp.cno + '成功！');
+                this.msg.success('删除油品入库单：'+resp.bno + '成功！');
             }
             this.getData()}).catch(error => this.msg.error(error));
     }
 
     //更新按钮事件
     update(id): void {
-        this.contractForPurchaseService.formOperation='update';
-        this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateContract = result; 
-                                this.contractForPurchaseService.updateContract.details = result.contract_for_purchase_details})
-            .then(() => this.router.navigateByUrl('/layout/content/contract_for_purchase/form')).catch((error)=>
+        this.godownentryForAcceptanceService.formOperation='update';
+        this.godownentryForAcceptanceService.initUpdate(id)
+            .then(result => { this.godownentryForAcceptanceService.updateGodownentry = result; 
+                                this.godownentryForAcceptanceService.updateGodownentry.details = result.godownentry_for_acceptance_details})
+            .then(() => this.router.navigateByUrl('/layout/content/godownentry_for_acceptance/form')).catch((error)=>
             console.log(error)); 
 
     }
 
     //审核按钮事件
     audit(id) :void {
-        this.contractForPurchaseService.formOperation='audit';
-        this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateContract = result; 
-                              this.contractForPurchaseService.updateContract.details = result.contract_for_purchase_details})
-            .then(() => this.router.navigateByUrl('/layout/content/contract_for_purchase/form')).catch((error)=>
+        this.godownentryForAcceptanceService.formOperation='audit';
+        this.godownentryForAcceptanceService.initUpdate(id)
+            .then(result => { this.godownentryForAcceptanceService.updateGodownentry = result; 
+                              this.godownentryForAcceptanceService.updateGodownentry.details = result.godownentry_for_acceptance_details})
+            .then(() => this.router.navigateByUrl('/layout/content/godownentry_for_acceptance/form')).catch((error)=>
             console.log(error)); 
     }
 
-    //查看按钮事件
     show(id) :void {
-        this.contractForPurchaseService.formOperation='show';
-        this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateContract = result; 
-                              this.contractForPurchaseService.updateContract.details = result.contract_for_purchase_details})
-            .then(() => this.router.navigateByUrl('/layout/content/contract_for_purchase/form')).catch((error)=>
+        this.godownentryForAcceptanceService.formOperation='show';
+        this.godownentryForAcceptanceService.initUpdate(id)
+            .then(result => { this.godownentryForAcceptanceService.updateGodownentry = result; 
+                              this.godownentryForAcceptanceService.updateGodownentry.details = result.godownentry_for_acceptance_details})
+            .then(() => this.router.navigateByUrl('/layout/content/godownentry_for_acceptance/form')).catch((error)=>
             console.log(error));
     }
 }
