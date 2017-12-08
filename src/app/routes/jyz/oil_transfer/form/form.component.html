@@ -1,0 +1,251 @@
+<form nz-form [formGroup]="form" (ngSubmit)="_submitForm()" [nzLayout]="'vertical'">
+    <nz-card [nzBordered]="false" [nzTitle]="title">
+        <div nz-row [nzGutter]="16">
+            <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col><label>调拨单号</label></div>
+                    <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="billno">
+                        <nz-input formControlName="billno" nzPlaceHolder="请输入调拨单号" nzSize="large" [nzDisabled]="!editable"></nz-input>
+                        
+                        <p nz-form-explain *ngIf="form.controls['billno'].invalid && (form.controls['billno'].dirty || form.controls['billno'].touched) && form.controls['billno'].errors.required">
+                            请输入调拨单号
+                        </p>
+                        <p nz-form-explain *ngIf="form.controls['billno'].invalid && (form.controls['billno'].dirty || form.controls['billno'].touched) && form.controls['billno'].errors.minlength">
+                            调拨单号不小于4位
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col><label>移出罐（车）号</label></div>
+                    <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="stockplace">
+                        <nz-input formControlName="stockplace" nzPlaceHolder="请输入移出罐（车）号" nzSize="large" [nzDisabled]="!editable"></nz-input>
+                        
+                        <p nz-form-explain *ngIf="form.controls['stockplace'].invalid && (form.controls['stockplace'].dirty || form.controls['stockplace'].touched) && form.controls['stockplace'].errors.required">
+                            请输入移出罐（车）号
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col><label>调度</label></div>
+                    <div nz-form-control nz-col [nzValidateStatus]="dispatcher">
+                            <nz-input formControlName="dispatcher" nzPlaceHolder="请输入调度" nzSize="large" [nzDisabled]="!editable"></nz-input>
+                        
+                        <p nz-form-explain *ngIf="form.controls['dispatcher'].invalid && (form.controls['dispatcher'].dirty || form.controls['dispatcher'].touched) && form.controls['dispatcher'].errors.required">
+                            请输入调度
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                    <div nz-form-item nz-row >
+                        <div nz-form-label nz-col><label>保管员</label></div>
+                        <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="stockman" >
+                            <nz-input formControlName="stockman" nzPlaceHolder="请输入保管员" nzSize="large" [nzDisabled]="!editable"></nz-input>
+                            
+                            <p nz-form-explain *ngIf="form.controls['stockman'].invalid && (form.controls['stockman'].dirty || form.controls['stockman'].touched) && form.controls['stockman'].errors.required">
+                                请输入保管员
+                            </p>                          
+
+                        </div>
+                    </div>
+            </div>
+        </div>
+
+
+
+        <div nz-row [nzGutter]="16">
+                
+            <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col><label>核算员</label></div>
+                    <div nz-form-control nz-col [nzValidateStatus]="checker">
+                            <nz-input formControlName="checker" nzPlaceHolder="请输入核算员" nzSize="large" [nzDisabled]="!editable"></nz-input>
+                        
+                        <p nz-form-explain *ngIf="form.controls['checker'].invalid && (form.controls['checker'].dirty || form.controls['checker'].touched) && form.controls['checker'].errors.required">
+                            请输入核算员
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div nz-col [nzMd]="6" nzSm="12" nzXs="24">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col><label>日期</label></div>
+                    <div nz-form-control>
+                        <div nz-col [nzSpan]="11">
+                            <div nz-form-item nz-row>
+                                <div nz-form-control [nzValidateStatus]="date">
+                                    <nz-datepicker formControlName="date" [nzPlaceHolder]="'日期'" nzFormat="YYYY-MM-DD" [nzDisabled]="!editable"></nz-datepicker>
+                                    <p nz-form-explain *ngIf="form.controls['date'].invalid && (form.controls['date'].dirty || form.controls['date'].touched) && form.controls['date'].errors.required">
+                                        请选择日期
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col><label>录入人</label></div>
+                    <div nz-form-control nz-col [nzValidateStatus]="create_user">
+                            <nz-input formControlName="create_user" nzPlaceHolder="请输入录入人" nzSize="large" [nzDisabled]="!editable"></nz-input>
+                        
+                        <p nz-form-explain *ngIf="form.controls['create_user'].invalid && (form.controls['create_user'].dirty || form.controls['create_user'].touched) && form.controls['create_user'].errors.required">
+                            请输入录入人
+                        </p>
+                    </div>
+                </div>
+            </div>
+        
+            <div nz-col nzMd="6" nzSm="12" nzXs="24">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col><label>审核人</label></div>
+                    <div nz-form-control nz-col [nzValidateStatus]="audit_user">
+                            <nz-input formControlName="audit_user" nzPlaceHolder="请输入审核人" nzSize="large" [nzDisabled]="!editable"></nz-input>
+                        
+                        <p nz-form-explain *ngIf="form.controls['audit_user'].invalid && (form.controls['audit_user'].dirty || form.controls['audit_user'].touched) && form.controls['audit_user'].errors.required">
+                            请输入审核人
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div nz-col [nzMd]="6" nzSm="12" nzXs="24">
+                <div nz-form-item nz-row>
+                    <div nz-form-label nz-col><label>审核时间</label></div>
+                    <div nz-form-control>
+                        <div nz-col [nzSpan]="11">
+                            <div nz-form-item nz-row>
+                                <div nz-form-control [nzValidateStatus]="audit_time">
+                                    <nz-datepicker formControlName="audit_time" [nzPlaceHolder]="审核时间" nzFormat="YYYY-MM-DD" [nzDisabled]="!editable"></nz-datepicker>
+                                    <p nz-form-explain *ngIf="form.controls['audit_time'].invalid && (form.controls['audit_time'].dirty || form.controls['audit_time'].touched) && form.controls['audit_time'].errors.required">
+                                        请选择审核时间
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div> -->
+
+
+
+
+
+        </div>
+
+    </nz-card>
+    
+    <nz-card [nzBordered]="false" nzTitle="油品移库明细">
+        <nz-table formArrayName="details" [nzDataSource]="details.value" [nzIsPagination]="false">
+            <thead nz-thead>
+                <tr>
+                    <th nz-th>调拨单号</th>
+                    <th nz-th>移入车（罐）号</th>
+                    <th nz-th>计量单位</th>
+                    <th nz-th>泵码起数</th>
+                    <th nz-th>泵码止数</th>
+                    <th nz-th>数量</th>
+                    <th nz-th>确认人</th>                  
+                    
+                    <th nz-th *ngIf="editable">操作</th>
+                </tr>
+            </thead>
+            <tbody nz-tbody>
+                <tr nz-tbody-tr *ngFor="let item of details.controls; let i = index" [formGroupName]="i">
+
+                    <td nz-td>
+                        <span *ngIf="editIndex!==i">{{details.value[i].Billno}}</span>
+                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.Billno">
+                            <nz-input formControlName="Billno" nzPlaceHolder="请输入调拨单号" nzSize="large"></nz-input>
+                        </span>
+                    </td>
+
+                    <td nz-td>
+                        <span *ngIf="editIndex!==i">{{details.value[i].Stockpalce}}</span>
+                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.Stockpalce">
+                            <nz-input formControlName="Stockpalce" nzPlaceHolder="请输入移入车（罐）号" nzSize="large"></nz-input>
+                        </span>
+                    </td>
+
+                    <td nz-td>
+                        <span *ngIf="editIndex!==i">{{details.value[i].Unit}}</span>
+                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.Unit">
+                            <nz-input formControlName="Unit" nzPlaceHolder="请输入计量单位" nzSize="large"></nz-input>
+                        </span>
+                    </td>
+
+                    <td nz-td>
+                            <span *ngIf="editIndex!==i">{{details.value[i].Startdegree}}</span>
+                            <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.Startdegree">
+                                <nz-input formControlName="Startdegree" nzPlaceHolder="请输入泵码起数" nzSize="large"></nz-input>
+                            </span>
+                    </td>
+
+                        <td nz-td>
+                            <span *ngIf="editIndex!==i">{{details.value[i].Enddegree}}</span>
+                            <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.Enddegree">
+                                <nz-input formControlName="Enddegree" nzPlaceHolder="请输入泵码止数" nzSize="large"></nz-input>
+                            </span>
+                        </td>
+                        <td nz-td>
+                            <span *ngIf="editIndex!==i">{{details.value[i].Quantity}}</span>
+                            <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.Quantity">
+                                <nz-input formControlName="Quantity" nzPlaceHolder="请输入数量" nzSize="large"></nz-input>
+                            </span>
+                        </td>
+                        <td nz-td>
+                                <span *ngIf="editIndex!==i">{{details.value[i].Confirmation}}</span>
+                                <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.Confirmation">
+                                    <nz-input formControlName="Confirmation" nzPlaceHolder="确认人" nzSize="large" ></nz-input>
+                                </span>
+                            </td>
+                    <td nz-td *ngIf="editable">
+                        <span *ngIf="editIndex!==i">
+                            <a (click)="edit(i)">编辑</a>
+                            <span nz-table-divider></span>
+                            <nz-popconfirm (nzOnConfirm)="del(i)" [nzTitle]="'是否要删除此行？'">
+                                <a nz-popconfirm>删除</a>
+                            </nz-popconfirm>
+                        </span>
+                        <span *ngIf="editIndex===i">
+                            <a (click)="save(i)">保存</a>
+                            <span nz-table-divider></span>
+                            <nz-popconfirm (nzOnConfirm)="cancel(i)" [nzTitle]="'是否要取消操作？'">
+                                <a nz-popconfirm>取消</a>
+                            </nz-popconfirm>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </nz-table>
+        
+        <p *ngIf="editable && details.length>0 && !details.valid">
+            <font size="2" color = "red">             
+                注：明细中所有字段必须填写，并且“数量”、“泵码起数”与“泵码止数”需输入有效数字。
+            </font>
+        </p>
+        <button *ngIf="editIndex===-1 && editable" nz-button [nzType]="'dashed'" [nzSize]="'large'" (click)="add()" class="ant-btn__block mt-md">
+            <i class="anticon anticon-plus"></i>
+            <span>新增明细</span>
+        </button>
+        
+        
+
+    </nz-card>
+    <div >
+        <error-collect></error-collect>
+        <button nz-button [nzType]="'primary'" nzSize="large" *ngIf="editable">提交</button>
+        <button nz-button [nzType]="'primary'" nzSize="large" (click)="goBack()">返回</button>
+    </div>
+</form>

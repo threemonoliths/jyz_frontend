@@ -1,9 +1,9 @@
 import {Component,OnInit} from '@angular/core';
 
 @Component({
-    templateUrl: './contract_for_purchase.component.html'
+    templateUrl: './oil_transfer.component.html'
 })
-export class ContractForPurchaseComponent implements OnInit {
+export class OilTransferComponent implements OnInit {
 
     constructor() { }
     

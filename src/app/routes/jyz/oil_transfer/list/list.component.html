@@ -3,9 +3,9 @@
                 <div nz-row [nzGutter]="24">
                     <div *ngIf="expandForm" nz-col [nzSpan]="6" class="mb-md">
                         <div nz-form-item class="d-flex">
-                            <div nz-form-label><label for="no">合同编号</label></div>
+                            <div nz-form-label><label for="no">调拨单号</label></div>
                             <div nz-form-control class="flex-1">
-                                <nz-input [(ngModel)]="q.cno" name="cno" [nzSize]="'large'" [nzPlaceHolder]="'请输入'" nzId="cno"></nz-input>
+                                <nz-input [(ngModel)]="q.billno" name="billno" [nzSize]="'large'" [nzPlaceHolder]="'请输入调拨单号'" nzId="billno"></nz-input>
                             </div>
                         </div>
                     </div>
@@ -58,45 +58,55 @@
                 (nzPageIndexChange)="pageChange($event)">
         <thead nz-thead>
             <tr>
-                <th nz-th [nzCheckbox]="true">
+                <!--<th nz-th [nzCheckbox]="true">
                     <label nz-checkbox [(ngModel)]="allChecked" [nzIndeterminate]="indeterminate"
                         (ngModelChange)="checkAll($event)"></label>
-                </th>
-                <th nz-th><span>合同号</span></th>
+                </th>-->
+                <th nz-th><span>调拨单号</span></th>
                 <th nz-th>
-                    <span>签订时间</span>
+                    <span>日期</span>
                     <nz-table-sort [(nzValue)]="sortMap.date" (nzValueChange)="sort('date',$event)"></nz-table-sort>
                 </th>
-                <th nz-th><span>签订地点</span></th>
-                <th nz-th><span>金额</span></th>
-                <th nz-th><span>甲方</span></th>
-                <th nz-th><span>乙方</span></th>
+                <th nz-th><span>移出罐（车）号</span></th>
+                <th nz-th><span>调度</span></th>
+                <th nz-th><span>保管员</span></th>
+                <th nz-th><span>核算员</span></th>
+                <th nz-th><span>录入人</span></th>
                 <th nz-th><span>审核状态</span></th>
                 <th nz-th><span>审核时间</span></th>
+                <th nz-th><span>审核人</span></th>
+                <th nz-th><span>创建人</span></th>
                 <th nz-th><span>操作</span></th>
             </tr>
         </thead>
         <tbody nz-tbody>
             <tr nz-tbody-tr *ngFor="let i of nzTable.data">
+                <!--
                 <td nz-td [nzCheckbox]="true">
                     <label nz-checkbox [nzDisabled]="i.disabled" [(ngModel)]="i.checked" (ngModelChange)="refreshStatus($event)">
                     </label>
-                </td>
-                <td nz-td>{{i.cno}}</td>
+                </td>-->
+                <td nz-td>{{i.billno}}</td>
                 <td nz-td>{{i.date}}</td>
-                <td nz-td>{{i.location}}</td>
-                <td nz-td>{{i.amount}}</td>
-                <td nz-td>{{i.partya}}</td>
-                <td nz-td>{{i.partyb}}</td>
+                <td nz-td>{{i.stockplace}}</td>
+                <td nz-td>{{i.dispatcher}}</td>
+                <td nz-td>{{i.stockman}}</td>
+                <td nz-td>{{i.checker}}</td>
+                <td nz-td>{{i.create_user}}</td>
                 <td nz-td>{{i.audited | auditPipe}}</td>
                 <td nz-td>{{i.audit_time}}</td>
+                <td nz-td>{{i.audit_user}}</td>
+                <td nz-td>{{i.create_user}}</td>
 
-                <td nz-td>
-                    <a (click)="audit(i.id)">审核</a>
+                <td nz-td *ngIf="!i.audited">
+                    <a (click)="audit(i.id)" >审核</a>
                     <span nz-table-divider></span>
                     <a (click)="update(i.id)">修改</a>
                     <span nz-table-divider></span>
                     <a (click)="delete(i.id)">删除</a>
+                </td>
+                <td nz-td *ngIf="i.audited">
+                    <a (click)="show(i.id)" >查看</a> 
                 </td>
             </tr>
         </tbody>

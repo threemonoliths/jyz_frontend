@@ -4,21 +4,21 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 
 import { GlobalService } from '../../../../services/global.service';
-import { ContractForPurchaseService } from '../../../../services/contract_for_purchase.service';
+import { OilTransferService } from '../../../../services/oil_transfer.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
 
 import { AuditPipe } from '../../../../pipes/pipes'; 
 
 @Component({
-    selector: 'contract-table-list',
+    selector: 'transfer-table-list',
     templateUrl: './list.component.html'
 })
-export class ContractForPurchaseListComponent implements OnInit {
+export class OilTransferListComponent implements OnInit {
 
     testp = true
 
-    title = "采购合同管理";
-    breadcrumbItem = {label: "采购合同", routerLink: "/layout/content/contract_for_purchase/page"}
+    title = "油品移库调拨单管理";
+    breadcrumbItem = {label: "油品移库调拨单", routerLink: "/layout/content/oil_transfer/page"}
 
     // 查询对象，包括分页、排序和查询字段的值
     q: any = 
@@ -27,7 +27,7 @@ export class ContractForPurchaseListComponent implements OnInit {
             ps: 15,
             sf: "date",
             sd: "desc",
-            cno: ""
+            billno: ""
         };
     
     // 记录总数
@@ -47,8 +47,8 @@ export class ContractForPurchaseListComponent implements OnInit {
     modalVisible = false;
     description = '';
 
-    constructor(public msg: NzMessageService, private globalService: GlobalService, 
-                private contractForPurchaseService: ContractForPurchaseService, private router: Router) {}
+    constructor(public msg: NzMessageService, private globalService: GlobalService,
+                private oilTransferService: OilTransferService, private router: Router) {}
 
     ngOnInit() {
         console.log(this.q);
@@ -62,15 +62,15 @@ export class ContractForPurchaseListComponent implements OnInit {
         console.log(this.q)
         this.loading = true;
         
-        this.contractForPurchaseService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
-                                                     .catch((error) => {console.log(error); this.loading = false;})                                           
+        this.oilTransferService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
+                                                     .catch((error) => {this.msg.error(error); this.loading = false;})                                           
     }
 
     add() {
          //新增按钮事件
-        this.contractForPurchaseService.formOperation = 'create';
-        //this.contractForPurchaseService.isUpdate=false;
-        this.router.navigateByUrl('/layout/content/contract_for_purchase/form');
+        this.oilTransferService.formOperation = 'create';
+        //this.oilTransferService.isUpdate=false;
+        this.router.navigateByUrl('/layout/content/oil_transfer/form');
     }
     
 
@@ -168,27 +168,42 @@ export class ContractForPurchaseListComponent implements OnInit {
     }
 
     delete(id) {
-        this.contractForPurchaseService.delete(id).then(resp => this.getData());
+        this.oilTransferService.delete(id).then(resp =>  {
+            if ('error' in resp) { 
+                this.msg.error(resp.error);
+            } else {
+                this.msg.success('删除油品移库调拨单：'+resp.billno + '成功！');
+            }
+            this.getData()}).catch(error => this.msg.error(error));
     }
 
     //更新按钮事件
     update(id): void {
-        this.contractForPurchaseService.formOperation='update';
-        this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateContract = result; 
-                                this.contractForPurchaseService.updateContract.details = result.contract_for_purchase_details})
-            .then(() => this.router.navigateByUrl('/layout/content/contract_for_purchase/form')).catch((error)=>
+        this.oilTransferService.formOperation='update';
+        this.oilTransferService.initUpdate(id)
+            .then(result => { this.oilTransferService.updateTransfer = result; 
+                                this.oilTransferService.updateTransfer.details = result.oil_transfer_details})
+            .then(() => this.router.navigateByUrl('/layout/content/oil_transfer/form')).catch((error)=>
             console.log(error)); 
 
     }
 
     //审核按钮事件
     audit(id) :void {
-        this.contractForPurchaseService.formOperation='audit';
-        this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateContract = result; 
-                              this.contractForPurchaseService.updateContract.details = result.contract_for_purchase_details})
-            .then(() => this.router.navigateByUrl('/layout/content/contract_for_purchase/form')).catch((error)=>
+        this.oilTransferService.formOperation='audit';
+        this.oilTransferService.initUpdate(id)
+            .then(result => { this.oilTransferService.updateTransfer = result; 
+                              this.oilTransferService.updateTransfer.details = result.oil_transfer_details})
+            .then(() => this.router.navigateByUrl('/layout/content/oil_transfer/form')).catch((error)=>
             console.log(error)); 
+    }
+
+    show(id) :void {
+        this.oilTransferService.formOperation='show';
+        this.oilTransferService.initUpdate(id)
+            .then(result => { this.oilTransferService.updateTransfer = result; 
+                              this.oilTransferService.updateTransfer.details = result.oil_transfer_details})
+            .then(() => this.router.navigateByUrl('/layout/content/oil_transfer/form')).catch((error)=>
+            console.log(error));
     }
 }
