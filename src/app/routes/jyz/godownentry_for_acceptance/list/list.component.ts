@@ -28,10 +28,10 @@ export class GodownentryForAcceptanceListComponent implements OnInit {
             sf: "supplier",
             sd: "desc",
             bno: "",
-            supplier:"",
-            cno:"",
-            audited:"",
-            audit_time:"",
+            // supplier:"",
+            // cno:"",
+            // audited:"",
+            // audit_time:"",
             
         };
     

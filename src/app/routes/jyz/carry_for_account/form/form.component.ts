@@ -19,6 +19,7 @@ export class CarryForAccountFormComponent implements OnInit {
     breadcrumbItem = {label: "销售油品提用表", routerLink: "/layout/content/carry_for_account/form"}
     caccount: CarryForAccount;
     editable = true;
+    editit=true;
     // 自定义验证器，验证失败时，需要手工添加class：has-error
     operator_error = ''
 
@@ -167,12 +168,14 @@ export class CarryForAccountFormComponent implements OnInit {
 
     initAudit() {
         this.title = '审核销售油品提用表';
+        this.editable = false;
         this.caccount = this.carryForAccountService.updateContract;
     }
 
     initShow() {
         this.title = '查看销售油品提用表';
         this.editable = false;
+        this.editit=false;
         this.caccount = this.carryForAccountService.updateContract;
     }
 

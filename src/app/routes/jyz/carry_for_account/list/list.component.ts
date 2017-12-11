@@ -4,7 +4,6 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { GlobalService } from '../../../../services/global.service';
 import { CarryForAccountService } from '../../../../services/carry_for_account.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
-
 import { AuditPipe } from '../../../../pipes/pipes'; 
 
 @Component({

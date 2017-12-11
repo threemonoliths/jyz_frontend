@@ -164,7 +164,7 @@
                 
                 <p *ngIf="editable && details.length>0 && !details.valid">
                     <font size="2" color = "red">             
-                        注：明细中所有字段必须填写，并且“数量”与“价格”需输入有效数字。
+                        注：明细中所有字段必须填写，并且“结存”、“存油”、“提用”需输入有效数字。
                     </font>
                 </p>
                 <button *ngIf="editIndex===-1 && editable" nz-button [nzType]="'dashed'" [nzSize]="'large'" (click)="add()" class="ant-btn__block mt-md">
@@ -175,7 +175,7 @@
 
             <div>
                 <error-collect></error-collect>
-                <button nz-button [nzType]="'primary'" nzSize="large" *ngIf="editable">提交</button>
+                <button nz-button [nzType]="'primary'" nzSize="large" *ngIf="editit">提交</button>
                 <button nz-button [nzType]="'primary'" nzSize="large" (click)="goBack()">返回</button>
             </div>
 

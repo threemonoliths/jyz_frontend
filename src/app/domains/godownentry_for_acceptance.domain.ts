@@ -31,6 +31,6 @@ export class GodownentryForAcceptanceDetail {
 	realquantity: number;
 	price: number;
 	totalprice: string;
-	stockplace: number;
+	stockplace: string;
 	comment: string;
 }
