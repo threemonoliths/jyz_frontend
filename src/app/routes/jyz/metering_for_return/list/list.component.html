@@ -9,6 +9,29 @@
                             </div>
                         </div>
                     </div>
+                     <!-- <div *ngIf="expandForm" nz-col [nzSpan]="6" class="mb-md">
+                        <div nz-form-item class="d-flex">
+                            <div nz-form-label><label for="billdate">时间</label></div>
+                            <div nz-form-control class="flex-1">
+                                <nz-input [(ngModel)]="q.billdate" name="billdate" [nzSize]="'large'" [nzPlaceHolder]="'请输入'" nzId="billdate"></nz-input>
+                            </div>
+                        </div>
+                    </div>  -->
+                    <div *ngIf="expandForm" nz-col [nzSpan]="6" class="mb-md">
+                        <div nz-form-item class="d-flex">
+                        <div nz-form-label><label for="no">审核状态</label></div>
+                        <div nz-form-control class="flex-1">
+                        <nz-select [(ngModel)]="q.audited" name="audited" nzAllowClear>
+                            <nz-option
+                                *ngFor="let option of options"
+                                [nzLabel]="option.label"
+                                [nzValue]="option"
+                                [nzDisabled]="option.disabled">
+                            </nz-option>
+                        </nz-select>
+                        </div>
+                        </div>
+                    </div>
                     
                     <div nz-col [nzSpan]="expandForm ? 24 : 8" class="mb-md" [class.text-right]="expandForm">
                            
@@ -42,27 +65,15 @@
             </nz-dropdown>
         </ng-container>
     </div>
-    <!--
-    <div class="mb-md">
-        <nz-alert [nzType]="'info'" [nzShowIcon]="true">
-            <span alert-body>
-                已选择 <strong class="text-primary">{{selectedRows.length}}</strong> 项&nbsp;&nbsp;
-                服务调用总计 <strong>{{totalCallNo}}</strong> 万
-                <a *ngIf="totalCallNo > 0" (click)="clear()" class="ml-lg">清空</a>
-            </span>
-        </nz-alert>
-    </div>
-    -->
     <nz-table #nzTable [nzAjaxData]="data" [nzTotal]="total" [nzPageSize]="q.ps" [nzLoading]="loading"
                 (nzDataChange)="dataChange($event)"
                 (nzPageIndexChange)="pageChange($event)">
         <thead nz-thead>
             <tr>
-                <!-- <th nz-th [nzCheckbox]="true">
-                    <label nz-checkbox [(ngModel)]="allChecked" [nzIndeterminate]="indeterminate"
-                        (ngModelChange)="checkAll($event)"></label>
-                </th> -->
-                <th nz-th><span>单号</span></th>
+                <th nz-th>
+                    <span>单号</span>
+                     <nz-table-sort [(nzValue)]="sortMap.billno" (nzValueChange)="sort('billno',$event)"></nz-table-sort>
+                </th>
                 <th nz-th>
                     <span>时间</span>
                     <nz-table-sort [(nzValue)]="sortMap.billdate" (nzValueChange)="sort('billdate',$event)"></nz-table-sort>
@@ -70,8 +81,14 @@
                 <th nz-th><span>保管员</span></th>
                 <th nz-th><span>核算员</span></th>
                 <th nz-th><span>备注</span></th>
-                <th nz-th><span>审核状态</span></th>
-                <th nz-th><span>审核时间</span></th>
+                <th nz-th>
+                    <span>审核状态</span>
+                    <nz-table-sort [(nzValue)]="sortMap.audited" (nzValueChange)="sort('audited',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>审核时间</span>
+                    <nz-table-sort [(nzValue)]="sortMap.audit_time" (nzValueChange)="sort('audit_time',$event)"></nz-table-sort>
+                </th>
                 <th nz-th><span>审核人</span></th>
                 <th nz-th><span>创建人</span></th>
                 <th nz-th><span>操作</span></th>
@@ -79,10 +96,6 @@
         </thead>
         <tbody nz-tbody>
             <tr nz-tbody-tr *ngFor="let i of nzTable.data">
-               <!--  <td nz-td [nzCheckbox]="true">
-                    <label nz-checkbox [nzDisabled]="i.disabled" [(ngModel)]="i.checked" (ngModelChange)="refreshStatus($event)">
-                    </label>
-                </td>  -->
                 <td nz-td>{{i.billno}}</td>
                 <td nz-td>{{i.billdate}}</td>
                 <td nz-td>{{i.stockman}}</td>
@@ -106,16 +119,3 @@
         </tbody>
     </nz-table>
 </nz-card>
-<!--
-<nz-modal [nzVisible]="modalVisible" [nzTitle]="'新建规则'" [nzConfirmLoading]="loading" [nzContent]="modalContent"
-    (nzOnCancel)="modalVisible=false" (nzOnOk)="save()">
-    <ng-template #modalContent>
-        <div nz-form-item class="d-flex">
-            <div nz-form-label><label for="no">描述</label></div>
-            <div nz-form-control class="flex-1">
-                <nz-input [(ngModel)]="description" name="description" [nzSize]="'large'" [nzPlaceHolder]="'请输入'" nzId="no"></nz-input>
-            </div>
-        </div>
-    </ng-template>
-</nz-modal>
--->

@@ -18,7 +18,7 @@ export class MeteringForReturnService {
   url = baseUrl+"metering_for_return"
 
   listOnePage(q) {
-    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&billno=${q.billno}`, getTokenOptions() )
+    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&billno=${q.billno}&audited=${q.audited.value}`, getTokenOptions() )
                .toPromise().then(res => {return res.json()})           
   }
 
