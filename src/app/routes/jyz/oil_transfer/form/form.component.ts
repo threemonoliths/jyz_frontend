@@ -72,7 +72,7 @@ export class OilTransferFormComponent implements OnInit {
             Unit: [ null, [ Validators.required ] ],
             Startdegree: [ null, [ Validators.required,this.validateNumber.bind(this)] ],
             Enddegree: [ null, [ Validators.required,this.validateNumber.bind(this) ] ],
-            Quantity: [ null, [ Validators.required, this.validateNumber.bind(this)] ],
+            Quantity: [ 0, [ Validators.required ] ],
             Confirmation: [ null, [ Validators.required ] ]
         });
     }
@@ -113,6 +113,9 @@ export class OilTransferFormComponent implements OnInit {
         
         this.details.at(index).markAsDirty();
         if (this.details.at(index).invalid) return;
+        //this.details.at(index)['controls']['Quantity'].value = this.details.at(index)['controls']['Enddegree'].value - this.details.at(index)['controls']['Startdegree'].value
+        let total = this.details.at(index)['controls']['Enddegree'].value - this.details.at(index)['controls']['Startdegree'].value
+        this.details.at(index)['controls']['Quantity'].setValue(total)
         this.editIndex = -1;
 
     }
@@ -182,6 +185,7 @@ export class OilTransferFormComponent implements OnInit {
 
     initAudit() {
         this.title = '审核油品移库调拨单';
+       // this.editable = false;
         this.transfer = this.oilTransferService.updateTransfer;
     }
 
@@ -192,12 +196,16 @@ export class OilTransferFormComponent implements OnInit {
     }
 
      //非负数字验证
-    validateNumber(c: FormControl) {
-        if (c.value > 0) { 
+    validateNumber(c: FormControl) {       
+        // if (c.value == 0){
+        //     this.Positive_error='';
+        //   }
+        if (c.value > 0 ) { 
             this.Positive_error='';
-        } else if(c.touched || c.dirty) {
+          }
+        else if(c.touched || c.dirty) {
             this.Positive_error='has-error';
-        }
+          }
         return c.value > 0 ? null : {validateNumber: true}
     };
 

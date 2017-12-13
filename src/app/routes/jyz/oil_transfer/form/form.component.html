@@ -201,7 +201,7 @@
                         <td nz-td>
                             <span *ngIf="editIndex!==i">{{details.value[i].Quantity}}</span>
                             <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.Quantity">
-                                <nz-input formControlName="Quantity" nzPlaceHolder="请输入数量" nzSize="large"></nz-input>
+                                <nz-input formControlName="Quantity" nzPlaceHolder="数量" nzSize="large" nzDisabled="true"></nz-input>
                             </span>
                         </td>
                         <td nz-td>
@@ -232,7 +232,7 @@
         
         <p *ngIf="editable && details.length>0 && !details.valid">
             <font size="2" color = "red">             
-                注：明细中所有字段必须填写，并且“数量”、“泵码起数”与“泵码止数”需输入有效数字。
+                注：明细中所有字段必须填写，并且“数量”、“泵码起数”与“泵码止数”需输入有效数字、且“泵码起数”小于“泵码止数”。
             </font>
         </p>
         <button *ngIf="editIndex===-1 && editable" nz-button [nzType]="'dashed'" [nzSize]="'large'" (click)="add()" class="ant-btn__block mt-md">
