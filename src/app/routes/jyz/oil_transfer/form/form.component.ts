@@ -68,11 +68,11 @@ export class OilTransferFormComponent implements OnInit {
     createDetail(): FormGroup {
         return this.fb.group({
             Billno: [ null, [ Validators.required ] ],
-            Stockpalce: [ null, [ Validators.required ] ],
+            stockpalce: [ null, [ Validators.required ] ],
             Unit: [ null, [ Validators.required ] ],
             Startdegree: [ null, [ Validators.required,this.validateNumber.bind(this)] ],
             Enddegree: [ null, [ Validators.required,this.validateNumber.bind(this) ] ],
-            Quantity: [ 0, [ Validators.required ] ],
+            quantity: [ 0, [ Validators.required,this.validateNumber.bind(this) ] ],
             Confirmation: [ null, [ Validators.required ] ]
         });
     }
@@ -113,9 +113,9 @@ export class OilTransferFormComponent implements OnInit {
         
         this.details.at(index).markAsDirty();
         if (this.details.at(index).invalid) return;
-        //this.details.at(index)['controls']['Quantity'].value = this.details.at(index)['controls']['Enddegree'].value - this.details.at(index)['controls']['Startdegree'].value
+        //this.details.at(index)['controls']['quantity'].value = this.details.at(index)['controls']['Enddegree'].value - this.details.at(index)['controls']['Startdegree'].value
         let total = this.details.at(index)['controls']['Enddegree'].value - this.details.at(index)['controls']['Startdegree'].value
-        this.details.at(index)['controls']['Quantity'].setValue(total)
+        this.details.at(index)['controls']['quantity'].setValue(total)
         this.editIndex = -1;
 
     }
@@ -200,20 +200,20 @@ export class OilTransferFormComponent implements OnInit {
         // if (c.value == 0){
         //     this.Positive_error='';
         //   }
-        if (c.value > 0 ) { 
+        if (c.value >= 0 ) { 
             this.Positive_error='';
           }
         else if(c.touched || c.dirty) {
             this.Positive_error='has-error';
           }
-        return c.value > 0 ? null : {validateNumber: true}
+        return c.value >= 0 ? null : {validateNumber: true}
     };
 
     // 自定义validator验证失败需调用该函数，为元素添加has-error类以显示红色高亮样式
     // custom_validator() {
     //     if (!this.form.controls['Startdegree'].valid) { this.Positive_error = 'has-error' }
     //     if (!this.form.controls['Enddegree'].valid) { this.Positive_error = 'has-error' }
-    //     if (!this.form.controls['Quantity'].valid) { this.Positive_error = 'has-error' }
+    //     if (!this.form.controls['quantity'].valid) { this.Positive_error = 'has-error' }
     // }
 
 }
