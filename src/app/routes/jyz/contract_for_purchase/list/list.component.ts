@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
 import { NzMessageService } from 'ng-zorro-antd';
-
 import { GlobalService } from '../../../../services/global.service';
 import { ContractForPurchaseService } from '../../../../services/contract_for_purchase.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
-
 import { AuditPipe } from '../../../../pipes/pipes'; 
 
 @Component({

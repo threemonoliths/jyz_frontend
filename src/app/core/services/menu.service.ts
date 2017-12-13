@@ -27,10 +27,6 @@ export interface Menu {
     hide?: boolean;
     /** ACL配置 */
     acl?: string | string[] | ACLType;
-    /** 是否快捷菜单项 */
-    shortcut?: boolean;
-    /** 快捷菜单根节点 */
-    shortcut_root?: boolean;
     /** 二级菜单 */
     children?: Menu[];
     /**
@@ -101,49 +97,11 @@ export class MenuService {
             item._type = item.externalLink ? 2 : 1;
             if (item.children && item.children.length > 0) {
                 item._type = 3;
-            }
-
-            // shortcut
-            if (item.shortcut === true && (item.link || item.externalLink))
-                shortcuts.push(item);
-        });
-
-        this.loadShortcut(shortcuts);
-    }
-
-    /**
-     * 加载快捷菜单，加载位置规则如下：
-     * 1、统一在下标0的节点下（即【主导航】节点下方）
-     *      1、若 children 存在 【shortcut_root: true】则最优先【推荐】这种方式
-     *      2、否则查找带有【dashboard】字样链接，若存在则在此菜单的下方创建快捷入口
-     *      3、否则放在0节点位置
-     */
-    private loadShortcut(shortcuts: Menu[]) {
-        if (shortcuts.length === 0 || this.data.length === 0) return;
-        const ls = this.data[0].children || [];
-        let pos = ls.findIndex(w => w.shortcut_root === true);
-        if (pos === -1) {
-            // || w.externalLink.includes('dashboard')
-            pos = ls.findIndex(w => w.link.includes('dashboard'));
-            pos = (pos !== -1 ? pos : 0) + 1;
-            this.data[0].children.splice(pos, 0, {
-                text: '快捷菜单',
-                translate: 'shortcut',
-                icon: 'icon-rocket',
-                children: []
-            });
-        }
-        let _data = this.data[0].children[pos];
-        _data = Object.assign(_data, {
-            _type: 3,
-            __id: -1,
-            _depth: 1
-        });
-        _data.children = shortcuts.map(i => {
-            i._depth = 2;
-            return i;
+            } 
         });
     }
+
+   
 
     get menus() {
         return this.data;

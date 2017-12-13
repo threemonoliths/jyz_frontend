@@ -37,7 +37,7 @@ export class GodownentryForAcceptanceService {
   formOperation = 'create';
   updateGodownentry : GodownentryForAcceptance = null;
 
-  //获取合同对象将提供给修改页面Form使用
+  //获取油品入库单对象将提供给修改页面Form使用
   initUpdate(id){
     return this.http.get(this.url + `/${id}`, getTokenOptions())
                .map(response => response.json()).toPromise();

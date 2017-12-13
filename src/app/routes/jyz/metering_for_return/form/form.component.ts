@@ -45,7 +45,7 @@ export class MeteringForReturnFormComponent implements OnInit {
             billdate: [this.metering? stringToDate(this.metering.billdate) : '', [Validators.required]],
             stockman: [this.metering? this.metering.stockman : '', [Validators.required]],
             accountingclerk : [this.metering? this.metering.accountingclerk : '', [Validators.required]],
-            comment : [this.metering? this.metering.comment : '', [Validators.required]],
+            comment : [this.metering? this.metering.comment : ''],
             audited : [this.metering? this.metering.audited : '未审核'],
             audit_time : [this.metering? this.metering.audit_time : ''],
             audit_user : [this.metering? this.metering.audit_user : ''],
@@ -70,7 +70,7 @@ export class MeteringForReturnFormComponent implements OnInit {
             unit: [ null, [ Validators.required ] ],
             quantity: [ null, [ Validators.required , this.validateNumber.bind(this)] ],
             stockplace: [ null, [ Validators.required, this.validateNumber.bind(this) ] ],
-            comment: [ null, [ Validators.required ] ]
+            comment: [ null ]
         });
     }
 
@@ -175,6 +175,7 @@ export class MeteringForReturnFormComponent implements OnInit {
 
     initAudit() {
         this.title = '审核油品回罐单';
+        //this.editable = false;
         this.metering = this.meteringForReturnService.updateMetering;
     }
 

@@ -7,7 +7,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { GodownentryForAcceptanceService } from '../../../../services/godownentry_for_acceptance.service';
 import { GodownentryForAcceptance } from '../../../../domains/godownentry_for_acceptance.domain'; 
 import { GlobalService } from '../../../../services/global.service';
-
+import { OilDepotService } from '../../../../services/oil_depot.service';
 import { stringToDate} from '../../../../utils/utils';
 
 @Component({
@@ -22,13 +22,16 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
     breadcrumbItem = {label: "油品入库", routerLink: "/layout/content/godownentry_for_acceptance/form"}
     godownentry: GodownentryForAcceptance;
     editable = true;
+    editit=true;
+    depotdata: any[] = [];
 
     // 自定义验证器，验证失败时，需要手工添加class：has-error
     amout_error = ''
      constructor(private fb: FormBuilder, private router: Router, private godownentryForAcceptanceService: GodownentryForAcceptanceService, 
-                private globalService: GlobalService, private msg: NzMessageService) {}
+                private globalService: GlobalService, private msg: NzMessageService,private oilDepotService:OilDepotService ) {}
 
     ngOnInit() {
+        this.getDepot();
         let op = this.godownentryForAcceptanceService.formOperation;
         if (op == 'create') this.initCreate();
         if (op == 'update') this.initUpdate();
@@ -64,7 +67,7 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
             oilname: [ null, [ Validators.required ] ],
             planquantity: [ null, [ Validators.required , this.validateNumber.bind(this)] ],
             realquantity: [null, [ Validators.required , this.validateNumber.bind(this)] ],
-            stockplace: [ null, [ Validators.required] ],
+            stockplace: [ null, [ Validators.required ] ],
             comment: [ null, [ Validators.required ] ],
             price: [ null, [ Validators.required, this.validateNumber.bind(this)] ],
             totalprice: [ 0, [ Validators.required ] ]
@@ -124,7 +127,6 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
     }
 
     _submitForm() {
-        //this.msg.success(`Copied Success!`);
          for (const i in this.form.controls) {
           this.form.controls[ i ].markAsDirty();
         }
@@ -175,12 +177,14 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
 
     initAudit() {
         this.title = '审核油品入库单';
+        this.editable=false;
         this.godownentry = this.godownentryForAcceptanceService.updateGodownentry;
     }
 
     initShow() {
         this.title = '查看油品入库单';
         this.editable = false;
+        this.editit=false;
         this.godownentry = this.godownentryForAcceptanceService.updateGodownentry;
     }
 
@@ -193,12 +197,20 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
         }
         return c.value > 0 ? null : {validateNumber: true}
     };
+    loading : false;
+    q: any = 
+    {
+        pi: 1,
+        ps: 15,
+        sf: "depotiddr",
+        sd: "desc",
+        depotname: "",};
+    total : number;
+    getDepot() {
+        console.log("in getDepot")
+    this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.total = resp.total_entries; this.loading = false;})
+                                                     .catch((error) => {this.msg.error(error);})                                           
+    }
 
-    // 自定义validator验证失败需调用该函数，为元素添加has-error类以显示红色高亮样式
-//     custom_validator() {
-//         console.log("_______________________");
-// console.log(this.form.controls['planquantity']);
-//         if (!this.form.controls['planquantity'].valid) { this.amout_error = 'has-error' }
-//     }
 
 }

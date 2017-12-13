@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '@shared/shared.module';
 
-
+import { OilDepotService } from '../../../services/oil_depot.service';
 import { GodownentryForAcceptanceComponent } from './godownentry_for_acceptance.component';
 import { GodownentryForAcceptanceFormComponent } from './form/form.component';
 import { GodownentryForAcceptanceListComponent } from './list/list.component';
@@ -30,6 +30,7 @@ import { MainPipe } from '../../../pipes/pipe.module';
     GodownentryForAcceptanceListComponent
   ],
   providers: [
+    OilDepotService,
     GodownentryForAcceptanceService,
     // ConfirmationService
   ]
