@@ -221,7 +221,8 @@
     </nz-card>
     <div >
         <error-collect></error-collect>
-        <button nz-button [nzType]="'primary'" nzSize="large" *ngIf="editable">提交</button>
+        <!-- <button nz-button [nzType]="'primary'" nzSize="large" *ngIf="editable" clcik="_submitForm()">提交</button> -->
+         <button nz-button [nzType]="'primary'" nzSize="large" *ngIf="yesorno" (clcik)="_submitForm()">提交</button>
         <button nz-button [nzType]="'primary'" nzSize="large" (click)="goBack()">返回</button>
     </div>
 </form>

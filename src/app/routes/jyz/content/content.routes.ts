@@ -16,7 +16,8 @@ export const contentRoutes = [{
 		{ path: 'oil_depot', loadChildren: '../oil_depot/oil_depot.module#OilDepotModule' },
 		{ path: 'oil_transfer', loadChildren: '../oil_transfer/oil_transfer.module#OilTransferModule' },
 		{ path: 'dispatch_for_purchase', loadChildren: '../dispatch_for_purchase/dispatch_for_purchase.module#DispatchForPurchaseModule' },
-		{ path: 'metering_for_return', loadChildren: '../metering_for_return/metering_for_return.module#MeteringForReturnModule' },     
+		{ path: 'metering_for_return', loadChildren: '../metering_for_return/metering_for_return.module#MeteringForReturnModule' },
+		{ path: 'stock_change', loadChildren: '../stock_change/stock_change.module#StockChangeModule' },     
         { path: 'dashboard', component: DashboardComponent},
 
 	]

@@ -1,0 +1,53 @@
+<nz-card [nzBordered]="false">
+        <form nz-form (ngSubmit)="getData()" [nzLayout]="'inline'">
+        <div class="mb-md">
+        <button nz-button (click)="show()" [nzType]="'primary'" [nzSize]="'large'">
+            <!-- <i class="anticon anticon-plus"></i> -->
+            <span>查看</span>
+        </button>
+        </div>
+       </form>
+    
+ <nz-table #nzTable [nzAjaxData]="data" [nzTotal]="total" [nzPageSize]="q.ps" [nzLoading]="loading"
+                (nzDataChange)="dataChange($event)"
+                (nzPageIndexChange)="pageChange($event)">
+        <thead nz-thead>
+            <tr>
+                <!--<th nz-th [nzCheckbox]="true">
+                    <label nz-checkbox [(ngModel)]="allChecked" [nzIndeterminate]="indeterminate"
+                        (ngModelChange)="checkAll($event)"></label>
+                </th>-->
+                <th nz-th><span>单号</span></th>        
+                <th nz-th><span>计算时间</span></th>
+                <th nz-th><span>型号</span></th>
+                <th nz-th><span>数量</span></th>
+                <th nz-th><span>仓库</span></th>
+                <th nz-th><span>出入库类型</span></th>
+                <th nz-th><span>出库|入库</span></th>
+                <th nz-th><span>已计算|未计算</span></th>
+
+                <!-- <th nz-th><span>操作</span></th> -->
+            </tr>
+        </thead>
+        <tbody nz-tbody>
+            <tr nz-tbody-tr *ngFor="let i of nzTable.data">
+                <!--
+                <td nz-td [nzCheckbox]="true">
+                    <label nz-checkbox [nzDisabled]="i.disabled" [(ngModel)]="i.checked" (ngModelChange)="refreshStatus($event)">
+                    </label>
+                </td>-->
+                <td nz-td>{{i.cno}}</td>
+                <td nz-td>{{i.date}}</td>
+                <td nz-td>{{i.model}}</td>
+                <td nz-td>{{i.amount}}</td>
+                <td nz-td>{{i.warehouse}}</td>
+                <td nz-td>{{i.type}}</td>
+                <td nz-td>{{i.stockin}}</td>
+                <td nz-td>{{i.calculated}}</td>
+
+                
+            </tr>
+        </tbody>
+    </nz-table>
+</nz-card>
+

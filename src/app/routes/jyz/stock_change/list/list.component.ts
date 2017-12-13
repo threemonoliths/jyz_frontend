@@ -4,30 +4,30 @@ import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 
 import { GlobalService } from '../../../../services/global.service';
-import { DispatchForPurchaseService } from '../../../../services/dispatch_for_purchase.service';
+import { StockChangeService } from '../../../../services/stock_change.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
+
 import { AuditPipe } from '../../../../pipes/pipes'; 
+
 @Component({
-    selector: 'dispatch-table-list',
+    selector: 'StockChange-table-list',
     templateUrl: './list.component.html'
 })
-export class DispatchForPurchaseListComponent implements OnInit {
+export class StockChangeListComponent implements OnInit {
+
     testp = true
 
-    title = "油品配送出库单管理";
-    breadcrumbItem = {label: "油品配送出库单", routerLink: "/layout/content/dispatch_for_purchase/page"}
+    title = "计算信息管理";
+    breadcrumbItem = {label: "计算信息", routerLink: "/layout/content/stock_change/page"}
 
     // 查询对象，包括分页、排序和查询字段的值
     q: any = 
         {
             pi: 1,
             ps: 15,
-            sf: "date",
+            sf: "date", 
             sd: "desc",
-            billno: "",
-            date: "",
-            audited:""
-           
+            cno: ""
         };
     
     // 记录总数
@@ -47,8 +47,8 @@ export class DispatchForPurchaseListComponent implements OnInit {
     modalVisible = false;
     description = '';
 
-    constructor(public msg: NzMessageService, private globalService: GlobalService, 
-                private dispatchForPurchaseService: DispatchForPurchaseService, private router: Router) {}
+    constructor(public msg: NzMessageService, private globalService: GlobalService,
+                private stockchangeService: StockChangeService, private router: Router) {}
 
     ngOnInit() {
         console.log(this.q);
@@ -62,16 +62,11 @@ export class DispatchForPurchaseListComponent implements OnInit {
         console.log(this.q)
         this.loading = true;
         
-        this.dispatchForPurchaseService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
-                                                     .catch((error) => {console.log(error); this.loading = false;})                                           
+        this.stockchangeService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
+                                                     .catch((error) => {this.msg.error(error); this.loading = false;})                                           
     }
 
-    add() {
-         //新增按钮事件
-         this.dispatchForPurchaseService.formOperation = 'create';
-        // this.dispatchForPurchaseService.isUpdate=false;
-        this.router.navigateByUrl('/layout/content/dispatch_for_purchase/form');
-    }
+    
     
 
     save() {
@@ -87,9 +82,9 @@ export class DispatchForPurchaseListComponent implements OnInit {
         this.clear();
     }
 
-    approval() {
-        this.msg.success(`审批了 ${this.selectedRows.length} 笔`);
-    }
+    // approval() {
+    //     this.msg.success(`审批了 ${this.selectedRows.length} 笔`);
+    // }
 
     clear() {
         this.selectedRows = [];
@@ -167,38 +162,13 @@ export class DispatchForPurchaseListComponent implements OnInit {
         }
     }
 
-    delete(id) {
-        this.dispatchForPurchaseService.delete(id).then(resp =>
-            this.getData());
-    }
-    //更新按钮事件
-    update(id): void {
-        this.dispatchForPurchaseService.formOperation='update';
-        this.dispatchForPurchaseService.initUpdate(id)
-            .then(result => { this.dispatchForPurchaseService.updateDispatch = result; 
-                                this.dispatchForPurchaseService.updateDispatch.details = result.dispatch_for_purchase_details})
-            .then(() => this.router.navigateByUrl('/layout/content/dispatch_for_purchase/form')).catch((error)=>
-            console.log(error)); 
+ 
 
-    }
-
-    //审核按钮事件
-    audit(id) :void {
-       
-        this.dispatchForPurchaseService.formOperation='audit';
-        this.dispatchForPurchaseService.initUpdate(id)
-            .then(result => { this.dispatchForPurchaseService.updateDispatch = result; 
-                              this.dispatchForPurchaseService.updateDispatch.details = result.dispatch_for_purchase_details})
-            .then(() => this.router.navigateByUrl('/layout/content/dispatch_for_purchase/form')).catch((error)=>
-            console.log(error)); 
-    }
- show(id) :void {
-        this.dispatchForPurchaseService.formOperation='show';
-        this.dispatchForPurchaseService.initUpdate(id)
-            .then(result => { this.dispatchForPurchaseService.updateDispatch = result; 
-                              this.dispatchForPurchaseService.updateDispatch.details = result.dispatch_for_purchase_details})
-            .then(() => this.router.navigateByUrl('/layout/content/dispatch_for_purchase/form')).catch((error)=>
+    show(id) :void {
+        this.stockchangeService.formOperation='show';
+        this.stockchangeService.initUpdate(id)
+            .then(result => { this.stockchangeService.updateStockChange = result})
+            .then(() => this.router.navigateByUrl('/layout/content/stock_change/form')).catch((error)=>
             console.log(error));
     }
 }
-

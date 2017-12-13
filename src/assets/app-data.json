@@ -48,8 +48,12 @@
                 "icon":"fa fa-briefcase",
                 "link":"/layout/content/oil_transfer/page",
                 "translate":"油库调拨单"
+            },{
+                "text":"出入库计算单",
+                "icon":"fa fa-briefcase",
+                "link":"/layout/content/stock_change/page",
+                "translate":"出入库计算单"
             }
-
         ]
            },{
             "text": "gas depot",

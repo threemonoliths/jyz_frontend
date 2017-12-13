@@ -72,11 +72,12 @@ export class DispatchForPurchaseService {
                .map(response => response.json()).toPromise();
   }
   audit(cid): Promise<any>{
-
+    
     return this.http.get(this.url + `/audit/${cid}`, getTokenOptions())
                .map(response => response.json()).toPromise();
   }
    
+  
    getDate(v) {
     v.date = dateToString(v.date)
   }
