@@ -73,7 +73,6 @@ export class OilTransferListComponent implements OnInit {
         this.router.navigateByUrl('/layout/content/oil_transfer/form');
     }
     
-
     save() {
         
         saveRule(this.description);
