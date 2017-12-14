@@ -172,9 +172,9 @@
                     </td>
 
                     <td nz-td>
-                        <span *ngIf="editIndex!==i">{{details.value[i].Stockpalce}}</span>
-                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.Stockpalce">
-                            <nz-input formControlName="Stockpalce" nzPlaceHolder="请输入移入车（罐）号" nzSize="large"></nz-input>
+                        <span *ngIf="editIndex!==i">{{details.value[i].stockpalce}}</span>
+                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.stockpalce">
+                            <nz-input formControlName="stockpalce" nzPlaceHolder="请输入移入车（罐）号" nzSize="large"></nz-input>
                         </span>
                     </td>
 
@@ -199,9 +199,9 @@
                             </span>
                         </td>
                         <td nz-td>
-                            <span *ngIf="editIndex!==i">{{details.value[i].Quantity}}</span>
-                            <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.Quantity">
-                                <nz-input formControlName="Quantity" nzPlaceHolder="数量" nzSize="large" nzDisabled="true"></nz-input>
+                            <span *ngIf="editIndex!==i">{{details.value[i].quantity}}</span>
+                            <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.quantity">
+                                <nz-input formControlName="quantity" nzPlaceHolder="数量" nzSize="large" nzDisabled="true"></nz-input>
                             </span>
                         </td>
                         <td nz-td>
