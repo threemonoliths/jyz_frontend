@@ -18,7 +18,7 @@ export class StockChangeService {
   url = baseUrl+"stock_change"
 
   listOnePage(q) {
-    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&depotname=${q.cno}`, getTokenOptions() )
+    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&cno=${q.cno}`, getTokenOptions() )
                .toPromise().then(res => {return res.json()})           
   }
 
