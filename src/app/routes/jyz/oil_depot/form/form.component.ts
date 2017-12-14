@@ -29,7 +29,7 @@ export class OilDepotFormComponent implements OnInit {
     editable = true;
 
     // 自定义验证器，验证失败时，需要手工添加class：has-error
-    //amount_error = ''
+    number_error = ''
 
     constructor(private fb: FormBuilder, private router: Router, private oilDepotService: OilDepotService, 
                 private globalService: GlobalService, private msg: NzMessageService) {}
@@ -46,6 +46,7 @@ export class OilDepotFormComponent implements OnInit {
             depotname : [this.depot? this.depot.depotname : ''],
             depotiddr : [this.depot? this.depot.depotiddr : ''],
             kind : [this.depot? this.depot.kind : ''],
+            number : [this.depot? this.depot.number : '',[Validators.required, this.validateNumber.bind(this)]],
         });       
 
     }
@@ -56,6 +57,7 @@ export class OilDepotFormComponent implements OnInit {
     get depotname() { return this.form.controls.depotname; }
     get depotiddr() { return this.form.controls.depotiddr; }
     get kind() { return this.form.controls.kind; }
+    get number() { return this.form.controls.number; }
 
 
     _submitForm() {
@@ -121,11 +123,23 @@ export class OilDepotFormComponent implements OnInit {
         this.depot = this.oilDepotService.updateDepot;
     }
 
-  
+    //验证仓库数量字段是否为负值
+    validateNumber(c: FormControl) {
+        if (c.value >= 0) { 
+            this.number_error='';
+        } 
+        // else if (c.value == 0) { 
+        //     this.number_error='';
+        // } 
+        else if(c.touched || c.dirty) {
+            this.number_error='has-error';
+        }
+        return c.value >= 0 ? null : {validateNumber: true}
+    };
 
     // 自定义validator验证失败需调用该函数，为元素添加has-error类以显示红色高亮样式
-    // custom_validator() {
-    //     if (!this.form.controls['amount'].valid) { this.amount_error = 'has-error' }
-    // }
+    custom_validator() {
+        if (!this.form.controls['number'].valid) { this.number_error = 'has-error' }
+    }
 
 }

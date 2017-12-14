@@ -12,7 +12,7 @@ import { GodownentryForAcceptanceListComponent } from './list/list.component';
 import { godownentryForAcceptanceRoutes} from './godownentry_for_acceptance.routes';
 import { GodownentryForAcceptanceService } from '../../../services/godownentry_for_acceptance.service';
 
-import { MainPipe } from '../../../pipes/pipe.module';
+import { MainPipe } from '../pipes/pipe.module';
 
  
 @NgModule({

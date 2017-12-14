@@ -13,7 +13,7 @@ import { contractForPurchaseRoutes} from './contract_for_purchase.routes';
 
 import { ContractForPurchaseService } from '../../../services/contract_for_purchase.service';
 
-import { MainPipe } from '../../../pipes/pipe.module';
+import { MainPipe } from '../pipes/pipe.module';
 
  
 @NgModule({

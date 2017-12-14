@@ -6,7 +6,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { GlobalService } from '../../../../services/global.service';
 import { DispatchForPurchaseService } from '../../../../services/dispatch_for_purchase.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
-import { AuditPipe } from '../../../../pipes/pipes'; 
+import { AuditPipe } from '../../pipes/pipes'; 
 @Component({
     selector: 'dispatch-table-list',
     templateUrl: './list.component.html'
@@ -26,13 +26,19 @@ export class DispatchForPurchaseListComponent implements OnInit {
             sd: "desc",
             billno: "",
             date: "",
-            audited:""
+            audited:"null"
            
         };
     
     // 记录总数
     total: number;
    
+     // 状态查询
+    options = [
+        { value: null, label: '--' },
+        { value: true, label: '已审核' },
+        { value: false, label: '未审核' }
+    ];
 
     data: any[] = [];
     loading = false;
@@ -184,6 +190,7 @@ export class DispatchForPurchaseListComponent implements OnInit {
 
     //审核按钮事件
     audit(id) :void {
+       
         this.dispatchForPurchaseService.formOperation='audit';
         this.dispatchForPurchaseService.initUpdate(id)
             .then(result => { this.dispatchForPurchaseService.updateDispatch = result; 

@@ -1,32 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { NzMessageService } from 'ng-zorro-antd';
+
 import { GlobalService } from '../../../../services/global.service';
-import { CarryForAccountService } from '../../../../services/carry_for_account.service';
+import { StockChangeService } from '../../../../services/stock_change.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
+
 import { AuditPipe } from '../../pipes/pipes'; 
+import { Cal_StatusPipe } from '../../pipes/pipe_stock';
 
 @Component({
-    selector: 'contract-table-list',
+    selector: 'StockChange-table-list',
     templateUrl: './list.component.html'
 })
-export class CarryForAccountListComponent implements OnInit {
+export class StockChangeListComponent implements OnInit {
+
     testp = true
-    title = "销售油品提用表管理";
-    breadcrumbItem = {label: "销售油品提用表", routerLink: "/layout/content/carry_for_account/page"}
+
+    title = "出入库明细表管理";
+    breadcrumbItem = {label: "出入库明细表信息", routerLink: "/layout/content/stock_change/page"}
 
     // 查询对象，包括分页、排序和查询字段的值
     q: any = 
         {
             pi: 1,
             ps: 15,
-            sf: "date",
+            sf: "date", 
             sd: "desc",
-            companyname: ""
+            cno: ""
         };
     
     // 记录总数
     total: number;
+   
+
     data: any[] = [];
     loading = false;
     selectedRows: any[] = [];
@@ -34,13 +42,14 @@ export class CarryForAccountListComponent implements OnInit {
     totalCallNo = 0;
     allChecked = false;
     indeterminate = false;
+
     sortMap: any = {};
     expandForm = false;
     modalVisible = false;
     description = '';
 
     constructor(public msg: NzMessageService, private globalService: GlobalService,
-                private contractForPurchaseService: CarryForAccountService, private router: Router) {}
+                private stockchangeService: StockChangeService, private router: Router) {}
 
     ngOnInit() {
         console.log(this.q);
@@ -52,17 +61,15 @@ export class CarryForAccountListComponent implements OnInit {
     getData() {
         console.log("in getData")
         console.log(this.q)
-        this.loading = true;   
-        this.contractForPurchaseService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
+        this.loading = true;
+        
+        this.stockchangeService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
                                                      .catch((error) => {this.msg.error(error); this.loading = false;})                                           
     }
 
-    add() {
-         //新增按钮事件
-        this.contractForPurchaseService.formOperation = 'create';
-        this.router.navigateByUrl('/layout/content/carry_for_account/form');
-    }
     
+    
+
     save() {
         
         saveRule(this.description);
@@ -76,9 +83,9 @@ export class CarryForAccountListComponent implements OnInit {
         this.clear();
     }
 
-    approval() {
-        this.msg.success(`审批了 ${this.selectedRows.length} 笔`);
-    }
+    // approval() {
+    //     this.msg.success(`审批了 ${this.selectedRows.length} 笔`);
+    // }
 
     clear() {
         this.selectedRows = [];
@@ -104,6 +111,7 @@ export class CarryForAccountListComponent implements OnInit {
     }
 
     sort(field: string, value: any) {
+       
         console.log("sort value is:")
         console.log(value);
         this.q.sf = field;
@@ -119,14 +127,19 @@ export class CarryForAccountListComponent implements OnInit {
     }
 
     pageChange(pi: number) {
-        this.q.pi = pi;   
-        this.getData();   
+        this.q.pi = pi;
+      
+        this.getData();
+        
     }
 
     search() {
+        
         this.q.pi = 1;
         this.getData()
     }
+
+   
 
     getSortDirection(c: string) {
         if (c=="ascend") {
@@ -138,42 +151,13 @@ export class CarryForAccountListComponent implements OnInit {
         }
     }
 
-    delete(id) {
-        this.contractForPurchaseService.delete(id).then(resp =>  {
-            if ('error' in resp) { 
-                this.msg.error(resp.error);
-            } else {
-                this.msg.success('删除销售油品提用表：'+resp.companyname + '成功！');
-            }
-            this.getData()}).catch(error => this.msg.error(error));
-    }
-
-    //更新按钮事件
-    update(id): void {
-        this.contractForPurchaseService.formOperation='update';
-        this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateCarryAccount = result; 
-                                this.contractForPurchaseService.updateCarryAccount.details = result.carry_for_account_details})
-            .then(() => this.router.navigateByUrl('/layout/content/carry_for_account/form')).catch((error)=>
-            console.log(error)); 
-    }
-
-    //审核按钮事件
-    audit(id) :void {
-        this.contractForPurchaseService.formOperation='audit';
-        this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateCarryAccount = result; 
-                              this.contractForPurchaseService.updateCarryAccount.details = result.carry_for_account_details})
-            .then(() => this.router.navigateByUrl('/layout/content/carry_for_account/form')).catch((error)=>
-            console.log(error)); 
-    }
+ 
 
     show(id) :void {
-        this.contractForPurchaseService.formOperation='show';
-        this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateCarryAccount = result; 
-                              this.contractForPurchaseService.updateCarryAccount.details = result.carry_for_account_details})
-            .then(() => this.router.navigateByUrl('/layout/content/carry_for_account/form')).catch((error)=>
+        this.stockchangeService.formOperation='show';
+        this.stockchangeService.initUpdate(id)
+            .then(result => { this.stockchangeService.updateStockChange = result})
+            .then(() => this.router.navigateByUrl('/layout/content/stock_change/form')).catch((error)=>
             console.log(error));
     }
 }

@@ -23,6 +23,7 @@ export class DispatchForPurchaseFormComponent implements OnInit {
     dispatch: DispatchForPurchase;
     
     editable = true;
+    yesorno = true;
     //自动以验证器，验证失败时，需要手工添加class:has-error
     amount_error = ''
 
@@ -177,12 +178,15 @@ export class DispatchForPurchaseFormComponent implements OnInit {
     }
 
     initAudit() {
+        this.editable=false;
+        this.yesorno=true;
         this.title = '审核油品配送出库单';
         this.dispatch = this.dispatchForPurchaseService.updateDispatch;
     }
  initShow() {
         this.title = '查看优品配送出库单';
         this.editable = false;
+        this.yesorno=false;
         this.dispatch = this.dispatchForPurchaseService.updateDispatch;
     }
 
@@ -200,6 +204,7 @@ export class DispatchForPurchaseFormComponent implements OnInit {
     custom_validator() {
         if (!this.form.controls['amount'].valid) { this.amount_error = 'has-error' }
     }
+    
    
 }
 

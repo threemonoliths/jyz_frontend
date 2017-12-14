@@ -19,6 +19,7 @@ export const contentRoutes = [{
 		{ path: 'metering_for_return', loadChildren: '../metering_for_return/metering_for_return.module#MeteringForReturnModule' },
 		{ path: 'user_management', loadChildren: '../user_management/user_management.module#UserManagementModule' },
 		{ path: 'dict', loadChildren: '../dict/dict.module#DictModule' },            
+		{ path: 'stock_change', loadChildren: '../stock_change/stock_change.module#StockChangeModule' },     
         { path: 'dashboard', component: DashboardComponent},
 
 	]
