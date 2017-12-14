@@ -165,9 +165,9 @@
                 <tr nz-tbody-tr *ngFor="let item of details.controls; let i = index" [formGroupName]="i">
 
                     <td nz-td>
-                        <span *ngIf="editIndex!==i">{{details.value[i].Billno}}</span>
-                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.Billno">
-                            <nz-input formControlName="Billno" nzPlaceHolder="请输入调拨单号" nzSize="large"></nz-input>
+                        <span *ngIf="editIndex!==i">{{details.value[i].billno1}}</span>
+                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.billno1">
+                            <nz-input formControlName="billno1" nzPlaceHolder="请输入调拨单号" nzSize="large"></nz-input>
                         </span>
                     </td>
 

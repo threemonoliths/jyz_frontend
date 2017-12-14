@@ -67,7 +67,7 @@ export class OilTransferFormComponent implements OnInit {
 
     createDetail(): FormGroup {
         return this.fb.group({
-            Billno: [ null, [ Validators.required ] ],
+            billno1: [ null, [ Validators.required ] ],
             stockpalce: [ null, [ Validators.required ] ],
             Unit: [ null, [ Validators.required ] ],
             Startdegree: [ null, [ Validators.required,this.validateNumber.bind(this)] ],
