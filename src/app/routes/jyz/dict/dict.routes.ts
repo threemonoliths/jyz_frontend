@@ -1,13 +1,13 @@
-// import {ContractForPurchaseComponent} from './contract_for_purchase.component';
-// import {ContractForPurchaseListComponent} from './list/list.component';
-// import {ContractForPurchaseFormComponent} from './form/form.component';
+import {DictComponent} from './dict.component';
+import {DictListComponent} from './list/list.component';
+import {DictFormComponent} from './form/form.component';
 
-// export const contractForPurchaseRoutes = [{
-// 	path: '',
-// 	component: ContractForPurchaseComponent,
-// 	children: [
-// 		{ path: '', redirectTo: 'page', pathMatch: 'full' },
-// 		{ path: 'page', component: ContractForPurchaseListComponent },
-// 		{ path: 'form', component: ContractForPurchaseFormComponent },
-// 	]
-// }];
+export const dictRoutes = [{
+	path: '',
+	component: DictComponent,
+	children: [
+		{ path: '', redirectTo: 'page', pathMatch: 'full' },
+		{ path: 'page', component: DictListComponent },
+		{ path: 'form', component: DictFormComponent },
+	]
+}];

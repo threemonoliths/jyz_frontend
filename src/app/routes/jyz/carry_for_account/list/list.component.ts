@@ -152,8 +152,8 @@ export class CarryForAccountListComponent implements OnInit {
     update(id): void {
         this.contractForPurchaseService.formOperation='update';
         this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateContract = result; 
-                                this.contractForPurchaseService.updateContract.details = result.carry_for_account_details})
+            .then(result => { this.contractForPurchaseService.updateCarryAccount = result; 
+                                this.contractForPurchaseService.updateCarryAccount.details = result.carry_for_account_details})
             .then(() => this.router.navigateByUrl('/layout/content/carry_for_account/form')).catch((error)=>
             console.log(error)); 
     }
@@ -162,8 +162,8 @@ export class CarryForAccountListComponent implements OnInit {
     audit(id) :void {
         this.contractForPurchaseService.formOperation='audit';
         this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateContract = result; 
-                              this.contractForPurchaseService.updateContract.details = result.carry_for_account_details})
+            .then(result => { this.contractForPurchaseService.updateCarryAccount = result; 
+                              this.contractForPurchaseService.updateCarryAccount.details = result.carry_for_account_details})
             .then(() => this.router.navigateByUrl('/layout/content/carry_for_account/form')).catch((error)=>
             console.log(error)); 
     }
@@ -171,8 +171,8 @@ export class CarryForAccountListComponent implements OnInit {
     show(id) :void {
         this.contractForPurchaseService.formOperation='show';
         this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateContract = result; 
-                              this.contractForPurchaseService.updateContract.details = result.carry_for_account_details})
+            .then(result => { this.contractForPurchaseService.updateCarryAccount = result; 
+                              this.contractForPurchaseService.updateCarryAccount.details = result.carry_for_account_details})
             .then(() => this.router.navigateByUrl('/layout/content/carry_for_account/form')).catch((error)=>
             console.log(error));
     }
