@@ -6,8 +6,8 @@ export class StockChange {
     amount: number;    //数量
     warehouse: string; //仓库
     type: string;      //出入库类型
-    stockin: boolean;  //true：入库，false：出库
-    calculated: boolean; //true：已计算，false：未计算
+    calculated: boolean; //true：已计算，false：未计算a
+    cal_status: boolean;//计算状态
    
 
     // 交互用属性

@@ -7,7 +7,8 @@ import { GlobalService } from '../../../../services/global.service';
 import { StockChangeService } from '../../../../services/stock_change.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
 
-import { AuditPipe } from '../../../../pipes/pipes'; 
+import { AuditPipe } from '../../pipes/pipes'; 
+import { Cal_StatusPipe } from '../../pipes/pipe_stock';
 
 @Component({
     selector: 'StockChange-table-list',
@@ -17,8 +18,8 @@ export class StockChangeListComponent implements OnInit {
 
     testp = true
 
-    title = "计算信息管理";
-    breadcrumbItem = {label: "计算信息", routerLink: "/layout/content/stock_change/page"}
+    title = "出入库明细表管理";
+    breadcrumbItem = {label: "出入库明细表信息", routerLink: "/layout/content/stock_change/page"}
 
     // 查询对象，包括分页、排序和查询字段的值
     q: any = 
@@ -110,11 +111,7 @@ export class StockChangeListComponent implements OnInit {
     }
 
     sort(field: string, value: any) {
-        // this.sortMap = {};
-        // this.sortMap[field] = value;
-        // this.q.sorter = value ? `${field}_${value}` : '';
-        // this.sortMap
-        //this.loading = true;
+       
         console.log("sort value is:")
         console.log(value);
         this.q.sf = field;
@@ -131,26 +128,18 @@ export class StockChangeListComponent implements OnInit {
 
     pageChange(pi: number) {
         this.q.pi = pi;
-        //this.loading = true;
+      
         this.getData();
-        // return new Promise((resolve) => {
-        //     setTimeout(() => {
-        //         this.loading = false;
-        //         resolve();
-        //     }, 500);
-        // });
+        
     }
 
     search() {
-        //this.loading = true;
+        
         this.q.pi = 1;
         this.getData()
     }
 
-    // reset(ls: any[]) {
-    //     for (const item of ls) item.value = false;
-    //     this.getData();
-    // }
+   
 
     getSortDirection(c: string) {
         if (c=="ascend") {

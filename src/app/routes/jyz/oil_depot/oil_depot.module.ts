@@ -13,7 +13,7 @@ import { OilDepotRoutes} from './oil_depot.routes';
 
 import { OilDepotService } from '../../../services/oil_depot.service';
 
-import { MainPipe } from '../../../pipes/pipe.module';
+import { MainPipe } from '../pipes/pipe.module';
 
  
 @NgModule({

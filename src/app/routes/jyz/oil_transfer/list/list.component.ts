@@ -7,7 +7,7 @@ import { GlobalService } from '../../../../services/global.service';
 import { OilTransferService } from '../../../../services/oil_transfer.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
 
-import { AuditPipe } from '../../../../pipes/pipes'; 
+import { AuditPipe } from '../../pipes/pipes'; 
 
 @Component({
     selector: 'transfer-table-list',

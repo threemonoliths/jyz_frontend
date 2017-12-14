@@ -13,7 +13,7 @@ import { contractForPurchaseRoutes} from './carry_for_account.routes';
 
 import { CarryForAccountService } from '../../../services/carry_for_account.service';
 
-import { MainPipe } from '../../../pipes/pipe.module';
+import { MainPipe } from '../pipes/pipe.module';
 
  
 @NgModule({

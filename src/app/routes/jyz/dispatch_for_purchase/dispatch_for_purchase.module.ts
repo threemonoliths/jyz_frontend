@@ -13,7 +13,7 @@ import { dispatchForPurchaseRoutes} from './dispatch_for_purchase.routes';
 
 import { DispatchForPurchaseService } from '../../../services/dispatch_for_purchase.service';
 
-import { MainPipe } from '../../../pipes/pipe.module';
+import { MainPipe } from '../pipes/pipe.module';
 //import { ContractService } from '../../_services/contract.service';
 //import { RoleService } from '../../_services/role.service';
 

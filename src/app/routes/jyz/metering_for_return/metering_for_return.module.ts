@@ -13,7 +13,7 @@ import { meteringForReturnComponentRoutes} from './metering_for_return.routes';
 
 import { MeteringForReturnService } from '../../../services/metering_for_return.service';
 
-import { MainPipe } from '../../../pipes/pipe.module';
+import { MainPipe } from '../pipes/pipe.module';
 //import { ContractService } from '../../_services/contract.service';
 //import { RoleService } from '../../_services/role.service';
 

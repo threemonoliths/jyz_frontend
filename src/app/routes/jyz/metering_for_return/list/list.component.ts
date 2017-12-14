@@ -7,7 +7,7 @@ import { GlobalService } from '../../../../services/global.service';
 import { MeteringForReturnService } from '../../../../services/metering_for_return.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
 
-import { AuditPipe } from '../../../../pipes/pipes'; 
+import { AuditPipe } from '../../pipes/pipes'; 
 
 @Component({
     selector: 'metering-table-list',

@@ -1,13 +1,49 @@
 <nz-card [nzBordered]="false">
         <form nz-form (ngSubmit)="getData()" [nzLayout]="'inline'">
-        <div class="mb-md">
-        <button nz-button (click)="show()" [nzType]="'primary'" [nzSize]="'large'">
-            <!-- <i class="anticon anticon-plus"></i> -->
-            <span>查看</span>
-        </button>
-        </div>
-       </form>
+        <div nz-row [nzGutter]="24">
+                    <div *ngIf="expandForm" nz-col [nzSpan]="6" class="mb-md">
+                        <div nz-form-item class="d-flex">
+                            <div nz-form-label><label for="no">单号</label></div>
+                            <div nz-form-control class="flex-1">
+                                <nz-input [(ngModel)]="q.cno" name="cno" [nzSize]="'large'" [nzPlaceHolder]="'请输入'" nzId="cno"></nz-input>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="expandForm" nz-col [nzSpan]="6" class="mb-md">
+                        <div nz-form-item class="d-flex">
+                            <div nz-form-label><label for="no">仓库</label></div>
+                            <div nz-form-control class="flex-1">
+                                <nz-input [(ngModel)]="q.warehouse" name="warehouse" [nzSize]="'large'" [nzPlaceHolder]="'请输入'" nzId="warehouse"></nz-input>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="expandForm" nz-col [nzSpan]="6" class="mb-md">
+                        <div nz-form-item class="d-flex">
+                            <div nz-form-label><label for="no">出入库类型</label></div>
+                            <div nz-form-control class="flex-1">
+                                <nz-input [(ngModel)]="q.type" name="type" [nzSize]="'large'" [nzPlaceHolder]="'请输入'" nzId="type"></nz-input>
+                            </div>
+                        </div>
+                    </div>
+                    <div nz-col [nzSpan]="expandForm ? 24 : 8" class="mb-md" [class.text-right]="expandForm">
+                           
+                                
+                        <button nz-button *ngIf="expandForm" type="button" (click)="search()" [nzType]="'primary'" [nzLoading]="loading" [nzSize]="'large'">查询</button>
+                        <!--<button nz-button *ngIf="expandForm" type="reset" (click)="getData()" [nzSize]="'large'" class="mx-sm">重置</button>-->
+                        <a (click)="expandForm=!expandForm">
+                            {{expandForm ? '收起查询' : '展开查询'}}
+                            <i class="anticon" [class.anticon-down]="!expandForm" [class.anticon-up]="expandForm"></i>
+                        </a>
+                    </div>
+                    
+
+                </div>
+                 <div class="mb-md">
+                      <button nz-button (click)="show()" [nzType]="'primary'" [nzSize]="'large'">查看</button>
+                </div>
+            </form>
     
+  
  <nz-table #nzTable [nzAjaxData]="data" [nzTotal]="total" [nzPageSize]="q.ps" [nzLoading]="loading"
                 (nzDataChange)="dataChange($event)"
                 (nzPageIndexChange)="pageChange($event)">
@@ -23,8 +59,8 @@
                 <th nz-th><span>数量</span></th>
                 <th nz-th><span>仓库</span></th>
                 <th nz-th><span>出入库类型</span></th>
-                <th nz-th><span>出库|入库</span></th>
                 <th nz-th><span>已计算|未计算</span></th>
+                <th nz-th><span>计算状态</span></th>
 
                 <!-- <th nz-th><span>操作</span></th> -->
             </tr>
@@ -42,8 +78,8 @@
                 <td nz-td>{{i.amount}}</td>
                 <td nz-td>{{i.warehouse}}</td>
                 <td nz-td>{{i.type}}</td>
-                <td nz-td>{{i.stockin}}</td>
                 <td nz-td>{{i.calculated}}</td>
+                 <td nz-td>{{i.cal_status | cal_statusPipe}}</td>
 
                 
             </tr>

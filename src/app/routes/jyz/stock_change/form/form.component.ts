@@ -20,8 +20,8 @@ export class StockChangeFormComponent implements OnInit {
 
     form: FormGroup;
 
-    title = '创建计算信息';
-    breadcrumbItem = {label: "计算信息", routerLink: "/layout/content/stock_change/form"}
+    title = '出入库明细表';
+    breadcrumbItem = {label: "出入库明细表信息", routerLink: "/layout/content/stock_change/form"}
 
     stockchange: StockChange;
 
@@ -48,11 +48,11 @@ export class StockChangeFormComponent implements OnInit {
             amount : [this.stockchange? this.stockchange.amount : ''],
             warehouse : [this.stockchange? this.stockchange.warehouse : ''],
             type : [this.stockchange? this.stockchange.type : ''],
-            stockin : [this.stockchange? this.stockchange.stockin : ''],
             calculated : [this.stockchange? this.stockchange.calculated : ''],
+            cal_status : [this.stockchange?this.stockchange.cal_status : '未计算'],
         });       
 
-    }
+    } 
 
 
     //#region get form fields
@@ -62,8 +62,8 @@ export class StockChangeFormComponent implements OnInit {
     get amount() { return this.form.controls.amount; }
     get warehouse() { return this.form.controls.warehouse; }
     get type() { return this.form.controls.type; }
-    get stockin() { return this.form.controls.stockin; }
     get calculated() { return this.form.controls.calculated; }
+    get cal_status() { return this.form.controls.cal_status;}
 
 
     _submitForm() {
@@ -110,7 +110,7 @@ export class StockChangeFormComponent implements OnInit {
    
 
     initShow() {
-        this.title = '查看计算信息'; 
+        this.title = '查看出入库明细表信息'; 
         this.editable = false;
         this.stockchange = this.stockchangeService.updateStockChange;
     }

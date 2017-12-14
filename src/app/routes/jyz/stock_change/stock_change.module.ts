@@ -13,7 +13,8 @@ import {stockChangeRoutes} from './stock_change.routes';
 
 import { StockChangeService } from '../../../services/stock_change.service';
 
-import { MainPipe } from '../../../pipes/pipe.module';
+import { MainPipe } from '../pipes/pipe.module';
+import { Main1Pipe } from '../pipes/pipe_stock.module';
 
  
 @NgModule({
@@ -23,6 +24,7 @@ import { MainPipe } from '../../../pipes/pipe.module';
     FormsModule,
     ReactiveFormsModule,
     MainPipe,
+    Main1Pipe,
     RouterModule.forChild(stockChangeRoutes)
   ],
   declarations: [
