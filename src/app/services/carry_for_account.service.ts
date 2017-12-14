@@ -38,7 +38,7 @@ export class CarryForAccountService {
   isUpdate = false;
   isAudit = false;
   formOperation = 'create';
-  updateContract : CarryForAccount = null;
+  updateCarryAccount : CarryForAccount = null;
 
   //获取合同对象将提供给修改页面Form使用
   initUpdate(id){

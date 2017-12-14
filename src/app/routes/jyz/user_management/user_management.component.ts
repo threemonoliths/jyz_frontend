@@ -1,13 +1,13 @@
-// import {Component,OnInit} from '@angular/core';
+import {Component,OnInit} from '@angular/core';
 
-// @Component({
-//     templateUrl: './contract_for_purchase.component.html'
-// })
-// export class ContractForPurchaseComponent implements OnInit {
+@Component({
+    templateUrl: './user_management.component.html'
+})
+export class UserManagementComponent implements OnInit {
 
-//     constructor() { }
+    constructor() { }
     
-//     ngOnInit() {
+    ngOnInit() {
         
-//     }
-// }
+    }
+}

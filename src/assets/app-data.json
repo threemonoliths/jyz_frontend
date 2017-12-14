@@ -14,7 +14,22 @@
         "translate": "汽运公司加油站",
         "link":"",
         "group": true,
-        "children": [ {"text": "form manage",
+        "children": [
+            {"text": "系统配置",
+                "translate": "系统配置",
+                "link":"",
+                "icon": "fa fa-cab",
+                "children":[{
+                    "text":"用户管理",
+                    "link":"/layout/content/user_management/page",
+                    "translate":"用户管理"
+                },{
+                    "text":"数据字典",
+                    "link":"/layout/content/dict/page",
+                    "translate":"数据字典"
+                }]
+            },
+            {"text": "form manage",
             "translate": "表单管理",
             "link":"",
             "icon": "fa fa-cab",

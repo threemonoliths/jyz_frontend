@@ -1,14 +1,13 @@
-export class ContractForPurchase {
+export class UserManagement {
     id: number;
     username: string;
     email: string;
-    password: string;
-    password_hash: string;
     fullname: string;
     position: string;
     is_admin: boolean;
     active: boolean;
     permissions: number;
+    avatar :string;
    
     // 交互用属性
     disabled: boolean;

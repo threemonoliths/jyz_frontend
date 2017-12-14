@@ -159,4 +159,5 @@ export class StockChangeListComponent implements OnInit {
             .then(() => this.router.navigateByUrl('/layout/content/stock_change/form')).catch((error)=>
             console.log(error));
     }
+       
 }
