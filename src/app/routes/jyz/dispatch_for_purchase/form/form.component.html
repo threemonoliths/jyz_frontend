@@ -50,6 +50,7 @@
                     <div nz-form-item nz-row>
                         <div nz-form-label nz-col><label>配送库存地</label></div>
                         <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="stockplace">
+                            
                             <nz-input formControlName="stockplace" nzPlaceHolder="请输入配送库存地" nzSize="large" [nzDisabled]="!editable"></nz-input>
                             
                             <p nz-form-explain *ngIf="form.controls['stockplace'].invalid && (form.controls['stockplace'].dirty || form.controls['stockplace'].touched) && form.controls['stockplace'].errors.required">
