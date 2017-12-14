@@ -7,7 +7,7 @@ import { GlobalService } from '../../../../services/global.service';
 import { DictService } from '../../../../services/dict.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
 
-import { AuditPipe } from '../../../../pipes/pipes'; 
+import { AuditPipe } from '../../pipes/pipes'; 
 
 @Component({
     selector: 'Dict-table-list',

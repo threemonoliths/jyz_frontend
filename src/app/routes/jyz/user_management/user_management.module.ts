@@ -12,7 +12,7 @@ import { userManagementRoutes} from './user_management.routes';
 
 import { UserManagementService } from '../../../services/user_management.service';
 
-import { MainPipe } from '../../../pipes/pipe.module';
+import { MainPipe } from '../pipes/pipe.module';
 
  
 @NgModule({

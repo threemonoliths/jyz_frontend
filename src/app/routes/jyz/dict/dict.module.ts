@@ -12,7 +12,7 @@ import { DictListComponent } from './list/list.component';
 import {  dictRoutes} from './dict.routes';
 import { DictService } from '../../../services/dict.service';
 
-import { MainPipe } from '../../../pipes/pipe.module';
+import { MainPipe } from '../pipes/pipe.module';
 
  
 @NgModule({
