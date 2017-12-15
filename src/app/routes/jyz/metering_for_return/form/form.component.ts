@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder,FormControl, Validators, FormArray } from '@angular/forms';
 import { OilDepotService } from '../../../../services/oil_depot.service';
+import { DictService } from '../../../../services/dict.service';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 
@@ -32,10 +33,11 @@ export class MeteringForReturnFormComponent implements OnInit {
     amount_error = ''
 
     constructor(private fb: FormBuilder, private router: Router, private meteringForReturnService: MeteringForReturnService, 
-                private globalService: GlobalService, private msg: NzMessageService,private oilDepotService: OilDepotService) {}
+                private globalService: GlobalService, private msg: NzMessageService,private oilDepotService: OilDepotService,private dictService: DictService) {}
 
     ngOnInit() {
         this.getDepot();
+        this.getDictOil();
         let op = this.meteringForReturnService.formOperation;
         if (op == 'create') this.initCreate();
         if (op == 'update') this.initUpdate();
@@ -70,7 +72,7 @@ export class MeteringForReturnFormComponent implements OnInit {
             oilname: [ null, [ Validators.required ] ],
             unit: [ null, [ Validators.required ] ],
             quantity: [ null, [ Validators.required , this.validateNumber.bind(this)] ],
-            stockplace: [ null, [ Validators.required, this.validateNumber.bind(this) ] ],
+            stockplace: [ null, [ Validators.required ] ],
             comment: [ null ]
         });
     }
@@ -202,6 +204,16 @@ export class MeteringForReturnFormComponent implements OnInit {
     }
 
     loading : false;
+
+    oildata: any[]=[];
+    p: any = 
+    {
+        pi: 1,
+        ps: 15,
+        sf: "key", 
+        sd: "desc",
+        name: "fuel_type",
+    };
     
         q: any = 
         {
@@ -218,5 +230,11 @@ export class MeteringForReturnFormComponent implements OnInit {
         this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.totals = resp.total_entries; this.loading = false;})
                                                          .catch((error) => {this.msg.error(error);})                                           
         }
+
+        getDictOil() {
+        console.log("in getOil")
+        this.dictService.listOnePage(this.p).then(resp =>  {this.oildata = resp.entries;this.totals = resp.total_entries; this.loading = false;})
+                                                     .catch((error) => {this.msg.error(error);})                                           
+    }
 
 }
