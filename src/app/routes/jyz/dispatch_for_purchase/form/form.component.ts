@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl,Validators, FormArray } from '@angular/forms';
-
+import { OilDepotService } from '../../../../services/oil_depot.service';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd'  
 import { DispatchForPurchaseService } from '../../../../services/dispatch_for_purchase.service';
@@ -28,9 +28,10 @@ export class DispatchForPurchaseFormComponent implements OnInit {
     amount_error = ''
 
     constructor(private fb: FormBuilder, private router: Router, private dispatchForPurchaseService: DispatchForPurchaseService,
-                private globalService: GlobalService,private msg:NzMessageService) {}
+                private globalService: GlobalService,private msg:NzMessageService,private oilDepotService :OilDepotService) {}
 
     ngOnInit() {
+        this.getDepot();
          let op = this.dispatchForPurchaseService.formOperation;
         if (op == 'create') this.initCreate();
         if (op == 'update') this.initUpdate();
@@ -203,6 +204,24 @@ export class DispatchForPurchaseFormComponent implements OnInit {
     // 自定义validator验证失败需调用该函数，为元素添加has-error类以显示红色高亮样式
     custom_validator() {
         if (!this.form.controls['amount'].valid) { this.amount_error = 'has-error' }
+    }
+
+    loading : false;
+
+    q: any = 
+    {
+        pi: 1,
+        ps: 15,
+        sf: "depotiddr",
+        sd: "desc",
+        depotname: "",};
+
+    totals : number;
+    depotdata: any[] = [];
+    getDepot() {
+        console.log("in getDepot")
+    this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.totals = resp.total_entries; this.loading = false;})
+                                                     .catch((error) => {this.msg.error(error);})                                           
     }
     
    

@@ -50,8 +50,16 @@
                     <div nz-form-item nz-row>
                         <div nz-form-label nz-col><label>配送库存地</label></div>
                         <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="stockplace">
-                            <nz-input formControlName="stockplace" nzPlaceHolder="请输入配送库存地" nzSize="large" [nzDisabled]="!editable"></nz-input>
-                            
+                                <div nz-form-control class="flex-1">
+                                <nz-select formControlName="stockplace" [nzPlaceHolder]="'请选择配送库存地'" nzAllowClear [nzDisabled]="!editable" >
+                                    <nz-option
+                                        *ngFor="let option of depotdata"
+                                        [nzLabel]="option.depotname"
+                                        [nzValue]="option.depotname"
+                                        [nzDisabled]="option.disabled">
+                                    </nz-option>
+                                </nz-select>
+                                </div>                                     
                             <p nz-form-explain *ngIf="form.controls['stockplace'].invalid && (form.controls['stockplace'].dirty || form.controls['stockplace'].touched) && form.controls['stockplace'].errors.required">
                                 请输入配送库存地
                             </p>
@@ -74,9 +82,7 @@
                             </p>
                             <p nz-form-explain *ngIf="form.controls['quantity'].invalid && (form.controls['quantity'].dirty || form.controls['quantity'].touched) && form.controls['quantity'].errors.validateNumber">
                                 请输入有效数字
-                            </p>
-                            
-                            
+                            </p>    
                         </div>
                     </div>
                 </div>
@@ -157,7 +163,16 @@
                     <td nz-td>
                         <span *ngIf="editIndex!==i">{{details.value[i].oilname}}</span>
                         <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.oilname">
-                            <nz-input formControlName="oilname" nzPlaceHolder="请输入油品名称" nzSize="large"></nz-input>
+                            <div nz-form-control class="flex-1">
+                                <nz-select  formControlName="oilname" [nzPlaceHolder]="'请选择油品名称'" nzAllowClear  >
+                                    <nz-option
+                                        *ngFor="let options of depotdata"
+                                        [nzLabel]="options.oilname"
+                                        [nzValue]="options.oilname"
+                                        [nzDisabled]="options.disabled">
+                                    </nz-option>
+                                </nz-select>
+                                </div>       
                         </span>
                     </td>
                     <td nz-td>
@@ -226,3 +241,5 @@
         <button nz-button [nzType]="'primary'" nzSize="large" (click)="goBack()">返回</button>
     </div>
 </form>
+
+

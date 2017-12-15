@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder,FormControl, Validators, FormArray } from '@angular/forms';
-
+import { OilDepotService } from '../../../../services/oil_depot.service';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 
 import { MeteringForReturnService } from '../../../../services/metering_for_return.service';
 import { MeteringForReturn } from '../../../../domains/metering_for_return.domain'; 
 import { GlobalService } from '../../../../services/global.service';
-import { OilDepotService } from '../../../../services/oil_depot.service';
+
 import { stringToDate} from '../../../../utils/utils';
 
 @Component({
@@ -27,13 +27,12 @@ export class MeteringForReturnFormComponent implements OnInit {
 
     
     editable = true;
-    editit=true;
-    depotdata: any[] = [];
+
     // 自定义验证器，验证失败时，需要手工添加class：has-error
     amount_error = ''
 
     constructor(private fb: FormBuilder, private router: Router, private meteringForReturnService: MeteringForReturnService, 
-                private globalService: GlobalService, private msg: NzMessageService,private oilDepotService:OilDepotService ) {}
+                private globalService: GlobalService, private msg: NzMessageService,private oilDepotService: OilDepotService) {}
 
     ngOnInit() {
         this.getDepot();
@@ -71,7 +70,7 @@ export class MeteringForReturnFormComponent implements OnInit {
             oilname: [ null, [ Validators.required ] ],
             unit: [ null, [ Validators.required ] ],
             quantity: [ null, [ Validators.required , this.validateNumber.bind(this)] ],
-            stockplace: [ null, [ Validators.required] ],
+            stockplace: [ null, [ Validators.required, this.validateNumber.bind(this) ] ],
             comment: [ null ]
         });
     }
@@ -123,6 +122,9 @@ export class MeteringForReturnFormComponent implements OnInit {
     }
 
      _submitForm() {
+        //this.msg.success(`Copied Success!`);
+        //this.custom_validator();
+
         for (const i in this.form.controls) {
           this.form.controls[ i ].markAsDirty();
         }
@@ -174,14 +176,13 @@ export class MeteringForReturnFormComponent implements OnInit {
 
     initAudit() {
         this.title = '审核油品回罐单';
-        this.editable = false;
+        //this.editable = false;
         this.metering = this.meteringForReturnService.updateMetering;
     }
 
     initShow() {
         this.title = '查看油品回罐单';
         this.editable = false;
-        this.editit=false;
         this.metering = this.meteringForReturnService.updateMetering;
     }
 
@@ -199,20 +200,23 @@ export class MeteringForReturnFormComponent implements OnInit {
     custom_validator() {
         if (!this.form.controls['stockman'].valid) { this.amount_error = 'has-error' }
     }
-   loading : false;
-    q: any = 
-    {
-        pi: 1,
-        ps: 15,
-        sf: "depotiddr",
-        sd: "desc",
-        depotname: "",};
-    total : number;
-    getDepot() {
-        console.log("in getDepot")
-    this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.total = resp.total_entries; this.loading = false;})
-                                                     .catch((error) => {this.msg.error(error);})                                           
-    }
 
+    loading : false;
+    
+        q: any = 
+        {
+            pi: 1,
+            ps: 15,
+            sf: "depotiddr",
+            sd: "desc",
+            depotname: "",};
+    
+        totals : number;
+        depotdata: any[] = [];
+        getDepot() {
+            console.log("in getDepot")
+        this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.totals = resp.total_entries; this.loading = false;})
+                                                         .catch((error) => {this.msg.error(error);})                                           
+        }
 
 }

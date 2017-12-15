@@ -21,7 +21,16 @@
                 <div nz-form-item nz-row>
                     <div nz-form-label nz-col><label>移出罐（车）号</label></div>
                     <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="stockplace">
-                        <nz-input formControlName="stockplace" nzPlaceHolder="请输入移出罐（车）号" nzSize="large" [nzDisabled]="!editable"></nz-input>
+                            <div nz-form-control class="flex-1">
+                                    <nz-select formControlName="stockplace" [nzPlaceHolder]="'移出存地'" nzAllowClear [nzDisabled]="!editable" >
+                                        <nz-option
+                                            *ngFor="let option of depotdata"
+                                            [nzLabel]="option.depotname"
+                                            [nzValue]="option.depotname"
+                                            [nzDisabled]="option.disabled">
+                                        </nz-option>
+                                    </nz-select>
+                                    </div>   
                         
                         <p nz-form-explain *ngIf="form.controls['stockplace'].invalid && (form.controls['stockplace'].dirty || form.controls['stockplace'].touched) && form.controls['stockplace'].errors.required">
                             请输入移出罐（车）号
@@ -174,7 +183,16 @@
                     <td nz-td>
                         <span *ngIf="editIndex!==i">{{details.value[i].stockpalce}}</span>
                         <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.stockpalce">
-                            <nz-input formControlName="stockpalce" nzPlaceHolder="请输入移入车（罐）号" nzSize="large"></nz-input>
+                                <div nz-form-control class="flex-1">
+                                        <nz-select formControlName="stockpalce" [nzPlaceHolder]="'移入车号'" nzAllowClear  >
+                                            <nz-option
+                                                *ngFor="let option of depotdata"
+                                                [nzLabel]="option.depotname"
+                                                [nzValue]="option.depotname"
+                                                [nzDisabled]="option.disabled">
+                                            </nz-option>
+                                        </nz-select>
+                                        </div>    
                         </span>
                     </td>
 
