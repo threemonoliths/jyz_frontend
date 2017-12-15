@@ -15,8 +15,9 @@ export class GodownentryForAcceptanceService {
   url = baseUrl+"godownentry_for_acceptance"
 
   listOnePage(q) {
-    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&bno=${q.bno}&supplier=${q.supplier}&cno=${q.cno}&audited=${q.audited}&audit_time=${q.audit_time}`, getTokenOptions() )
-               .toPromise().then(res => {return res.json()})           
+    console.log(q.audited.value);
+    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&bno=${q.bno}&audited=${q.audited.value}`, getTokenOptions() )
+               .toPromise().then(res => {console.log(res);return res.json()})           
   }
 
   add(v): Promise<any>{ 

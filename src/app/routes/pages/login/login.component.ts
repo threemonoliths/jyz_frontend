@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { SettingsService } from '@core/services/settings.service';
 
+import { NzMessageService } from 'ng-zorro-antd';
+
 import { AuthenticationService } from '../../../services/login.service';
 
 @Component({
@@ -15,9 +17,11 @@ export class LoginComponent {
   waiting = false;
   button_label = "登录";
 
-  constructor(public settings: SettingsService, private authenticationService: AuthenticationService, fb: FormBuilder, private router: Router) {
+  invalidlogin = false;
+
+  constructor(public settings: SettingsService, private authenticationService: AuthenticationService, fb: FormBuilder, private router: Router, private msg: NzMessageService) {
     this.valForm = fb.group({
-      username: [null, Validators.compose([Validators.required])],
+      username: [null, Validators.compose([Validators.required]), ],
       password: [null, Validators.required],
       remember_me: [null]
     });
@@ -26,6 +30,7 @@ export class LoginComponent {
   submit() {
     this.waiting = true
     this.button_label = "登录中..."
+    this.invalidlogin = false
     // tslint:disable-next-line:forin
     for (const i in this.valForm.controls) {
       this.valForm.controls[i].markAsDirty();
@@ -39,24 +44,24 @@ export class LoginComponent {
 				// login successful
           console.log(localStorage.getItem('currentUsername'));
           this.router.navigate(['layout']);
-			  } 
+			  } else if (result === false) {
+          this.invalidlogin = true
+        }
 			  }, 
 			  err => { 
-					if (err.status===401){
-						// this.error = "用户名或密码错误！";
-						// this.loading=false;
-					} 
-					else if (err.status===400){
-						// this.error = "HTTP请求错误！";
-						// this.loading=false;
-					}
-					else {
-						// this.error = "无法连接服务器，请检查网络与服务器是否正常！";
-						// this.loading=false;
-					}
+          this.msg.error(err);
+          this.waiting = false
+          this.button_label = "登录"
+          this.invalidlogin = false
 				  });
 
       // this.router.navigate(['layout']);
     }
   }
+
+  onChange(){
+    this.invalidlogin = false
+  }
+
+
 }

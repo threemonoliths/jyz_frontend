@@ -154,7 +154,7 @@
                             <span *ngIf="editIndex!==i">{{details.value[i].stockplace}}</span>
                             <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.stockplace">
                                 <!-- <nz-input formControlName="stockplace" nzPlaceHolder="请输入仓库地址" nzSize="large"></nz-input>                                                      -->
-                                    <nz-select formControlName="stockplace"  [nzPlaceHolder]="'请输入仓库地址'">                                                 
+                                    <nz-select [(ngModel)]="selected" formControlName="stockplace"  [nzPlaceHolder]="'请输入仓库地址'">                                                 
                                     <nz-option
                                             *ngFor="let option of depotdata" 
                                             [nzLabel]="option.depotname"
@@ -163,6 +163,7 @@
                                         </nz-option>
                                     </nz-select>                                                          
                             </span>
+                       
                         </td>
                         <td nz-td>
                                 <span *ngIf="editIndex!==i">{{details.value[i].comment}}</span>
@@ -193,6 +194,7 @@
                         </span>
                     </td>
                 </tr>
+               
             </tbody>
         </nz-table>
         

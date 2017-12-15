@@ -2,14 +2,14 @@
     <div class="abs-center mt-lg width-lg">
         <nz-card [nzTitle]="nzTitle" [nzBordered]="false" class="ant-card__primary ant-card__title-img">
             <ng-template #nzTitle>
-                <div class="text-center"><img src="./assets/img/logo.svg" style="height:20px;"></div>
+                <div class="text-center"><img src="./assets/img/logo1.png" style="height:33px;"></div>
             </ng-template>
             <form nz-form [formGroup]="valForm" (ngSubmit)="submit()" role="form">
                 <div nz-form-item>
                     <div nz-form-control [nzValidateStatus]="valForm.controls.username">
-                        <nz-input formControlName="username" [nzPlaceHolder]="'邮箱'" [nzSize]="'large'">
+                        <nz-input formControlName="username" [nzPlaceHolder]="'用户名'" [nzSize]="'large'" (input)="onChange()">
                             <ng-template #suffix>
-                                <i class="anticon anticon-username"></i>
+                                <i class="anticon anticon-user"></i>
                             </ng-template>
                         </nz-input>
                         <div nz-form-explain *ngIf="valForm.controls.username.dirty&&valForm.controls.username.hasError('required')">用户名必填</div>
@@ -17,7 +17,7 @@
                 </div>
                 <div nz-form-item>
                     <div nz-form-control [nzValidateStatus]="valForm.controls.password">
-                        <nz-input formControlName="password" [nzPlaceHolder]="'密码'" [nzType]="'password'" [nzSize]="'large'">
+                        <nz-input formControlName="password" [nzPlaceHolder]="'密码'" [nzType]="'password'" [nzSize]="'large'" (input)="onChange()">
                             <ng-template #suffix>
                                 <i class="anticon anticon-lock"></i>
                             </ng-template>
@@ -25,15 +25,24 @@
                         <div nz-form-explain *ngIf="valForm.controls.password.dirty&&valForm.controls.password.hasError('required')">密码必填</div>
                     </div>
                 </div>
+
+                <div *ngIf = "invalidlogin">
+                    <p >
+                        <font color="red">
+                            用户名或密码错误！
+                        </font>
+                    </p>
+                </div>
+
                 <div nz-form-item nz-row>
                     <div nz-col [nzSpan]="12">
                         <label nz-checkbox formControlName="remember_me">
                             <span>记住密码</span>
                         </label>
                     </div>
-                    <div nz-col [nzSpan]="12" class="text-right">
+                   <!--  <div nz-col [nzSpan]="12" class="text-right">
                         <a [routerLink]="['/forget']">忘记密码？</a>
-                    </div>
+                    </div> -->
                 </div>
                 <div nz-form-item nz-row>
                     <div nz-col [nzSpan]="24">
@@ -55,8 +64,9 @@
             </div>
         </nz-card>
         <div class="p-lg text-center text-sm">
-            &copy; {{ settings.app.year }} - {{ settings.app.name }}
-            <br> {{ settings.app.description }}
+            <div nz-col [class.text-center]="true">马钢汽运公司加油站 ©2017 Powered By Ng-zorro, Angular, Phoenix.</div>
+            <!-- &copy; {{ settings.app.year }} - {{ settings.app.name }}
+            <br> {{ settings.app.description }} -->
         </div>
     </div>
 </div>

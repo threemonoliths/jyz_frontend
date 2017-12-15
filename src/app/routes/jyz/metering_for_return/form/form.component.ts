@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder,FormControl, Validators, FormArray } from '@angular/forms';
-
+import { OilDepotService } from '../../../../services/oil_depot.service';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 
@@ -32,9 +32,10 @@ export class MeteringForReturnFormComponent implements OnInit {
     amount_error = ''
 
     constructor(private fb: FormBuilder, private router: Router, private meteringForReturnService: MeteringForReturnService, 
-                private globalService: GlobalService, private msg: NzMessageService) {}
+                private globalService: GlobalService, private msg: NzMessageService,private oilDepotService: OilDepotService) {}
 
     ngOnInit() {
+        this.getDepot();
         let op = this.meteringForReturnService.formOperation;
         if (op == 'create') this.initCreate();
         if (op == 'update') this.initUpdate();
@@ -200,5 +201,22 @@ export class MeteringForReturnFormComponent implements OnInit {
         if (!this.form.controls['stockman'].valid) { this.amount_error = 'has-error' }
     }
 
+    loading : false;
+    
+        q: any = 
+        {
+            pi: 1,
+            ps: 15,
+            sf: "depotiddr",
+            sd: "desc",
+            depotname: "",};
+    
+        totals : number;
+        depotdata: any[] = [];
+        getDepot() {
+            console.log("in getDepot")
+        this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.totals = resp.total_entries; this.loading = false;})
+                                                         .catch((error) => {this.msg.error(error);})                                           
+        }
 
 }
