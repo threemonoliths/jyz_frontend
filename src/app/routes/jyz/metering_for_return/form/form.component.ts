@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder,FormControl, Validators, FormArray } from '@angular/forms';
 import { OilDepotService } from '../../../../services/oil_depot.service';
+import { DictService } from '../../../../services/dict.service';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 
@@ -32,10 +33,11 @@ export class MeteringForReturnFormComponent implements OnInit {
     amount_error = ''
 
     constructor(private fb: FormBuilder, private router: Router, private meteringForReturnService: MeteringForReturnService, 
-                private globalService: GlobalService, private msg: NzMessageService,private oilDepotService: OilDepotService) {}
+                private globalService: GlobalService, private msg: NzMessageService,private oilDepotService: OilDepotService,private dictService: DictService) {}
 
     ngOnInit() {
         this.getDepot();
+        this.getDictOil();
         let op = this.meteringForReturnService.formOperation;
         if (op == 'create') this.initCreate();
         if (op == 'update') this.initUpdate();
@@ -70,7 +72,7 @@ export class MeteringForReturnFormComponent implements OnInit {
             oilname: [ null, [ Validators.required ] ],
             unit: [ null, [ Validators.required ] ],
             quantity: [ null, [ Validators.required , this.validateNumber.bind(this)] ],
-            stockplace: [ null, [ Validators.required, this.validateNumber.bind(this) ] ],
+            stockplace: [ null, [ Validators.required ] ],
             comment: [ null ]
         });
     }
@@ -201,11 +203,24 @@ export class MeteringForReturnFormComponent implements OnInit {
         if (!this.form.controls['stockman'].valid) { this.amount_error = 'has-error' }
     }
 
-        depotdata: any[] = [];
+   
+    depotdata: any[] = [];
+    oildata: any[]=[];
+    p: any = 
+    {
+        name: "fuel_type",
+    };
+     
         getDepot() {
             console.log("in getDepot")
         this.oilDepotService.listAll().then(resp =>  {this.depotdata = resp.entries;})
                                                          .catch((error) => {this.msg.error(error);})                                           
         }
+
+        getDictOil() {
+        console.log("in getOil")
+        this.dictService.listAll(this.p).then(resp =>  {this.oildata = resp.entries;})
+                                                     .catch((error) => {this.msg.error(error);})                                           
+    }
 
 }

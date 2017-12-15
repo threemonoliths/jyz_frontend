@@ -16,17 +16,13 @@ import { DictService } from '../../../../services/dict.service';
 export class DispatchForPurchaseFormComponent implements OnInit {
     editIndex = -1;
     editObj = {};
-
     form: FormGroup;
-
     title = '创建油品配送出库单';
     breadcrumbItem = {label: "油品配送出库单", routerLink: "/layout/content/dispatch_for_purchase/form"}
-
-    dispatch: DispatchForPurchase;
-    
+    dispatch: DispatchForPurchase; 
     editable = true;
     yesorno = true;
-    depotdata: any[] = [];
+   
     //自动以验证器，验证失败时，需要手工添加class:has-error
     amount_error = ''
 
@@ -211,36 +207,22 @@ export class DispatchForPurchaseFormComponent implements OnInit {
 
 
 
-    loading : false;
-
+    
+    depotdata: any[] = [];
     oildata: any[]=[];
     p: any = 
     {
-        pi: 1,
-        ps: 15,
-        sf: "key", 
-        sd: "desc",
         name: "fuel_type",
     };
-
-    q: any = 
-    {
-        pi: 1,
-        ps: 15,
-        sf: "depotiddr",
-        sd: "desc",
-        depotname: "",};
-
-    totals : number;
-   
+  
     getDepot() {
         console.log("in getDepot")
-    this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.totals = resp.total_entries; this.loading = false;})
+    this.oilDepotService.listAll().then(resp =>  {this.depotdata = resp.entries;})
                                                      .catch((error) => {this.msg.error(error);})                                           
     }
     getDictOil() {
         console.log("in getOil")
-    this.dictService.listOnePage(this.p).then(resp =>  {this.oildata = resp.entries;this.totals = resp.total_entries; this.loading = false;})
+    this.dictService.listAll(this.p).then(resp =>  {this.oildata = resp.entries;})
                                                      .catch((error) => {this.msg.error(error);})                                           
     }
     }

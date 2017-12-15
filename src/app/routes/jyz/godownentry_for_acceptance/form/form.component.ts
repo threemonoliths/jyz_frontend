@@ -8,6 +8,7 @@ import { GodownentryForAcceptanceService } from '../../../../services/godownentr
 import { GodownentryForAcceptance } from '../../../../domains/godownentry_for_acceptance.domain'; 
 import { GlobalService } from '../../../../services/global.service';
 import { OilDepotService } from '../../../../services/oil_depot.service';
+import { DictService } from '../../../../services/dict.service';
 import { stringToDate} from '../../../../utils/utils';
 
 @Component({
@@ -23,15 +24,16 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
     godownentry: GodownentryForAcceptance;
     editable = true;
     editit=true;
-    depotdata: any[] = [];
+ 
 
     // 自定义验证器，验证失败时，需要手工添加class：has-error
     amout_error = ''
      constructor(private fb: FormBuilder, private router: Router, private godownentryForAcceptanceService: GodownentryForAcceptanceService, 
-                private globalService: GlobalService, private msg: NzMessageService,private oilDepotService:OilDepotService ) {}
+                private globalService: GlobalService, private msg: NzMessageService,private oilDepotService:OilDepotService,private dictService: DictService ) {}
 
     ngOnInit() {
         this.getDepot();
+        this.getDictOil();
         let op = this.godownentryForAcceptanceService.formOperation;
         if (op == 'create') this.initCreate();
         if (op == 'update') this.initUpdate();
@@ -197,21 +199,26 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
         }
         return c.value > 0 ? null : {validateNumber: true}
     };
-    loading : false;
-    q: any = 
+    
+    depotdata: any[] = [];
+    oildata: any[]=[];
+    p: any = 
     {
-        pi: 1,
-        ps: 15,
-        sf: "depotiddr",
-        sd: "desc",
-        depotname: "",};
-    total : number;
+        name: "fuel_type",
+    };
+
+   
     getDepot() {
         console.log("in getDepot")
-    this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.total = resp.total_entries; this.loading = false;})
+    this.oilDepotService.listAll().then(resp =>  {this.depotdata = resp.entries;})
                                                      .catch((error) => {this.msg.error(error);})                                           
     }
    
-
+    getDictOil() {
+        console.log("in getOil")
+    this.dictService.listAll(this.p).then(resp =>  {this.oildata = resp.entries;})
+                                                     .catch((error) => {this.msg.error(error);})                                           
+    }
+    
 
 }

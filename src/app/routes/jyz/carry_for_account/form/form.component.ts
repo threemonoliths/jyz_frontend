@@ -6,7 +6,7 @@ import { CarryForAccountService } from '../../../../services/carry_for_account.s
 import { CarryForAccount } from '../../../../domains/carry_for_account.domain'; 
 import { GlobalService } from '../../../../services/global.service';
 import { stringToDate} from '../../../../utils/utils';
-
+import { DictService } from '../../../../services/dict.service';
 @Component({
     selector: 'carry_for_account-form',
     templateUrl: './form.component.html'
@@ -24,9 +24,10 @@ export class CarryForAccountFormComponent implements OnInit {
     operator_error = ''
 
     constructor(private fb: FormBuilder, private router: Router, private carryForAccountService: CarryForAccountService, 
-                private globalService: GlobalService, private msg: NzMessageService) {}
+                private globalService: GlobalService, private msg: NzMessageService,private dictService:DictService) {}
 
     ngOnInit() {
+        this.getDictOil();
         let op = this.carryForAccountService.formOperation;
         if (op == 'create') this.initCreate();
         if (op == 'update') this.initUpdate();
@@ -188,5 +189,17 @@ export class CarryForAccountFormComponent implements OnInit {
         }
         return c.value > 0 ? null : {validateNumber: true}
     };
+
+    oildata: any[]=[];
+    p: any = 
+    {
+        name: "fuel_type",
+    };
+
+    getDictOil() {
+        console.log("in getOil")
+    this.dictService.listAll(this.p).then(resp =>  {this.oildata = resp.entries;})
+                                                     .catch((error) => {this.msg.error(error);})                                           
+    }
    
 }

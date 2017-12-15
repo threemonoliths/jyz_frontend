@@ -216,21 +216,11 @@ export class OilTransferFormComponent implements OnInit {
     //     if (!this.form.controls['Enddegree'].valid) { this.Positive_error = 'has-error' }
     //     if (!this.form.controls['quantity'].valid) { this.Positive_error = 'has-error' }
     // }
-    loading : false;
-    
-        q: any = 
-        {
-            pi: 1,
-            ps: 15,
-            sf: "depotiddr",
-            sd: "desc",
-            depotname: "",};
-    
-        totals : number;
+     
         depotdata: any[] = [];
         getDepot() {
             console.log("in getDepot")
-        this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.totals = resp.total_entries; this.loading = false;})
+        this.oilDepotService.listAll().then(resp =>  {this.depotdata = resp.entries;})
                                                          .catch((error) => {this.msg.error(error);})                                           
         }
 

@@ -22,7 +22,7 @@ export class DictService {
                .toPromise().then(res => {return res.json()})           
   }
   listAll(q) {
-    return this.http.get(this.url +`name=${q.name}`, getTokenOptions() )
+    return this.http.get(this.url +`?name=${q.name}`, getTokenOptions() )
                .toPromise().then(res => {return res.json()})           
   }
 
