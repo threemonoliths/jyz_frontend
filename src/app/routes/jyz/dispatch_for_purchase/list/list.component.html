@@ -9,14 +9,7 @@
                             </div>
                         </div>
                     </div>
-                    <div *ngIf="expandForm" nz-col [nzSpan]="6" class="mb-md">
-                        <div nz-form-item class="d-flex">
-                            <div nz-form-label><label for="no">日期</label></div>
-                            <div nz-form-control class="flex-1">
-                                <nz-input [(ngModel)]="q.date" name="date" [nzSize]="'large'" [nzPlaceHolder]="'请输入'" nzId="date"></nz-input>
-                            </div>
-                        </div>
-                    </div>
+                   
                     <div *ngIf="expandForm" nz-col [nzSpan]="6" class="mb-md">
                         <div nz-form-item class="d-flex">
                             <div nz-form-label><label for="no">审核状态</label></div>

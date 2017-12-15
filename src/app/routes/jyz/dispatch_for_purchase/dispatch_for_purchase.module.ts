@@ -12,7 +12,7 @@ import { DispatchForPurchaseListComponent } from './list/list.component';
 import { dispatchForPurchaseRoutes} from './dispatch_for_purchase.routes';
 
 import { DispatchForPurchaseService } from '../../../services/dispatch_for_purchase.service';
-
+import { OilDepotService } from '../../../services/oil_depot.service';
 import { MainPipe } from '../pipes/pipe.module';
 //import { ContractService } from '../../_services/contract.service';
 //import { RoleService } from '../../_services/role.service';
@@ -35,6 +35,7 @@ import { MainPipe } from '../pipes/pipe.module';
   providers: [
     DispatchForPurchaseService,
     // ConfirmationService
+    OilDepotService,
   ]
 })
 export class DispatchForPurchaseModule { }

@@ -6,6 +6,7 @@ import { NzMessageService } from 'ng-zorro-antd'
 import { DispatchForPurchaseService } from '../../../../services/dispatch_for_purchase.service';
 import {DispatchForPurchase } from '../../../../domains/dispatch_for_purchase.domain';
 import { GlobalService } from '../../../../services/global.service';
+import { OilDepotService } from '../../../../services/oil_depot.service';
 import { stringToDate } from '../../../../utils/utils'; 
 @Component({
     selector: 'dispatch_for_purchase-form',
@@ -24,13 +25,15 @@ export class DispatchForPurchaseFormComponent implements OnInit {
     
     editable = true;
     yesorno = true;
+    depotdata: any[] = [];
     //自动以验证器，验证失败时，需要手工添加class:has-error
     amount_error = ''
 
     constructor(private fb: FormBuilder, private router: Router, private dispatchForPurchaseService: DispatchForPurchaseService,
-                private globalService: GlobalService,private msg:NzMessageService) {}
+                private globalService: GlobalService,private msg:NzMessageService,private oilDepotService:OilDepotService ) {}
 
     ngOnInit() {
+        this.getDepot();
          let op = this.dispatchForPurchaseService.formOperation;
         if (op == 'create') this.initCreate();
         if (op == 'update') this.initUpdate();
@@ -200,11 +203,24 @@ export class DispatchForPurchaseFormComponent implements OnInit {
         return c.value > 0 ? null : {validateNumber: true}
     };
 
-    // 自定义validator验证失败需调用该函数，为元素添加has-error类以显示红色高亮样式
-    custom_validator() {
-        if (!this.form.controls['amount'].valid) { this.amount_error = 'has-error' }
+     loading : false;
+    q: any = 
+    {
+        pi: 1,
+        ps: 15,
+        sf: "depotiddr",
+        sd: "desc",
+        depotname: "",};
+    total1 : number;
+    getDepot() {
+        console.log("in getDepot")
+    this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.total1 = resp.total_entries; this.loading = false;})
+                                                     .catch((error) => {this.msg.error(error);})                                           
     }
+
+
+}
     
    
-}
+
 
