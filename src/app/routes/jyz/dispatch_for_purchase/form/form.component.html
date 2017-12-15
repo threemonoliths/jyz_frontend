@@ -163,11 +163,11 @@
                         <span *ngIf="editIndex!==i">{{details.value[i].oilname}}</span>
                         <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.oilname">
                             <div nz-form-control class="flex-1">
-                                <nz-select  formControlName="oilname" [nzPlaceHolder]="'请选择油品名称'" nzAllowClear  >
+                                <nz-select  formControlName="oilname" [nzPlaceHolder]="'油品名称'" nzAllowClear  >
                                     <nz-option
-                                        *ngFor="let options of depotdata"
-                                        [nzLabel]="options.oilname"
-                                        [nzValue]="options.oilname"
+                                        *ngFor="let options of oildata"
+                                        [nzLabel]="options.parm"
+                                        [nzValue]="options.parm"
                                         [nzDisabled]="options.disabled">
                                     </nz-option>
                                 </nz-select>
