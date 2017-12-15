@@ -18,7 +18,7 @@
             {"text": "系统配置",
                 "translate": "系统配置",
                 "link":"",
-                "icon": "fa fa-cab",
+                "icon": "icon-wrench",
                 "children":[{
                     "text":"用户管理",
                     "link":"/layout/content/user_management/page",
@@ -32,7 +32,7 @@
             {"text": "form manage",
             "translate": "表单管理",
             "link":"",
-            "icon": "fa fa-cab",
+            "icon": "anticon anticon-folder-open",
             "children":[{
                 "text":"采购合同",
                 "icon":"fa fa-briefcase",

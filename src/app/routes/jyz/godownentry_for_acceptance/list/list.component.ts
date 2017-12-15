@@ -25,18 +25,22 @@ export class GodownentryForAcceptanceListComponent implements OnInit {
         {
             pi: 1,
             ps: 15,
-            sf: "supplier",
+            sf: "cno",
             sd: "desc",
             bno: "",
-            // supplier:"",
-            // cno:"",
-            // audited:"",
-            // audit_time:"",
-            
+            audited: "null"
         };
     
     // 记录总数
     total: number;
+
+     // 状态查询
+     options = [
+        { value: null, label: '--' },
+        { value: true, label: '已审核' },
+        { value: false, label: '未审核' }
+    ];
+   
    
 
     data: any[] = [];
@@ -66,7 +70,6 @@ export class GodownentryForAcceptanceListComponent implements OnInit {
         console.log("in getData")
         console.log(this.q)
         this.loading = true;
-        
         this.godownentryForAcceptanceService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
                                                      .catch((error) => {this.msg.error(error); this.loading = false;})                                           
     }
@@ -141,26 +144,16 @@ export class GodownentryForAcceptanceListComponent implements OnInit {
 
     pageChange(pi: number) {
         this.q.pi = pi;
-        //this.loading = true;
         this.getData();
-        // return new Promise((resolve) => {
-        //     setTimeout(() => {
-        //         this.loading = false;
-        //         resolve();
-        //     }, 500);
-        // });
+      
     }
 
     search() {
-        //this.loading = true;
         this.q.pi = 1;
         this.getData()
     }
 
-    // reset(ls: any[]) {
-    //     for (const item of ls) item.value = false;
-    //     this.getData();
-    // }
+  
 
     getSortDirection(c: string) {
         if (c=="ascend") {
