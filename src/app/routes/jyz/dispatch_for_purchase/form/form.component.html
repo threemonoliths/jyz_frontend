@@ -77,12 +77,12 @@
                         <div nz-form-label nz-col><label>合计数量</label></div>
                         <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="quantity">
                             <nz-input formControlName="quantity" nzPlaceHolder="请输入合计数量" nzSize="large" [nzDisabled]="!editable"></nz-input>
-                             <p nz-form-explain *ngIf="form.controls['quantity'].invalid && (form.controls['quantity'].dirty || form.controls['quantity'].touched) && form.controls['quantity'].errors.required">
-                                请输入合计数量
+                             <p nz-form-explain *ngIf="form.controls['quantity'].invalid && (form.controls['quantity'].dirty || form.controls['quantity'].touched) && form.controls['quantity'].errors.required
+                               || form.controls['quantity'].invalid && (form.controls['quantity'].dirty || form.controls['quantity'].touched) && form.controls['quantity'].errors.validateNumber
+                             ">
+                                请输入合计数量(且为有效数字)
                             </p>
-                            <p nz-form-explain *ngIf="form.controls['quantity'].invalid && (form.controls['quantity'].dirty || form.controls['quantity'].touched) && form.controls['quantity'].errors.validateNumber">
-                                请输入有效数字
-                            </p>    
+                               
                         </div>
                     </div>
                 </div>
@@ -93,12 +93,11 @@
                         <div nz-form-control nz-col [nzValidateStatus]="total">
                                 <nz-input formControlName="total" nzPlaceHolder="请输入油劵回笼金额" nzSize="large" [nzDisabled]="!editable"></nz-input>
                             
-                            <p nz-form-explain *ngIf="form.controls['total'].invalid && (form.controls['total'].dirty || form.controls['total'].touched) && form.controls['total'].errors.required">
-                                请输入油劵回笼金额
+                            <p nz-form-explain *ngIf="form.controls['total'].invalid && (form.controls['total'].dirty || form.controls['total'].touched) && form.controls['total'].errors.required
+                            ||form.controls['total'].invalid && (form.controls['total'].dirty || form.controls['total'].touched) && form.controls['total'].errors.validateNumber">
+                                请输入油劵回笼金额(且为有效数字)
                             </p>
-                             <p nz-form-explain *ngIf="form.controls['total'].invalid && (form.controls['total'].dirty || form.controls['total'].touched) && form.controls['total'].errors.validateNumber">
-                                请输入有效数字
-                            </p>
+                             
                             
                         </div>
                     </div>
