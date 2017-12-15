@@ -57,8 +57,8 @@
                 <th nz-th><span>数量</span></th>
                 <th nz-th><span>仓库</span></th>
                 <th nz-th><span>出入库类型</span></th>
-                <th nz-th><span>已计算|未计算</span></th>
                 <th nz-th><span>计算状态</span></th>
+                <th nz-th><span>计算结果</span></th>
 
                 <!-- <th nz-th><span>操作</span></th> -->
             </tr>
@@ -76,8 +76,8 @@
                 <td nz-td>{{i.amount}}</td>
                 <td nz-td>{{i.warehouse}}</td>
                 <td nz-td>{{i.type}}</td>
-                <td nz-td>{{i.calculated}}</td>
-                 <td nz-td>{{i.cal_status | cal_statusPipe}}</td>
+                <td nz-td>{{i.calculated | caculatedPipe}}</td>
+                 <td nz-td>{{i.cal_status | calculateStatusPipe}}</td>
 
                 
             </tr>

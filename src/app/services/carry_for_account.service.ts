@@ -16,8 +16,8 @@ export class CarryForAccountService {
   url = baseUrl+"carry_for_account"
 
   listOnePage(q) {
-    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&companyname=${q.companyname}`, getTokenOptions() )
-               .toPromise().then(res => {return res.json()})           
+    return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&companyname=${q.companyname}&audited=${q.audited.value}`, getTokenOptions() )
+               .toPromise().then(res => { console.log(res); return res.json()})           
   }
 
   add(v): Promise<any>{ 
@@ -38,7 +38,7 @@ export class CarryForAccountService {
   isUpdate = false;
   isAudit = false;
   formOperation = 'create';
-  updateContract : CarryForAccount = null;
+  updateCarryAccount : CarryForAccount = null;
 
   //获取合同对象将提供给修改页面Form使用
   initUpdate(id){

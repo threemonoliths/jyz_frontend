@@ -7,8 +7,7 @@ import { GlobalService } from '../../../../services/global.service';
 import { StockChangeService } from '../../../../services/stock_change.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
 
-import { AuditPipe } from '../../pipes/pipes'; 
-import { Cal_StatusPipe } from '../../pipes/pipe_stock';
+import { CalculatedPipe, CalculateStatusPipe, AuditPipe } from '../../pipes/pipes'; 
 
 @Component({
     selector: 'StockChange-table-list',

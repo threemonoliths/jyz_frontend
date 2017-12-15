@@ -117,7 +117,16 @@
                     <td nz-td>
                         <span *ngIf="editIndex!==i">{{details.value[i].wagonno}}</span>
                         <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.wagonno">
-                            <nz-input formControlName="wagonno" nzPlaceHolder="请输入回罐车号" nzSize="large"></nz-input>
+                                <div nz-form-control class="flex-1">
+                                        <nz-select formControlName="wagonno" [nzPlaceHolder]="'请选择车号'" nzAllowClear  >
+                                            <nz-option
+                                                *ngFor="let option of depotdata"
+                                                [nzLabel]="option.depotname"
+                                                [nzValue]="option.depotname"
+                                                [nzDisabled]="option.disabled">
+                                            </nz-option>
+                                        </nz-select>
+                                        </div>       
                         </span>
                     </td>
                     <td nz-td>
@@ -129,7 +138,16 @@
                     <td nz-td>
                         <span *ngIf="editIndex!==i">{{details.value[i].oilname}}</span>
                         <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.oilname">
-                            <nz-input formControlName="oilname" nzPlaceHolder="请输入油品名称" nzSize="large"></nz-input>
+                                <div nz-form-control class="flex-1">
+                                        <nz-select formControlName="oilname" [nzPlaceHolder]="'请选择油品名称'" nzAllowClear  >
+                                            <nz-option
+                                                *ngFor="let option of depotdata"
+                                                [nzLabel]="option.oilname"
+                                                [nzValue]="option.oilname"
+                                                [nzDisabled]="option.disabled">
+                                            </nz-option>
+                                        </nz-select>
+                                        </div>       
                         </span>
                     </td>
                     <td nz-td>
@@ -147,7 +165,16 @@
                         <td nz-td>
                             <span *ngIf="editIndex!==i">{{details.value[i].stockplace}}</span>
                             <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.stockplace">
-                                <nz-input formControlName="stockplace" nzPlaceHolder="请输入回罐库存地" nzSize="large"></nz-input>
+                                    <div nz-form-control class="flex-1">
+                                            <nz-select formControlName="stockplace" [nzPlaceHolder]="'请选择库存地'" nzAllowClear  >
+                                                <nz-option
+                                                    *ngFor="let option of depotdata"
+                                                    [nzLabel]="option.depotname"
+                                                    [nzValue]="option.depotname"
+                                                    [nzDisabled]="option.disabled">
+                                                </nz-option>
+                                            </nz-select>
+                                            </div>       
                             </span>
                         </td>
                         <td nz-td>

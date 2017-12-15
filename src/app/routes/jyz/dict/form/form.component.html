@@ -10,9 +10,6 @@
                             <p nz-form-explain *ngIf="form.controls['code'].invalid && (form.controls['code'].dirty || form.controls['code'].touched) && form.controls['code'].errors.required">
                                 请输入字典编码
                             </p>
-                            <!-- <p nz-form-explain *ngIf="form.controls['code'].invalid && (form.controls['code'].dirty || form.controls['code'].touched) && form.controls['code'].errors.minlength">
-                                合同编号不小于4位
-                            </p> -->
                         </div>
                     </div>
                 </div>
@@ -50,20 +47,14 @@
                                 
                                 <p nz-form-explain *ngIf="form.controls['parm'].invalid && (form.controls['parm'].dirty || form.controls['parm'].touched) && form.controls['parm'].errors.required">
                                     请输入值
-                                </p>
-                                <p nz-form-explain *ngIf="form.controls['parm'].invalid && (form.controls['parm'].dirty || form.controls['parm'].touched) && form.controls['parm'].errors.validateNumber">
-                                    请输入有效数字
-                                </p>
+                                </p>                           
     
                             </div>
                         </div>
                 </div>
-
-            </div>
-         </div>
-        </div>
-     </div>         
-    </div>
+          </div>
+    
+   
     
         </nz-card>             
     

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
-
+import { OilDepotService } from '../../../../services/oil_depot.service';
 import { Router } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 
@@ -32,9 +32,10 @@ export class OilTransferFormComponent implements OnInit {
     Positive_error = ''
 
     constructor(private fb: FormBuilder, private router: Router, private oilTransferService: OilTransferService, 
-                private globalService: GlobalService, private msg: NzMessageService) {}
+                private globalService: GlobalService, private msg: NzMessageService,private oilDepotService: OilDepotService) {}
 
     ngOnInit() {
+        this.getDepot();
         let op = this.oilTransferService.formOperation;
         if (op == 'create') this.initCreate();
         if (op == 'update') this.initUpdate();
@@ -67,7 +68,7 @@ export class OilTransferFormComponent implements OnInit {
 
     createDetail(): FormGroup {
         return this.fb.group({
-            Billno: [ null, [ Validators.required ] ],
+            billno1: [ null, [ Validators.required ] ],
             stockpalce: [ null, [ Validators.required ] ],
             Unit: [ null, [ Validators.required ] ],
             Startdegree: [ null, [ Validators.required,this.validateNumber.bind(this)] ],
@@ -215,5 +216,23 @@ export class OilTransferFormComponent implements OnInit {
     //     if (!this.form.controls['Enddegree'].valid) { this.Positive_error = 'has-error' }
     //     if (!this.form.controls['quantity'].valid) { this.Positive_error = 'has-error' }
     // }
+    loading : false;
+    
+        q: any = 
+        {
+            pi: 1,
+            ps: 15,
+            sf: "depotiddr",
+            sd: "desc",
+            depotname: "",};
+    
+        totals : number;
+        depotdata: any[] = [];
+        getDepot() {
+            console.log("in getDepot")
+        this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.totals = resp.total_entries; this.loading = false;})
+                                                         .catch((error) => {this.msg.error(error);})                                           
+        }
 
+        
 }

@@ -163,20 +163,20 @@ export class CarryForAccountFormComponent implements OnInit {
 
     initUpdate() {
         this.title = '修改销售油品提用表';
-        this.caccount = this.carryForAccountService.updateContract;
+        this.caccount = this.carryForAccountService.updateCarryAccount;
     }
 
     initAudit() {
         this.title = '审核销售油品提用表';
         this.editable = false;
-        this.caccount = this.carryForAccountService.updateContract;
+        this.caccount = this.carryForAccountService.updateCarryAccount;
     }
 
     initShow() {
         this.title = '查看销售油品提用表';
         this.editable = false;
         this.editit=false;
-        this.caccount = this.carryForAccountService.updateContract;
+        this.caccount = this.carryForAccountService.updateCarryAccount;
     }
 
     //合同额数字验证
