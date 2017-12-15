@@ -1,7 +1,7 @@
 import { LayoutComponent } from '../layout/layout.component';
 import { LayoutFullScreenComponent } from '../layout/fullscreen/fullscreen.component';
 import { LoginComponent } from './pages/login/login.component';
-import { RegisterComponent } from './pages/register/register.component';
+import { StepFormComponent } from './pages/register/step-form.component';
 import { Page404Component } from './pages/404/404.component';
 import { Page500Component } from './pages/500/500.component';
 
@@ -51,7 +51,7 @@ export const routes = [
     //     ]
     // },
     // 单页不包裹Layout
-    { path: 'register', component: RegisterComponent, data: { translate: 'register' } },
+    { path: 'register', component: StepFormComponent, data: { translate: 'register' } },
     { path: 'login', component: LoginComponent, data: { title: 'login' } },
     { path: '404', component: Page404Component },
     { path: '500', component: Page500Component },
