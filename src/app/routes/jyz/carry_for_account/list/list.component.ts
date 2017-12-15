@@ -22,8 +22,15 @@ export class CarryForAccountListComponent implements OnInit {
             ps: 15,
             sf: "date",
             sd: "desc",
-            companyname: ""
+            companyname: "",
+            audited: "null"
         };
+         // 状态查询
+    options = [
+        { value: null, label: '--' },
+        { value: true, label: '已审核' },
+        { value: false, label: '未审核' }
+    ];
     
     // 记录总数
     total: number;

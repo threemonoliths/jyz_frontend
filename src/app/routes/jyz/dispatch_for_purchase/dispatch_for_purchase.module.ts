@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '@shared/shared.module';
 
-
+import { OilDepotService } from '../../../services/oil_depot.service';
 import { DispatchForPurchaseComponent } from './dispatch_for_purchase.component';
 import { DispatchForPurchaseFormComponent } from './form/form.component';
 import { DispatchForPurchaseListComponent } from './list/list.component';
@@ -33,6 +33,7 @@ import { MainPipe } from '../pipes/pipe.module';
     DispatchForPurchaseListComponent
   ],
   providers: [
+    OilDepotService,
     DispatchForPurchaseService,
     // ConfirmationService
   ]

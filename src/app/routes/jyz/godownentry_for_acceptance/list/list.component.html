@@ -10,7 +10,7 @@
                     </div>
                 </div>
                 
-                <div *ngIf="expandForm" nz-col [nzSpan]="6" class="mb-md">
+                <!-- <div *ngIf="expandForm" nz-col [nzSpan]="6" class="mb-md">
                         <div nz-form-item class="d-flex">
                             <div nz-form-label><label for="no">供应单位名称</label></div>
                             <div nz-form-control class="flex-1">
@@ -25,19 +25,21 @@
                                     <nz-input [(ngModel)]="q.cno" name="cno" [nzSize]="'large'" [nzPlaceHolder]="'请输入'" nzId="cno"></nz-input>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div *ngIf="expandForm" nz-col [nzSpan]="6" class="mb-md">
-                                <div nz-form-item class="d-flex">
-                                    <div nz-form-label><label for="no">审核状态</label></div>
-                                    <div nz-form-control class="flex-1">
-                                            <nz-dropdown-button>
-                                                  审核状态  
-                                                    <ul nz-menu>
-                                                        <li nz-menu-item>已审核</li>
-                                                        <li nz-menu-item>未审核</li>
-                                                    </ul>
-                                                </nz-dropdown-button>
-                                    </div>
+                            <div nz-form-item class="d-flex">
+                                <div nz-form-label><label for="no">审核状态</label></div>
+                                <div nz-form-control class="flex-1">
+                                <nz-select [(ngModel)]="q.audited" name="audited" nzAllowClear>
+                                    <nz-option
+                                        *ngFor="let option of options"
+                                        [nzLabel]="option.label"
+                                        [nzValue]="option"
+                                        [nzDisabled]="option.disabled">
+                                    </nz-option>
+                                </nz-select>
+                                </div>
+        
                                 </div>
                             </div> 
                             <!-- <div *ngIf="expandForm" nz-col [nzSpan]="6" class="mb-md">
