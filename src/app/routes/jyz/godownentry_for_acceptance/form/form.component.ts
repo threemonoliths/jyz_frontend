@@ -211,6 +211,7 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
     this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.total = resp.total_entries; this.loading = false;})
                                                      .catch((error) => {this.msg.error(error);})                                           
     }
+   
 
 
 }

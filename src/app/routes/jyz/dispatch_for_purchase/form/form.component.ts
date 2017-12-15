@@ -7,6 +7,7 @@ import { DispatchForPurchaseService } from '../../../../services/dispatch_for_pu
 import {DispatchForPurchase } from '../../../../domains/dispatch_for_purchase.domain';
 import { GlobalService } from '../../../../services/global.service';
 import { stringToDate } from '../../../../utils/utils'; 
+import { DictService } from '../../../../services/dict.service';
 @Component({
     selector: 'dispatch_for_purchase-form',
     templateUrl: './form.component.html'
@@ -28,9 +29,10 @@ export class DispatchForPurchaseFormComponent implements OnInit {
     amount_error = ''
 
     constructor(private fb: FormBuilder, private router: Router, private dispatchForPurchaseService: DispatchForPurchaseService,
-                private globalService: GlobalService,private msg:NzMessageService,private oilDepotService :OilDepotService) {}
+                private globalService: GlobalService,private msg:NzMessageService,private oilDepotService :OilDepotService,private dictService: DictService) {}
 
     ngOnInit() {
+        this.getDictOil();
         this.getDepot();
          let op = this.dispatchForPurchaseService.formOperation;
         if (op == 'create') this.initCreate();
@@ -208,6 +210,16 @@ export class DispatchForPurchaseFormComponent implements OnInit {
 
     loading : false;
 
+    oildata: any[]=[];
+    p: any = 
+    {
+        pi: 1,
+        ps: 15,
+        sf: "key", 
+        sd: "desc",
+        name: "fuel_type",
+    };
+
     q: any = 
     {
         pi: 1,
@@ -221,6 +233,11 @@ export class DispatchForPurchaseFormComponent implements OnInit {
     getDepot() {
         console.log("in getDepot")
     this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.totals = resp.total_entries; this.loading = false;})
+                                                     .catch((error) => {this.msg.error(error);})                                           
+    }
+    getDictOil() {
+        console.log("in getOil")
+    this.dictService.listOnePage(this.p).then(resp =>  {this.oildata = resp.entries;this.totals = resp.total_entries; this.loading = false;})
                                                      .catch((error) => {this.msg.error(error);})                                           
     }
     

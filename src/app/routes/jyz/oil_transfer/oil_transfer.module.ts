@@ -31,7 +31,7 @@ import { MainPipe } from '../pipes/pipe.module';
     OilTransferListComponent
   ],
   providers: [
-    OilDepotService
+    OilDepotService,
     OilTransferService,
     // ConfirmationService
   ]
