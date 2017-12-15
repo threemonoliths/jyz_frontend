@@ -27,7 +27,9 @@ export class StockChangeListComponent implements OnInit {
             ps: 15,
             sf: "date", 
             sd: "desc",
-            cno: ""
+            cno: "",
+            warehouse: "",
+            type: "",            
         };
     
     // 记录总数

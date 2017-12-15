@@ -182,12 +182,12 @@ export class CarryForAccountFormComponent implements OnInit {
 
     //合同额数字验证
     validateNumber(c: FormControl) {
-        if (c.value > 0) { 
+        if (c.value >= 0) { 
             this.operator_error='';
         } else if(c.touched || c.dirty) {
             this.operator_error='has-error';
         }
-        return c.value > 0 ? null : {validateNumber: true}
+        return c.value >= 0 ? null : {validateNumber: true}
     };
 
     oildata: any[]=[];
