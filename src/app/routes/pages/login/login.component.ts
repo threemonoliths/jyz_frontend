@@ -12,6 +12,9 @@ import { AuthenticationService } from '../../../services/login.service';
 export class LoginComponent {
   valForm: FormGroup;
 
+  waiting = false;
+  button_label = "登录";
+
   constructor(public settings: SettingsService, private authenticationService: AuthenticationService, fb: FormBuilder, private router: Router) {
     this.valForm = fb.group({
       username: [null, Validators.compose([Validators.required])],
@@ -21,6 +24,8 @@ export class LoginComponent {
   }
 
   submit() {
+    this.waiting = true
+    this.button_label = "登录中..."
     // tslint:disable-next-line:forin
     for (const i in this.valForm.controls) {
       this.valForm.controls[i].markAsDirty();
@@ -28,6 +33,8 @@ export class LoginComponent {
     if (this.valForm.valid) {
       this.authenticationService.login(this.valForm.value)
 			  .subscribe(result => {
+        this.waiting = false
+        this.button_label = "登录"
 			  if (result === true) {
 				// login successful
           console.log(localStorage.getItem('currentUsername'));

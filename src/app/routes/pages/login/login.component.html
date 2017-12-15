@@ -37,8 +37,8 @@
                 </div>
                 <div nz-form-item nz-row>
                     <div nz-col [nzSpan]="24">
-                        <button nz-button [disabled]="!valForm.valid" [nzType]="'primary'" [nzSize]="'large'" class="ant-btn__block">
-                            <span>登录</span>
+                        <button nz-button [disabled]="!valForm.valid" [nzType]="'primary'" [nzSize]="'large'" [disabled]="waiting" class="ant-btn__block">
+                            <span>{{button_label}}</span>
                         </button>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
             </div>
             <div nz-row>
                 <div nz-col [nzSpan]="24">
-                    <button nz-button [routerLink]="['/register']" [nzType]="'default'" [nzSize]="'large'" class="ant-btn__block">
+                    <button nz-button [routerLink]="['/register']" [nzType]="'default'" [nzSize]="'large'" [disabled]="waiting" class="ant-btn__block">
                         <span>立即注册</span>
                     </button>
                 </div>

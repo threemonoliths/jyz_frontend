@@ -23,8 +23,8 @@ export class UserManagementService {
   }
 
   add(v): Promise<any>{ 
-    
-    let obj = { usermanagement: v} 
+    console.log("### in add ####")
+    let obj = { user: v} 
     console.log(obj);
     let param = JSON.stringify(obj);
     return this.http.post(this.url, param, getTokenOptions())
@@ -65,6 +65,5 @@ export class UserManagementService {
                .map(response => response.json()).toPromise();
   }
 
-  
 
 }
