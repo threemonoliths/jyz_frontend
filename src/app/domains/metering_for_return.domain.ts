@@ -30,6 +30,6 @@ export class MeteringForReturnDetail {
 	oilname: string;
 	unit: string;
 	quantity: number;
-	stockplace: number;
+	stockplace: string;
 	comment: number;
 }

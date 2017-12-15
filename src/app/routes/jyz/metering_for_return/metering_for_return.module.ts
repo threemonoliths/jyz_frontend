@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '@shared/shared.module';
-
+import { OilDepotService } from '../../../services/oil_depot.service';
 
 import { MeteringForReturnComponent } from './metering_for_return.component';
 import { MeteringForReturnFormComponent } from './form/form.component';
@@ -34,6 +34,7 @@ import { MainPipe } from '../pipes/pipe.module';
   ],
   providers: [
     MeteringForReturnService,
+    OilDepotService
     // ConfirmationService
   ]
 })
