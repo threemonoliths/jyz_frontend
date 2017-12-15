@@ -48,6 +48,11 @@ export class AuthenticationService {
                 }
             });
     }
+
+    checkUsernameAlreadyExists(username) {
+        return this.http.get(baseUrl + `users/username/${username}`).map(response => response.json()).toPromise();
+
+    }
 }
 
     
