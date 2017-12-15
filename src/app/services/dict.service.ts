@@ -21,6 +21,10 @@ export class DictService {
     return this.http.get(this.url + `?page=${q.pi}&page_size=${q.ps}&sort_field=${q.sf}&sort_direction=${q.sd}&name=${q.name}`, getTokenOptions() )
                .toPromise().then(res => {return res.json()})           
   }
+  listAll(q) {
+    return this.http.get(this.url +`name=${q.name}`, getTokenOptions() )
+               .toPromise().then(res => {return res.json()})           
+  }
 
   add(v): Promise<any>{    
     let obj = { dict: v} 
