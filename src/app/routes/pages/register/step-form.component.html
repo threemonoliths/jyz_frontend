@@ -1,0 +1,17 @@
+
+<div class="abs-center mt-lg " style="width:70%">
+<pro-header [title]="'用户注册'">
+    <ng-template #content class="abs-center">欢迎注册马钢汽运公司加油站进销存系统。</ng-template>
+</pro-header>
+
+
+<nz-card [nzBordered]="false" [nzNoHovering]="true">
+    <ng-template #body>
+        <nz-steps [(nzCurrent)]="item.step">
+            <nz-step nzTitle="注册用户"></nz-step>
+            <nz-step nzTitle="注册完成"></nz-step>
+        </nz-steps>
+        <app-step1 *ngIf="item.step==0"></app-step1>
+        <app-step2 *ngIf="item.step==1"></app-step2>
+    </ng-template>
+</nz-card>
