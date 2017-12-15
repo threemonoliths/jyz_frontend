@@ -24,7 +24,7 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
     godownentry: GodownentryForAcceptance;
     editable = true;
     editit=true;
-    depotdata: any[] = [];
+ 
 
     // 自定义验证器，验证失败时，需要手工添加class：has-error
     amout_error = ''
@@ -199,34 +199,24 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
         }
         return c.value > 0 ? null : {validateNumber: true}
     };
-    loading : false;
+    
+    depotdata: any[] = [];
     oildata: any[]=[];
     p: any = 
     {
-        pi: 1,
-        ps: 15,
-        sf: "key", 
-        sd: "desc",
         name: "fuel_type",
     };
 
-    q: any = 
-    {
-        pi: 1,
-        ps: 15,
-        sf: "depotiddr",
-        sd: "desc",
-        depotname: "",};
-    totals : number;
+   
     getDepot() {
         console.log("in getDepot")
-    this.oilDepotService.listOnePage(this.q).then(resp =>  {this.depotdata = resp.entries;this.totals = resp.total_entries; this.loading = false;})
+    this.oilDepotService.listAll().then(resp =>  {this.depotdata = resp.entries;})
                                                      .catch((error) => {this.msg.error(error);})                                           
     }
    
     getDictOil() {
         console.log("in getOil")
-    this.dictService.listOnePage(this.p).then(resp =>  {this.oildata = resp.entries;this.totals = resp.total_entries; this.loading = false;})
+    this.dictService.listAll(this.p).then(resp =>  {this.oildata = resp.entries;})
                                                      .catch((error) => {this.msg.error(error);})                                           
     }
     

@@ -68,8 +68,8 @@ export class DispatchForPurchaseListComponent implements OnInit {
         console.log(this.q)
         this.loading = true;
         
-        this.dispatchForPurchaseService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
-                                                     .catch((error) => {console.log(error); this.loading = false;})                                           
+          this.dispatchForPurchaseService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
+                                                     .catch((error) => {this.msg.error(error); this.loading = false;})                                                            
     }
 
     add() {

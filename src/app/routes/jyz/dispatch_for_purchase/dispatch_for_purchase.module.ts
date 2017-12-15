@@ -37,6 +37,7 @@ import { MainPipe } from '../pipes/pipe.module';
     OilDepotService,
     DispatchForPurchaseService,
     // ConfirmationService
+    OilDepotService,
   ]
 })
 export class DispatchForPurchaseModule { }
