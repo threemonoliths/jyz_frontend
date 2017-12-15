@@ -102,55 +102,7 @@
                 </div>
             </div>
 
-            <!-- <div nz-col nzMd="6" nzSm="12" nzXs="24">
-                <div nz-form-item nz-row>
-                    <div nz-form-label nz-col><label>录入人</label></div>
-                    <div nz-form-control nz-col [nzValidateStatus]="create_user">
-                            <nz-input formControlName="create_user" nzPlaceHolder="请输入录入人" nzSize="large" [nzDisabled]="!editable"></nz-input>
-                        
-                        <p nz-form-explain *ngIf="form.controls['create_user'].invalid && (form.controls['create_user'].dirty || form.controls['create_user'].touched) && form.controls['create_user'].errors.required">
-                            请输入录入人
-                        </p>
-                    </div>
-                </div>
-            </div>
-        
-            <div nz-col nzMd="6" nzSm="12" nzXs="24">
-                <div nz-form-item nz-row>
-                    <div nz-form-label nz-col><label>审核人</label></div>
-                    <div nz-form-control nz-col [nzValidateStatus]="audit_user">
-                            <nz-input formControlName="audit_user" nzPlaceHolder="请输入审核人" nzSize="large" [nzDisabled]="!editable"></nz-input>
-                        
-                        <p nz-form-explain *ngIf="form.controls['audit_user'].invalid && (form.controls['audit_user'].dirty || form.controls['audit_user'].touched) && form.controls['audit_user'].errors.required">
-                            请输入审核人
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <div nz-col [nzMd]="6" nzSm="12" nzXs="24">
-                <div nz-form-item nz-row>
-                    <div nz-form-label nz-col><label>审核时间</label></div>
-                    <div nz-form-control>
-                        <div nz-col [nzSpan]="11">
-                            <div nz-form-item nz-row>
-                                <div nz-form-control [nzValidateStatus]="audit_time">
-                                    <nz-datepicker formControlName="audit_time" [nzPlaceHolder]="审核时间" nzFormat="YYYY-MM-DD" [nzDisabled]="!editable"></nz-datepicker>
-                                    <p nz-form-explain *ngIf="form.controls['audit_time'].invalid && (form.controls['audit_time'].dirty || form.controls['audit_time'].touched) && form.controls['audit_time'].errors.required">
-                                        请选择审核时间
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div> -->
-
-
-
-
-
+            
         </div>
 
     </nz-card>
@@ -159,24 +111,24 @@
         <nz-table formArrayName="details" [nzDataSource]="details.value" [nzIsPagination]="false">
             <thead nz-thead>
                 <tr>
-                    <th nz-th>调拨单号</th>
-                    <th nz-th>移入车（罐）号</th>
-                    <th nz-th>计量单位</th>
-                    <th nz-th>泵码起数</th>
-                    <th nz-th>泵码止数</th>
-                    <th nz-th>数量</th>
-                    <th nz-th>确认人</th>                  
+                    <th nz-th item-width="14%">调拨单号</th>
+                    <th nz-th item-width="17%">移入车（罐）号</th>
+                    <th nz-th item-width="14%">计量单位</th>
+                    <th nz-th item-width="14%">泵码起数</th>
+                    <th nz-th item-width="14%">泵码止数</th>
+                    <th nz-th item-width="7%">数量</th>
+                    <th nz-th item-width="12%">确认人</th>                  
                     
-                    <th nz-th *ngIf="editable">操作</th>
+                    <th nz-th *ngIf="editable"item-width="8%" >操作</th>
                 </tr>
             </thead>
             <tbody nz-tbody>
                 <tr nz-tbody-tr *ngFor="let item of details.controls; let i = index" [formGroupName]="i">
 
                     <td nz-td>
-                        <span *ngIf="editIndex!==i">{{details.value[i].Billno}}</span>
-                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.Billno">
-                            <nz-input formControlName="Billno" nzPlaceHolder="请输入调拨单号" nzSize="large"></nz-input>
+                        <span *ngIf="editIndex!==i">{{details.value[i].billno1}}</span>
+                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.billno1">
+                            <nz-input formControlName="billno1" nzPlaceHolder="请输入调拨单号" nzSize="large"></nz-input>
                         </span>
                     </td>
 
@@ -184,7 +136,7 @@
                         <span *ngIf="editIndex!==i">{{details.value[i].stockpalce}}</span>
                         <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.stockpalce">
                                 <div nz-form-control class="flex-1">
-                                        <nz-select formControlName="stockpalce" [nzPlaceHolder]="'移入车号'" nzAllowClear  >
+                                        <nz-select formControlName="stockpalce" [nzPlaceHolder]="'移入车（罐）号'" nzSize="large"  >
                                             <nz-option
                                                 *ngFor="let option of depotdata"
                                                 [nzLabel]="option.depotname"
@@ -219,7 +171,7 @@
                         <td nz-td>
                             <span *ngIf="editIndex!==i">{{details.value[i].quantity}}</span>
                             <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.quantity">
-                                <nz-input formControlName="quantity" nzPlaceHolder="数量" nzSize="large" nzDisabled="true"></nz-input>
+                                <nz-input formControlName="quantity" nzPlaceHolder="数量"  nzSize="large" nzDisabled="true"></nz-input>
                             </span>
                         </td>
                         <td nz-td>
