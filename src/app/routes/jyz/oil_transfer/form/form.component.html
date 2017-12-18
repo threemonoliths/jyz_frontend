@@ -136,7 +136,7 @@
                         <span *ngIf="editIndex!==i">{{details.value[i].stockpalce}}</span>
                         <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.stockpalce">
                                 <div nz-form-control class="flex-1">
-                                        <nz-select formControlName="stockpalce" [nzPlaceHolder]="'移入车（罐）号'" nzSize="large"  >
+                                        <nz-select formControlName="stockpalce" [nzPlaceHolder]="'移入车（罐）号'" nzSize="large" [nzDisabled]="!editable"  >
                                             <nz-option
                                                 *ngFor="let option of depotdata"
                                                 [nzLabel]="option.depotname"
