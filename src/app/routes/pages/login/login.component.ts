@@ -13,10 +13,12 @@ import { AuthenticationService } from '../../../services/login.service';
 })
 export class LoginComponent {
   valForm: FormGroup;
-
+  
+  // 异步操作等待状态
   waiting = false;
   button_label = "登录";
 
+  // ngIf用来显示密码错误信息
   invalidlogin = false;
 
   constructor(public settings: SettingsService, private authenticationService: AuthenticationService, fb: FormBuilder, private router: Router, private msg: NzMessageService) {
@@ -28,14 +30,15 @@ export class LoginComponent {
   }
 
   submit() {
-    this.waiting = true
-    this.button_label = "登录中..."
-    this.invalidlogin = false
+    
     // tslint:disable-next-line:forin
     for (const i in this.valForm.controls) {
       this.valForm.controls[i].markAsDirty();
     }
     if (this.valForm.valid) {
+      this.waiting = true
+      this.button_label = "登录中..."
+      this.invalidlogin = false
       this.authenticationService.login(this.valForm.value)
 			  .subscribe(result => {
         this.waiting = false
