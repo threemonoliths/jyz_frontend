@@ -22,6 +22,12 @@ export class OilDepotService {
                .toPromise().then(res => {return res.json()})           
   }
 
+  listAll() {
+    return this.http.get(this.url , getTokenOptions() )
+               .toPromise().then(res => {return res.json()})           
+  }
+
+
   add(v): Promise<any>{ 
     //this.getDate(v);
     

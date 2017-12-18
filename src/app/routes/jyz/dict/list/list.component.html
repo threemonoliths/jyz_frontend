@@ -62,10 +62,23 @@
                 <label nz-checkbox [(ngModel)]="allChecked" [nzIndeterminate]="indeterminate"
                     (ngModelChange)="checkAll($event)"></label>
             </th>-->
-            <th nz-th><span>字典编码</span></th> 
-            <th nz-th><span>字典名称</span></th>        
-            <th nz-th><span>键</span></th>
-            <th nz-th><span>值</span></th>
+            <th nz-th>
+                <span>字典编码</span>
+                <nz-table-sort [(nzValue)]="sortMap.code" (nzValueChange)="sort('code',$event)"></nz-table-sort>
+            </th> 
+            <th nz-th>
+                <span>字典名称</span>
+                <nz-table-sort [(nzValue)]="sortMap.name" (nzValueChange)="sort('name',$event)"></nz-table-sort>
+            </th>        
+            <th nz-th>
+                <span>键</span>
+                <nz-table-sort [(nzValue)]="sortMap.key" (nzValueChange)="sort('key',$event)"></nz-table-sort>
+            </th>
+            <th nz-th>
+                <span>值</span>
+                <nz-table-sort [(nzValue)]="sortMap.parm" (nzValueChange)="sort('parm',$event)"></nz-table-sort>
+            
+            </th>
         
             <th nz-th><span>操作</span></th>
         </tr>

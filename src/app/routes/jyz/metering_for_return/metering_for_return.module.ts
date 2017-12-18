@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '@shared/shared.module';
 import { OilDepotService } from '../../../services/oil_depot.service';
-
+import { DictService } from '../../../services/dict.service';
 import { MeteringForReturnComponent } from './metering_for_return.component';
 import { MeteringForReturnFormComponent } from './form/form.component';
 import { MeteringForReturnListComponent } from './list/list.component';
@@ -34,7 +34,8 @@ import { MainPipe } from '../pipes/pipe.module';
   ],
   providers: [
     MeteringForReturnService,
-    OilDepotService
+    OilDepotService,
+    DictService
     // ConfirmationService
   ]
 })
