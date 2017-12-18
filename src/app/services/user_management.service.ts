@@ -53,7 +53,7 @@ export class UserManagementService {
   }
 
   activate(id){
-    return this.http.post(this.url + `/${id}`+"/activate", getTokenOptions())
+    return this.http.post(this.url + `/${id}`+"/activate", "", getTokenOptions())
     .map(response => response.json())
     .toPromise();
   }

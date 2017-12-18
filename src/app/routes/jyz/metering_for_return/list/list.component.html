@@ -78,9 +78,18 @@
                     <span>时间</span>
                     <nz-table-sort [(nzValue)]="sortMap.billdate" (nzValueChange)="sort('billdate',$event)"></nz-table-sort>
                 </th>
-                <th nz-th><span>保管员</span></th>
-                <th nz-th><span>核算员</span></th>
-                <th nz-th><span>备注</span></th>
+                <th nz-th>
+                    <span>保管员</span>
+                    <nz-table-sort [(nzValue)]="sortMap.stockman" (nzValueChange)="sort('stockman',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>核算员</span>
+                    <nz-table-sort [(nzValue)]="sortMap.accountingclerk" (nzValueChange)="sort('accountingclerk',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>备注</span>
+                    <nz-table-sort [(nzValue)]="sortMap.comment" (nzValueChange)="sort('comment',$event)"></nz-table-sort>
+                </th>
                 <th nz-th>
                     <span>审核状态</span>
                     <nz-table-sort [(nzValue)]="sortMap.audited" (nzValueChange)="sort('audited',$event)"></nz-table-sort>
@@ -89,9 +98,18 @@
                     <span>审核时间</span>
                     <nz-table-sort [(nzValue)]="sortMap.audit_time" (nzValueChange)="sort('audit_time',$event)"></nz-table-sort>
                 </th>
-                <th nz-th><span>审核人</span></th>
-                <th nz-th><span>创建人</span></th>
-                <th nz-th><span>操作</span></th>
+                <th nz-th>
+                    <span>审核人</span>
+                    <nz-table-sort [(nzValue)]="sortMap.audit_user" (nzValueChange)="sort('audit_user',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>创建人</span>
+                    <nz-table-sort [(nzValue)]="sortMap.create_user" (nzValueChange)="sort('create_user',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>操作</span>
+                    <nz-table-sort [(nzValue)]="sortMap.billno" (nzValueChange)="sort('billno',$event)"></nz-table-sort>
+                </th>
             </tr>
         </thead>
         <tbody nz-tbody>

@@ -4,8 +4,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '@shared/shared.module';
-
-
+import { OilDepotService } from '../../../services/oil_depot.service';
 import { StockChangeComponent } from './stock_change.component';
 import { StockChangeFormComponent } from './form/form.component';
 import { StockChangeListComponent } from './list/list.component';
@@ -30,6 +29,7 @@ import { MainPipe } from '../pipes/pipe.module';
     StockChangeListComponent
   ],
   providers: [
+    OilDepotService,
     StockChangeService,
     // ConfirmationService
   ]

@@ -52,7 +52,7 @@
                         <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="stockplace">
                              
                           
-                               <nz-select formControlName="stockplace"  [nzPlaceHolder]="'请输入仓库地址'">                                                 
+                               <nz-select formControlName="stockplace"  [nzPlaceHolder]="'请输入仓库地址'" [nzDisabled]="!editable">                                                 
                                     <nz-option
                                             *ngFor="let option of depotdata" 
                                             [nzLabel]="option.depotname"

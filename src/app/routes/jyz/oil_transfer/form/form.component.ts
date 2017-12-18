@@ -186,7 +186,7 @@ export class OilTransferFormComponent implements OnInit {
 
     initAudit() {
         this.title = '审核油品移库调拨单';
-       // this.editable = false;
+       this.editable = false;
         this.transfer = this.oilTransferService.updateTransfer;
     }
 

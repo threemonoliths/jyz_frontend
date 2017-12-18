@@ -13,7 +13,14 @@
                         <div nz-form-item class="d-flex">
                             <div nz-form-label><label for="no">仓库</label></div>
                             <div nz-form-control class="flex-1">
-                                <nz-input [(ngModel)]="q.warehouse" name="warehouse" [nzSize]="'large'" [nzPlaceHolder]="'请输入'" nzId="warehouse"></nz-input>
+                                    <nz-select [(ngModel)]="q.warehouse" name="warehouse"  [nzPlaceHolder]="'请选择仓库'" nzId="warehouse">                                                 
+                                            <nz-option
+                                                    *ngFor="let option of depotdata" 
+                                                    [nzLabel]="option.depotname"
+                                                    [nzValue]="option.depotname"
+                                                    [nzDisabled]="option.disabled" >
+                                                </nz-option>
+                                            </nz-select>       
                             </div>
                         </div>
                     </div>
@@ -51,14 +58,38 @@
                     <label nz-checkbox [(ngModel)]="allChecked" [nzIndeterminate]="indeterminate"
                         (ngModelChange)="checkAll($event)"></label>
                 </th>-->
-                <th nz-th><span>单号</span></th>        
-                <th nz-th><span>计算时间</span></th>
-                <th nz-th><span>型号</span></th>
-                <th nz-th><span>数量</span></th>
-                <th nz-th><span>仓库</span></th>
-                <th nz-th><span>出入库类型</span></th>
-                <th nz-th><span>计算状态</span></th>
-                <th nz-th><span>计算结果</span></th>
+                <th nz-th>
+                    <span>单号</span>
+                    <nz-table-sort [(nzValue)]="sortMap.cno" (nzValueChange)="sort('cno',$event)"></nz-table-sort>
+                </th>        
+                <th nz-th>
+                    <span>计算时间</span>
+                    <nz-table-sort [(nzValue)]="sortMap.date" (nzValueChange)="sort('date',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>型号</span>
+                    <nz-table-sort [(nzValue)]="sortMap.model" (nzValueChange)="sort('model',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>数量</span>
+                    <nz-table-sort [(nzValue)]="sortMap.amount" (nzValueChange)="sort('amount',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>仓库</span>
+                    <nz-table-sort [(nzValue)]="sortMap.warehouse" (nzValueChange)="sort('warehouse',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>出入库类型</span>
+                    <nz-table-sort [(nzValue)]="sortMap.type" (nzValueChange)="sort('type',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>计算状态</span>
+                    <nz-table-sort [(nzValue)]="sortMap.calculated" (nzValueChange)="sort('calculated',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>计算结果</span>
+                    <nz-table-sort [(nzValue)]="sortMap.cal_status" (nzValueChange)="sort('cal_status',$event)"></nz-table-sort>
+                </th>
 
                 <!-- <th nz-th><span>操作</span></th> -->
             </tr>
