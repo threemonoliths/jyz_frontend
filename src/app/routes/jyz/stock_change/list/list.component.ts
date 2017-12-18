@@ -8,6 +8,7 @@ import { StockChangeService } from '../../../../services/stock_change.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
 
 import { CalculatedPipe, CalculateStatusPipe, AuditPipe } from '../../pipes/pipes'; 
+import { OilDepotService } from 'app/services/oil_depot.service';
 
 @Component({
     selector: 'StockChange-table-list',
@@ -50,9 +51,10 @@ export class StockChangeListComponent implements OnInit {
     description = '';
 
     constructor(public msg: NzMessageService, private globalService: GlobalService,
-                private stockchangeService: StockChangeService, private router: Router) {}
+                private stockchangeService: StockChangeService, private router: Router,private oilDepotService: OilDepotService) {}
 
     ngOnInit() {
+        this.getDepot();
         console.log(this.q);
         this.getData();
         this.globalService.setTitle(this.title);
@@ -160,6 +162,12 @@ export class StockChangeListComponent implements OnInit {
             .then(result => { this.stockchangeService.updateStockChange = result})
             .then(() => this.router.navigateByUrl('/layout/content/stock_change/form')).catch((error)=>
             console.log(error));
+    }
+    depotdata :any[]=[];
+    getDepot() {
+        console.log("in getDepot")
+    this.oilDepotService.listAll().then(resp =>  {this.depotdata = resp.entries;})
+                                                     .catch((error) => {this.msg.error(error);})                                           
     }
        
 }
