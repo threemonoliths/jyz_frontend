@@ -107,14 +107,26 @@
             </th>
             <th nz-th>
                 <span>供应单位名称</span>
+                <nz-table-sort [(nzValue)]="sortMap.supplier" (nzValueChange)="sort('supplier',$event)"></nz-table-sort>
             </th>
             <th nz-th>
                 <span>合同号</span>
                 <nz-table-sort [(nzValue)]="sortMap.cno" (nzValueChange)="sort('cno',$event)"></nz-table-sort>
             </th>
-            <th nz-th><span>采购员</span></th>
-            <th nz-th><span>验收员</span></th>
-            <th nz-th><span>核算员</span></th>
+            <th nz-th>
+                <span>采购员</span>
+                <nz-table-sort [(nzValue)]="sortMap.buyer" (nzValueChange)="sort('buyer',$event)"></nz-table-sort>
+            </th>
+    
+            <th nz-th>
+                <span>验收员</span>
+                <nz-table-sort [(nzValue)]="sortMap.examiner" (nzValueChange)="sort('examiner',$event)"></nz-table-sort>
+            </th>
+           
+            <th nz-th>
+                <span>核算员</span>
+                <nz-table-sort [(nzValue)]="sortMap.accountingstaff" (nzValueChange)="sort('accountingstaff',$event)"></nz-table-sort>
+            </th>
             <th nz-th>
                 <span>审核状态</span>
                 <nz-table-sort [(nzValue)]="sortMap.audited" (nzValueChange)="sort('audited',$event)"></nz-table-sort>
@@ -123,9 +135,16 @@
                 <span>审核时间</span>
                 <nz-table-sort [(nzValue)]="sortMap.audit_time" (nzValueChange)="sort('audit_time',$event)"></nz-table-sort>
             </th>
-            <th nz-th><span>审核人</span></th>
-            <th nz-th><span>创建人</span></th>
-            <th nz-th><span>操作</span></th>
+            <th nz-th>
+                <span>审核人</span>
+                <nz-table-sort [(nzValue)]="sortMap.audit_user" (nzValueChange)="sort('audit_user',$event)"></nz-table-sort></th>
+            <th nz-th>
+                <span>创建人</span>
+                <nz-table-sort [(nzValue)]="sortMap.create_user" (nzValueChange)="sort('create_user',$event)"></nz-table-sort>
+            </th>
+            <th nz-th>
+                <span>操作</span>
+            </th>
         </tr>
     </thead>
     <tbody nz-tbody>
