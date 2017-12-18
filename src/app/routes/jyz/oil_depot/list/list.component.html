@@ -62,13 +62,31 @@
                     <label nz-checkbox [(ngModel)]="allChecked" [nzIndeterminate]="indeterminate"
                         (ngModelChange)="checkAll($event)"></label>
                 </th>-->
-                <th nz-th><span>仓库名称</span></th>        
-                <th nz-th><span>油品名称</span></th>
-                <th nz-th><span>仓库地址</span></th>
-                <th nz-th><span>油品类型</span></th>
-                <th nz-th><span> 数 量 </span></th>
+                <th nz-th>
+                    <span>仓库名称</span>
+                    <nz-table-sort [(nzValue)]="sortMap.depotname" (nzValueChange)="sort('depotname',$event)"></nz-table-sort>
+                </th>        
+                <th nz-th>
+                    <span>油品名称</span>
+                    <nz-table-sort [(nzValue)]="sortMap.oilname" (nzValueChange)="sort('oilname',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>仓库地址</span>
+                    <nz-table-sort [(nzValue)]="sortMap.depotiddr" (nzValueChange)="sort('depotiddr',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span>油品类型</span>
+                    <nz-table-sort [(nzValue)]="sortMap.kind" (nzValueChange)="sort('kind',$event)"></nz-table-sort>
+                </th>
+                <th nz-th>
+                    <span> 数 量 </span>
+                    <nz-table-sort [(nzValue)]="sortMap.number" (nzValueChange)="sort('number',$event)"></nz-table-sort>
+                    
+                </th>
             
-                <th nz-th><span>操作</span></th>
+                <th nz-th>
+                    <span>操作</span>   
+                   </th>
             </tr>
         </thead>
         <tbody nz-tbody>
