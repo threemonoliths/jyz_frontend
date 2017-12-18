@@ -111,7 +111,6 @@
                 <td nz-td>{{i.audited | auditPipe}}</td>
                 <td nz-td>{{i.audit_time}}</td>
                 <td nz-td>{{i.audit_user}}</td>
-                <td nz-td>{{i.create_user}}</td>
 
                 <td nz-td *ngIf="!i.audited">
                     <a (click)="audit(i.id)" >审核</a>
