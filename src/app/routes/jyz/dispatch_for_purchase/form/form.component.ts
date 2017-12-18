@@ -8,6 +8,7 @@ import { GlobalService } from '../../../../services/global.service';
 import { OilDepotService } from '../../../../services/oil_depot.service';
 import { stringToDate } from '../../../../utils/utils'; 
 import { DictService } from '../../../../services/dict.service';
+import { OilDepotService } from '../../../../services/oil_depot.service'
 @Component({
     selector: 'dispatch_for_purchase-form',
     templateUrl: './form.component.html'
