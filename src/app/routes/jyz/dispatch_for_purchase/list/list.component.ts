@@ -26,6 +26,16 @@ export class DispatchForPurchaseListComponent implements OnInit {
             sd: "desc",
             billno: "",
             date: "",
+            purchaser:"",
+            stockplace:"",
+            quantity:"",
+            total:"",
+            dispatcher:"",
+            stockman:"",
+            accountingclerk:"",
+            audit_time:"",
+            audit_user:"",
+            create_user:"",
             audited:"null"
            
         };
