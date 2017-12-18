@@ -27,12 +27,19 @@ export class OilTransferListComponent implements OnInit {
             ps: 15,
             sf: "date",
             sd: "desc",
-            billno: ""
+            billno: "",
+            audited:"null"
         };
     
     // 记录总数
     total: number;
    
+    // 状态查询
+    options = [
+        { value: null, label: '--' },
+        { value: true, label: '已审核' },
+        { value: false, label: '未审核' }
+    ];
 
     data: any[] = [];
     loading = false;
