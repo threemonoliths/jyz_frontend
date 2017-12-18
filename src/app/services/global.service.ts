@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { deepIndexOf } from '../utils/utils';
 
-export const baseUrl='http://localhost:4000/api/v1/';
+// export const baseUrl='http://localhost:4000/api/v1/';
+export const baseUrl='http://172.27.21.133:4000/api/v1/';
 
 
 

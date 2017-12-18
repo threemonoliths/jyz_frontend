@@ -46,7 +46,7 @@
                                 <nz-input formControlName="position" nzPlaceHolder="请输入地址" nzSize="large" [nzDisabled]="!editable"></nz-input>
                                 
                                 <p nz-form-explain *ngIf="form.controls['position'].invalid && (form.controls['position'].dirty || form.controls['position'].touched) && form.controls['position'].errors.required">
-                                    请输入地址
+                                    请输入岗位
                                 </p>                           
     
                             </div>
@@ -54,21 +54,17 @@
                 </div>
                
                 <div nz-col nzMd="6" nzSm="12" nzXs="24">
-                    <div nz-form-item nz-row [ngClass]="permissions_error">
-                    <div nz-form-label><label for="no">权限</label></div>
-                    <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="permissions">
-                    <nz-select  name="permissions" nzAllowClear nzPlaceHolder="请选择权限">
-                        <nz-option
-                            *ngFor="let option of permissionOptions"
-                            [nzLabel]="option.label"
-                            [nzValue]="option"
-                            [nzDisabled]="option.disabled">
-                        </nz-option>
-                    </nz-select>
-                    </div>
+                    <div nz-form-item nz-row [ngClass]="position_error">
+                        <div nz-form-label nz-col><label>权限</label></div>
+                        <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="permissions" >
+                            <nz-input formControlName="permissions" nzPlaceHolder="请输入权限" nzSize="large" [nzDisabled]="!editable"></nz-input>
+                            
+                            <p nz-form-explain *ngIf="form.controls['permissions'].invalid && (form.controls['permissions'].dirty || form.controls['permissions'].touched) && form.controls['permissions'].errors.required">
+                                请输入权限
+                            </p>                           
 
+                        </div>
                     </div>
-
                 </div>               
           </div>
     

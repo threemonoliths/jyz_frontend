@@ -66,10 +66,10 @@
             <th nz-th><span>用户名</span></th>
             <th nz-th><span>全名</span></th>
             <th nz-th><span>邮箱</span></th>
-            <th nz-th><span>地址</span></th>
-            <th nz-th><span>（是否）管理员</span></th>
+            <th nz-th><span>岗位</span></th>
+            
             <th nz-th><span>权限</span></th>
-            <th nz-th><span>是否激活</span></th>
+            <th nz-th><span>状态</span></th>
             <th nz-th><span>操作</span></th>
         </tr>
     </thead>
@@ -79,16 +79,16 @@
             <td nz-td>{{i.fullname}}</td>
             <td nz-td>{{i.email}}</td>
             <td nz-td>{{i.position}}</td>
-            <td nz-td>{{i.is_admin}}</td>
+            
             <td nz-td>{{i.permissions}}</td>
-            <td nz-td>{{i.active}}</td>
+            <td nz-td>{{i.active | userStatusPipe}}</td>
 
 
             <td nz-td >
                 <a (click)="update(i.id)">修改</a>
                  <span nz-table-divider></span>
-                <a (click)="activate(i.id)">激活</a>
-                <span nz-table-divider></span>
+                <a (click)="activate(i.id)" *ngIf="!i.active">激活</a>
+                <span nz-table-divider *ngIf="!i.active"></span>
                 <a (click)="delete(i.id)">删除</a>
             </td>
            
