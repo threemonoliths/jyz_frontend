@@ -20,10 +20,6 @@ export class UserManagementFormComponent implements OnInit {
 
     form: FormGroup;
 
-    permissionOptions = [
-        { value: null, label: '--' },
-        { value: 255, label: '管理员' },
-        { value: 1, label: '普通用户' }];
 
     title = '创建用户';
     breadcrumbItem = {label: "用户", routerLink: "/layout/content/user_management/form"}
@@ -45,22 +41,21 @@ export class UserManagementFormComponent implements OnInit {
         if (op == 'show') this.initShow();
         console.log(this.user_management)
         this.form = this.fb.group({
-            username : [this.user_management? this.user_management.username : ''],
+           
             email : [this.user_management? this.user_management.email : ''],
             fullname : [this.user_management? this.user_management.fullname : ''],
             position : [this.user_management? this.user_management.position : ''],
-            permissions : [this.user_management? this.user_management.permissions : ''],
+            
         });       
 
     }
 
 
     //#region get form fields
-    get username() { return this.form.controls.username; }
     get email() { return this.form.controls.email; }
     get fullname() { return this.form.controls.fullname; }
     get position() { return this.form.controls.position; }
-    get permissions() { return this.form.controls.permissions; }
+    
 
 
     _submitForm() {

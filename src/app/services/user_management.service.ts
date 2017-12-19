@@ -59,6 +59,7 @@ export class UserManagementService {
   }
 
   update(cid, v): Promise<any>{
+    console.log("this is update")
     let obj = { user: v} 
     let param = JSON.stringify(obj);
     return this.http.post(this.url + `/${cid}`,param, getTokenOptions())
