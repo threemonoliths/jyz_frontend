@@ -22,6 +22,7 @@ import { registerLocaleData } from '@angular/common';
 import localeZhHans from '@angular/common/locales/zh-Hans';
 
 import { AuthenticationService } from './services/login.service';
+import { UserManagementService } from './services/user_management.service';
 import { AuthGuard } from './routes/auth.guard';
 import { GlobalService } from './services/global.service';
 
@@ -69,6 +70,7 @@ export function StartupServiceFactory(startupService: StartupService): Function 
         AuthenticationService,
         GlobalService,
         AuthGuard,
+        UserManagementService,
         {
             provide: APP_INITIALIZER,
             useFactory: StartupServiceFactory,

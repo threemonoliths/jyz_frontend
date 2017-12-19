@@ -56,6 +56,18 @@ export class AuthenticationService {
         return this.http.get(baseUrl + `users/username/${username}`).map(response => response.json()).toPromise();
 
     }
+
+    checkEmailAlreadyExists(email) {
+        return this.http.get(baseUrl + `users/email/${email}`, getTokenOptions()).map(response => response.json()).toPromise();
+
+    }
+
+    checkPassword(pwd) {
+
+            return this.http.get(baseUrl + `users/checkpwd/${pwd}`, getTokenOptions())
+                       .map(response => response.json()).toPromise();
+          }
+
 }
 
     

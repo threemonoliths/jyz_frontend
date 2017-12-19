@@ -59,11 +59,20 @@ export class UserManagementService {
   }
 
   update(cid, v): Promise<any>{
-    let obj = { usermanagement: v} 
+    let obj = { user: v} 
     let param = JSON.stringify(obj);
     return this.http.post(this.url + `/${cid}`,param, getTokenOptions())
                .map(response => response.json()).toPromise();
   }
 
+  changePwd(pwd){
+    return this.http.post(this.url + `/changepwd/${pwd}`,"", getTokenOptions())
+    .map(response => response.json()).toPromise();
+  }
+
+  getByName(name){
+    return this.http.get(this.url + `/username/${name}`, getTokenOptions())
+    .map(response => response.json()).toPromise();
+  }
 
 }

@@ -9,6 +9,8 @@ import { SharedModule } from '@shared/shared.module';
 import { ContentComponent } from './content.component';
 import { contentRoutes} from './content.routes';
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import {ChangePwComponent} from '../self_profile/change_password.component';
+import {ChangeProfileComponent} from '../self_profile/change_profile.component';
 
 import { NzMessageService } from 'ng-zorro-antd';
 
@@ -25,8 +27,9 @@ import { NzMessageService } from 'ng-zorro-antd';
   ],
   declarations: [
     ContentComponent,
-    DashboardComponent
-
+    DashboardComponent,
+    ChangePwComponent,
+    ChangeProfileComponent
   ],
   providers: [
     NzMessageService

@@ -1,6 +1,8 @@
 import {ContentComponent} from './content.component';
 
 import {DashboardComponent} from '../dashboard/dashboard.component';
+import {ChangePwComponent} from '../self_profile/change_password.component';
+import {ChangeProfileComponent} from '../self_profile/change_profile.component';
 
 
 export const contentRoutes = [{
@@ -8,7 +10,7 @@ export const contentRoutes = [{
 	component: ContentComponent,
 	children: [
 
-        { path: '', redirectTo: 'contract_for_purchase', pathMatch: 'full' },
+        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 		{ path: 'contract_for_purchase', loadChildren: '../contract_for_purchase/contract_for_purchase.module#ContractForPurchaseModule' },
 		{ path: 'godownentry_for_acceptance', loadChildren: '../godownentry_for_acceptance/godownentry_for_acceptance.module#GodownentryForAcceptanceModule' },
 		{ path: 'carry_for_account', loadChildren: '../carry_for_account/carry_for_account.module#CarryForAccountModule' },
@@ -20,7 +22,9 @@ export const contentRoutes = [{
 		{ path: 'user_management', loadChildren: '../user_management/user_management.module#UserManagementModule' },
 		{ path: 'dict', loadChildren: '../dict/dict.module#DictModule' },            
 		{ path: 'stock_change', loadChildren: '../stock_change/stock_change.module#StockChangeModule' },     
-        { path: 'dashboard', component: DashboardComponent},
+		{ path: 'dashboard', component: DashboardComponent},
+		{ path: 'change_password', component: ChangePwComponent},
+		{ path: 'change_profile', component: ChangeProfileComponent},
 
 	]
 }];
