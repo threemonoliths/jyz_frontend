@@ -4,8 +4,6 @@ export class Dict {
     name: string;
     key: string;
     parm: string;
-    value: number;
-    seq: string;
     // 交互用属性
     disabled: boolean;
     checked: boolean;
