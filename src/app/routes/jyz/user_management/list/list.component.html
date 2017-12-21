@@ -89,7 +89,9 @@
                  <span nz-table-divider></span>
                 <a (click)="activate(i.id)" *ngIf="!i.active">激活</a>
                 <span nz-table-divider *ngIf="!i.active"></span>
-                <a (click)="delete(i.id)">删除</a>
+                <nz-popconfirm (nzOnConfirm)="delete(i.id)" [nzTitle]="'确定要删除吗？'">
+                    <a nz-popconfirm>删除</a>
+                </nz-popconfirm>
             </td>
            
         </tr>
