@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -9,6 +9,8 @@ import { AuthenticationService } from '../../../services/login.service';
 import { UserManagementService } from '../../../services/user_management.service';
 
 import { NzMessageService } from 'ng-zorro-antd';
+
+import { Bounds, CropperSettings, ImageCropperComponent } from 'ng2-img-cropper';
 
 @Component({
     selector: 'app-step1',
@@ -60,6 +62,7 @@ import { NzMessageService } from 'ng-zorro-antd';
                 <button nz-button [nzType]="'primary'" nzSize="large" [disabled]="form.invalid || waiting"> {{button_label}}</button>
             </div>
         </div>
+
     </form>
 
     `
@@ -133,5 +136,56 @@ export class ChangeProfileComponent implements OnInit {
                 
             })
         )
-    }       
+    }   
+    
+    
+    //--------------------头像上传----------------------------//
+    name: string;
+    data1: any;
+    cropperSettings: CropperSettings;
+
+    @ViewChild('cropper', undefined) cropper: ImageCropperComponent;
+
+    initUpload(){
+        this.name = 'ng-alain';
+        this.cropperSettings = new CropperSettings();
+
+        this.cropperSettings.noFileInput = true;
+
+        this.cropperSettings.width = 200;
+        this.cropperSettings.height = 200;
+
+        this.cropperSettings.croppedWidth = 200;
+        this.cropperSettings.croppedHeight = 200;
+
+        this.cropperSettings.canvasWidth = 460;
+        this.cropperSettings.canvasHeight = 400;
+
+        this.cropperSettings.minWidth = 100;
+        this.cropperSettings.minHeight = 100;
+
+        this.cropperSettings.cropperDrawSettings.strokeColor = 'rgba(255,255,255,1)';
+        this.cropperSettings.cropperDrawSettings.strokeWidth = 2;
+
+        this.cropperSettings.rounded = false;
+
+        this.data1 = {};
+    }
+
+    cropped(bounds: Bounds) {
+        console.log(bounds);
+    }
+
+    fileChange($event) {
+        const image: any = new Image();
+        const file: File = $event.target.files[0];
+        const myReader: FileReader = new FileReader();
+        const that = this;
+        myReader.onloadend = (loadEvent: any) => {
+            image.src = loadEvent.target.result;
+            that.cropper.setImage(image);
+        };
+
+        myReader.readAsDataURL(file);
+    }
 }

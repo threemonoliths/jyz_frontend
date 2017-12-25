@@ -3,6 +3,7 @@ import {ContentComponent} from './content.component';
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {ChangePwComponent} from '../self_profile/change_password.component';
 import {ChangeProfileComponent} from '../self_profile/change_profile.component';
+import {CropperComponent} from '../self_profile/change_avatar.component';
 
 
 export const contentRoutes = [{
@@ -25,6 +26,8 @@ export const contentRoutes = [{
 		{ path: 'dashboard', component: DashboardComponent},
 		{ path: 'change_password', component: ChangePwComponent},
 		{ path: 'change_profile', component: ChangeProfileComponent},
+		{ path: 'change_avatar', component: CropperComponent},
+		
 
 	]
 }];

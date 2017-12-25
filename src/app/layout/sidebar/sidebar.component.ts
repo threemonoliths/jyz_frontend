@@ -33,6 +33,10 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['layout/content/change_password']);
     }
 
+    change_avatar(){
+      this.router.navigate(['layout/content/change_avatar']);
+    }
+
     change_profile(){
       console.log(localStorage.getItem("username"))
 

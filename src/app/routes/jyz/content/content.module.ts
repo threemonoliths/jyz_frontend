@@ -12,7 +12,11 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import {ChangePwComponent} from '../self_profile/change_password.component';
 import {ChangeProfileComponent} from '../self_profile/change_profile.component';
 
+import {CropperComponent} from '../self_profile/change_avatar.component';
+
 import { NzMessageService } from 'ng-zorro-antd';
+
+import { ImageCropperModule } from 'ng2-img-cropper';
 
 
 // import { GlobalService } from '../../../services/global.service'; 
@@ -23,13 +27,15 @@ import { NzMessageService } from 'ng-zorro-antd';
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    ImageCropperModule,
     RouterModule.forChild(contentRoutes)
   ],
   declarations: [
     ContentComponent,
     DashboardComponent,
     ChangePwComponent,
-    ChangeProfileComponent
+    ChangeProfileComponent,
+    CropperComponent
   ],
   providers: [
     NzMessageService
