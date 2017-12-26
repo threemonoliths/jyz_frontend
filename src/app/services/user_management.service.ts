@@ -76,7 +76,7 @@ export class UserManagementService {
     .map(response => response.json()).toPromise();
   }
 
-  uploadAvatar(id, filestr){
+  uploadAvatar(token, file){
 
     // let headers = new Headers();
     // let jwt = 'Bearer ' + localStorage.getItem('currentToken');
@@ -85,12 +85,12 @@ export class UserManagementService {
 
     // let token = localStorage.getItem('currentToken')
 
-    // const formData = new FormData();
-    // formData.append("avatar", file);
+    const formData = new FormData();
+    formData.append("avatar", file);
 
-    let v = { "avatar": filestr}
+    // let v = { "avatar": filestr}
 
-    return this.http.post(this.url + `/avatar/upload`,JSON.stringify(v), getTokenOptions())
+    return this.http.post(this.url + `/avatar/upload/${token}`,formData)
       .map(response => response.json()).toPromise();
 
   }

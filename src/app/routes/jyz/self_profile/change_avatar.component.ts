@@ -61,15 +61,8 @@ export class CropperComponent {
     }
 
     uploadAvatar(){
-        // console.log("this is data1")
-        // console.log(this.data1)
-        let v = this.data1.image.split(",")[1]
-        // v["name"] = "file.jpeg"
-        console.log(v)
-        let f = new Blob([JSON.stringify(v)],{type:'image/jpeg'})
-        // console.log("this is f")
-        // console.log(f)
-        this.userService.uploadAvatar(1, v).then(result => console.log(result))
-        // this.userService.uploadAvatar(1, this.data1.image).then(result => console.log(result))
+        let v = this.data1.image
+        let f = new Blob([v],{type:'text/plain'})
+        this.userService.uploadAvatar(localStorage.getItem("currentToken"), f).then(result => console.log(result))
     }
 }
