@@ -35,7 +35,7 @@ export class CropperComponent {
         this.cropperSettings.cropperDrawSettings.strokeColor = 'rgba(255,255,255,1)';
         this.cropperSettings.cropperDrawSettings.strokeWidth = 2;
 
-        this.cropperSettings.rounded = false;
+        this.cropperSettings.rounded = true;
 
         this.data1 = {};
     }

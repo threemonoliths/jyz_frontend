@@ -63,6 +63,7 @@
                 <label nz-checkbox [(ngModel)]="allChecked" [nzIndeterminate]="indeterminate"
                     (ngModelChange)="checkAll($event)"></label>
             </th>-->
+            <th nz-th><span>头像</span></th>
             <th nz-th><span>用户名</span></th>
             <th nz-th><span>全名</span></th>
             <th nz-th><span>邮箱</span></th>
@@ -75,6 +76,9 @@
     </thead>
     <tbody nz-tbody>
         <tr nz-tbody-tr *ngFor="let i of nzTable.data">
+            <td nz-td>
+                <nz-avatar [nzSrc]="i.avatar" [nzSize]="'large'"></nz-avatar>
+            </td>
             <td nz-td>{{i.username}}</td>
             <td nz-td>{{i.fullname}}</td>
             <td nz-td>{{i.email}}</td>

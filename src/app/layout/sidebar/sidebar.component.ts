@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
 
     username=""
     email=""
+    avatar="./assets/img/default.png"
 
     constructor(public settings: SettingsService, public msgSrv: NzMessageService,
                 private router: Router, private userService: UserManagementService) {
@@ -22,6 +23,8 @@ export class SidebarComponent implements OnInit {
     ngOnInit() {
       this.username = localStorage.getItem("username")
       this.email = localStorage.getItem("email")
+      this.avatar = localStorage.getItem("avatar") ? localStorage.getItem("avatar"): this.avatar
+      console.log(this.avatar)
     }
 
     logout() {

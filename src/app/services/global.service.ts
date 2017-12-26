@@ -21,7 +21,7 @@ export class GlobalService {
 
   public addBreadcrumbItem(c) {
     if (this.breadcrumbItems.length > 5){
-      this.breadcrumbItems.splice(0,1);
+      this.breadcrumbItems.splice(1,1);
     }
     let index = deepIndexOf(this.breadcrumbItems,c)
     if (index == -1){

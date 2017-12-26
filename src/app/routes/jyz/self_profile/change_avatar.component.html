@@ -1,22 +1,20 @@
-<div class="content__title">
-    <h1>Image Cropper</h1>
-</div>
+
 <div nz-row [nzGutter]="16">
     <div nz-col [nzMd]="6">
         <nz-card>
-            <h3 class="text-md">Select an image file</h3>
+            <h3 class="text-md">选择文件</h3>
             <button nz-button class="ant-btn__block file-upload mt-sm">
                 <input id="file1" accept type="file" (change)="fileChange($event)" />
-                <i class="anticon anticon-upload"></i><span>Upload a image</span>
+                <i class="anticon anticon-upload"></i><span>选择本地图片</span>
             </button>
-            <h3 class="text-md my-md">Crop type</h3>
-            <nz-radio-group [(ngModel)]="cropperSettings.rounded">
-                <label nz-radio-button [nzValue]="false"><span>Square</span></label>
-                <label nz-radio-button [nzValue]="true"><span>Circle</span></label>
+            <!-- <h3 class="text-md my-md">图形裁剪</h3> -->
+            <!-- <nz-radio-group [(ngModel)]="cropperSettings.rounded">
+                <label nz-radio-button [nzValue]="false"><span>方形</span></label>
+                <label nz-radio-button [nzValue]="true"><span>圆形</span></label>
                 
-            </nz-radio-group>
+            </nz-radio-group> -->
             <div class="my-md" *ngIf="data1.image">
-                <h3 class="text-md">Cropped image</h3>
+                <h3 class="text-md">效果图</h3>
                 <img [class.rounded-circle]="cropperSettings.rounded"
                     [src]="data1.image"
                     [width]="cropperSettings.croppedWidth"
