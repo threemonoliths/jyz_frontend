@@ -16,7 +16,7 @@ import { NzMessageService } from 'ng-zorro-antd';
     selector: 'change-password',
     template: `
     <form nz-form [formGroup]="form" (ngSubmit)="_submitForm()">
-
+        <h3 class="text-center" >修改密码</h3> 
         <div nz-form-item nz-row class="border-top-1 mt-lg pt-lg">
         <div nz-form-label nz-col [nzSm]="4" [nzOffset]="5" >
             <label for="oldpassword" nz-form-item-required>旧密码</label>
