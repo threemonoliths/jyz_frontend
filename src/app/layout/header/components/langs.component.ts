@@ -29,8 +29,8 @@ export class HeaderLangsComponent {
     }
 
     change(lang: string) {
-        //this.tsServ.use(lang, false);
-        //this.settings.setLayout('lang', lang);
+        this.tsServ.use(lang, false);
+        this.settings.setLayout('lang', lang);
     }
 
 }
