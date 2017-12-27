@@ -26,20 +26,14 @@
             </div>
         </li>
     </ul>
-    <header-search class="header-search" [toggleChange]="searchToggleStatus"></header-search>
+   
     <ul class="top-nav">
         <!-- Notify -->
-        <li>
-            <header-notify></header-notify>
-        </li>
+      
         <!-- Task -->
-        <li class="hidden-xs">
-            <header-task></header-task>
-        </li>
+        
         <!-- App Icons -->
-        <li class="hidden-xs">
-            <header-icon></header-icon>
-        </li>
+       
         <!-- Settings -->
         <li class="hidden-xs">
             <nz-dropdown nzTrigger="click" nzPlacement="bottomRight">
@@ -56,9 +50,7 @@
                     <div nz-menu-item>
                         <header-storage></header-storage>
                     </div>
-                    <div nz-menu-item>
-                        <header-langs></header-langs>
-                    </div>
+                   
                 </div>
             </nz-dropdown>
         </li>

@@ -21,7 +21,7 @@ import { Bounds, CropperSettings, ImageCropperComponent } from 'ng2-img-cropper'
             <div nz-form-label nz-col [nzSm]="4">
                 <label for="email" nz-form-item-required>电子邮箱</label>
             </div>
-            <div nz-form-control nz-col [nzSm]="20" nzHasFeedback [nzValidateStatus]="email">
+            <div nz-form-control nz-col [nzSm]="4" nzHasFeedback [nzValidateStatus]="email">
                 <nz-input formControlName="email" nzSize="large" [nzId]="'email'" (input)="onChange()"></nz-input>
                 <ng-container *ngIf="email.dirty || email.touched">
                     <p nz-form-explain *ngIf="email.errors?.required">请输入电子邮箱</p>
