@@ -16,7 +16,7 @@ import { Bounds, CropperSettings, ImageCropperComponent } from 'ng2-img-cropper'
     selector: 'app-step1',
     template: `
     <form nz-form [formGroup]="form" (ngSubmit)="_submitForm()">
-        
+        <h3 class="text-center" >个人资料</h3> 
         <div nz-form-item nz-row class="border-top-1 mt-lg pt-lg">
             <div nz-form-label nz-col [nzSm]="4" [nzOffset]="5">
                 <label for="email" nz-form-item-required>电子邮箱</label>
