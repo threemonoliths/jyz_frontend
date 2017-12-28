@@ -41,7 +41,8 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
         if (op == 'show') this.initShow();
         console.log(this.godownentry)
         this.form = this.fb.group({
-            bno: [this.godownentry? this.godownentry.bno : '', [Validators.required, Validators.minLength(4)]],
+            bno: [this.godownentry? this.godownentry.bno : '', [Validators.required, ,Validators.maxLength(30), Validators.minLength(4),
+                                                              Validators.pattern('[\u4E00-\u9FA5-a-zA-Z0-9_]*$') ]],
             supplier: [this.godownentry? this.godownentry.supplier : '', [Validators.required]],
             cno: [this.godownentry? this.godownentry.cno : '', [Validators.required,Validators.minLength(4)]],
             buyer : [this.godownentry? this.godownentry.buyer : '', [Validators.required]],
