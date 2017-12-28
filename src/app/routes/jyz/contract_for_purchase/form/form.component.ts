@@ -42,7 +42,8 @@ export class ContractForPurchaseFormComponent implements OnInit {
         if (op == 'show') this.initShow();
         console.log(this.contract)
         this.form = this.fb.group({
-            cno: [this.contract? this.contract.cno : '', [Validators.required, Validators.minLength(4)]],
+            cno: [this.contract? this.contract.cno : '', [Validators.required, ,Validators.maxLength(30), Validators.minLength(4),
+                                                              Validators.pattern('[\u4E00-\u9FA5-a-zA-Z0-9_]*$') ]],
             date: [this.contract? stringToDate(this.contract.date) : '', [Validators.required]],
             location: [this.contract? this.contract.location : '', [Validators.required]],
             amount : [this.contract? this.contract.amount : '', [Validators.required, this.validateNumber.bind(this)]],

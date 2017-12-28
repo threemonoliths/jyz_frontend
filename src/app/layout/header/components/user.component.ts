@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { SettingsService } from '@core/services/settings.service';
 
+import { Router } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd';
+
+
+ import { UserManagementService } from '../../../services/user_management.service';
 @Component({
     selector: 'header-user',
     template: `
@@ -10,14 +15,41 @@ import { SettingsService } from '@core/services/settings.service';
             {{settings.user.name}}
         </div>
         <div nz-menu class="width-sm">
-            <div nz-menu-item [nzDisable]="true"><i class="anticon anticon-user mr-sm"></i>个人中心</div>
-            <div nz-menu-item [nzDisable]="true"><i class="anticon anticon-setting mr-sm"></i>设置</div>
-            <li nz-menu-divider></li>
-            <div nz-menu-item [routerLink]="['/lock']"><i class="anticon anticon-setting mr-sm"></i>退出登录</div>
+            <div nz-menu-item [nzDisable]="true">
+            <li nz-menu-item (click)="change_profile()">{{ '个人资料' | translate }}</li>
+            <li nz-menu-item (click)="change_password()">{{ '修改密码' | translate }}</li>
+            <li nz-menu-item (click)="change_avatar()">{{ '上传头像' | translate }}</li>
+            <li nz-menu-item (click)="logout()">{{ '退出登录'}}</li>
+            </div>
         </div>
     </nz-dropdown>
     `
 })
 export class HeaderUserComponent {
-    constructor(public settings: SettingsService) {}
+    
+    constructor(public settings: SettingsService, public msgSrv: NzMessageService,
+                private router: Router, private userService: UserManagementService) {
+    }
+     logout() {
+      localStorage.clear()
+      this.router.navigate(['login']);
+    }
+
+    change_password(){
+      this.router.navigate(['layout/content/change_password']);
+    }
+
+    change_avatar(){
+      this.router.navigate(['layout/content/change_avatar']);
+    }
+
+    change_profile(){
+      console.log(localStorage.getItem("username"))
+
+      this.userService.getByName(localStorage.getItem("username"))
+        .then(result => {console.log(result);if (result.id) this.userService.updateUserManagement = result;})
+        .then(result => this.router.navigate(['layout/content/change_profile']))
+        .catch(error => this.msgSrv.error(error))
+        
+    }
 }

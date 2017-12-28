@@ -16,12 +16,12 @@ import { NzMessageService } from 'ng-zorro-antd';
     selector: 'change-password',
     template: `
     <form nz-form [formGroup]="form" (ngSubmit)="_submitForm()">
-
+        <h3 class="text-center" >修改密码</h3> 
         <div nz-form-item nz-row class="border-top-1 mt-lg pt-lg">
-        <div nz-form-label nz-col [nzSm]="4">
+        <div nz-form-label nz-col [nzSm]="4" [nzOffset]="5" >
             <label for="oldpassword" nz-form-item-required>旧密码</label>
         </div>
-        <div nz-form-control nz-col [nzSm]="20" nzHasFeedback [nzValidateStatus]="oldpassword">
+        <div nz-form-control nz-col [nzSm]="7" nzHasFeedback [nzValidateStatus]="oldpassword">
             <nz-input formControlName="oldpassword" nzSize="large" nzType="password" nzId="oldpassword"></nz-input>
             <ng-container *ngIf="oldpassword.dirty || oldpassword.touched">
                 <p nz-form-explain *ngIf="oldpassword.errors?.required">请输入旧密码</p>
@@ -31,11 +31,11 @@ import { NzMessageService } from 'ng-zorro-antd';
         </div>
         </div>
 
-        <div nz-form-item nz-row class="border-top-1 mt-lg pt-lg">
-        <div nz-form-label nz-col [nzSm]="4">
+        <div nz-form-item nz-row >
+        <div nz-form-label nz-col [nzSm]="4" [nzOffset]="5">
             <label for="newpassword" nz-form-item-required>新密码</label>
         </div>
-        <div nz-form-control nz-col [nzSm]="20" nzHasFeedback [nzValidateStatus]="newpassword">
+        <div nz-form-control nz-col [nzSm]="7" nzHasFeedback [nzValidateStatus]="newpassword">
             <nz-input formControlName="newpassword" nzSize="large" nzType="password" nzId="newpassword"></nz-input>
             <ng-container *ngIf="newpassword.dirty || newpassword.touched">
                 <p nz-form-explain *ngIf="newpassword.errors?.required">请输入新密码</p>
@@ -45,10 +45,10 @@ import { NzMessageService } from 'ng-zorro-antd';
         </div>
 
         <div nz-form-item nz-row>
-        <div nz-form-label nz-col [nzSm]="4">
+        <div nz-form-label nz-col [nzSm]="4" [nzOffset]="5">
             <label for="repassword" nz-form-item-required>确认新密码</label>
         </div>
-        <div nz-form-control nz-col [nzSm]="20" nzHasFeedback [nzValidateStatus]="repassword">
+        <div nz-form-control nz-col [nzSm]="7" nzHasFeedback [nzValidateStatus]="repassword">
             <nz-input formControlName="repassword" nzSize="large" nzType="password" nzId="repassword"></nz-input>
             <ng-container *ngIf="repassword.dirty || repassword.touched">
                 <p nz-form-explain *ngIf="repassword.errors?.required">请确认新密码</p>
@@ -58,8 +58,8 @@ import { NzMessageService } from 'ng-zorro-antd';
         </div>
         </div>
    
-        <div nz-form-item nz-row>
-            <div nz-form-control nz-col [nzSpan]="20" [nzOffset]="4">
+         <div nz-form-item nz-row>
+            <div nz-form-control nz-col [nzSpan]="20" [nzOffset]="2" style="text-align:center">
                 <button nz-button [nzType]="'primary'" nzSize="large" [disabled]="form.invalid || waiting"> {{button_label}}</button>
             </div>
         </div>
@@ -125,7 +125,7 @@ export class ChangePwComponent implements OnInit {
         )
     }
        
-    //却热密码验证
+    //确认密码验证
     confirmationValidator = (control: FormControl): { [s: string]: boolean } => {
         if (!control.value) {
             return { required: true };

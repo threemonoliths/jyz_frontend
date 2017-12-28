@@ -16,12 +16,12 @@ import { Bounds, CropperSettings, ImageCropperComponent } from 'ng2-img-cropper'
     selector: 'app-step1',
     template: `
     <form nz-form [formGroup]="form" (ngSubmit)="_submitForm()">
-        
+        <h3 class="text-center" >个人资料</h3> 
         <div nz-form-item nz-row class="border-top-1 mt-lg pt-lg">
-            <div nz-form-label nz-col [nzSm]="4">
+            <div nz-form-label nz-col [nzSm]="4" [nzOffset]="5">
                 <label for="email" nz-form-item-required>电子邮箱</label>
             </div>
-            <div nz-form-control nz-col [nzSm]="20" nzHasFeedback [nzValidateStatus]="email">
+            <div nz-form-control nz-col [nzSm]="7" nzHasFeedback [nzValidateStatus]="email">
                 <nz-input formControlName="email" nzSize="large" [nzId]="'email'" (input)="onChange()"></nz-input>
                 <ng-container *ngIf="email.dirty || email.touched">
                     <p nz-form-explain *ngIf="email.errors?.required">请输入电子邮箱</p>
@@ -32,10 +32,10 @@ import { Bounds, CropperSettings, ImageCropperComponent } from 'ng2-img-cropper'
         </div>
 
         <div nz-form-item nz-row>
-            <div nz-form-label nz-col [nzSm]="4">
+            <div nz-form-label nz-col [nzSm]="4" [nzOffset]="5">
                 <label for="fullname" nz-form-item-required>真实姓名</label>
             </div>
-            <div nz-form-control nz-col [nzSm]="20" nzHasFeedback [nzValidateStatus]="fullname">
+            <div nz-form-control nz-col [nzSm]="7" nzHasFeedback [nzValidateStatus]="fullname">
                 <nz-input formControlName="fullname" nzSize="large" [nzId]="'fullname'"></nz-input>
                 <ng-container *ngIf="fullname.dirty || fullname.touched">
                     <p nz-form-explain *ngIf="fullname.errors?.required">请输入真实姓名</p>
@@ -45,10 +45,10 @@ import { Bounds, CropperSettings, ImageCropperComponent } from 'ng2-img-cropper'
         </div>
 
         <div nz-form-item nz-row>
-            <div nz-form-label nz-col [nzSm]="4">
+            <div nz-form-label nz-col [nzSm]="4" [nzOffset]="5">
                 <label for="position" nz-form-item-required>职位</label>
             </div>
-            <div nz-form-control nz-col [nzSm]="20" nzHasFeedback [nzValidateStatus]="position">
+            <div nz-form-control nz-col [nzSm]="7" nzHasFeedback [nzValidateStatus]="position">
                 <nz-input formControlName="position" nzSize="large" [nzId]="'position'"></nz-input>
                 <ng-container *ngIf="position.dirty || position.touched">
                     <p nz-form-explain *ngIf="position.errors?.required">请输入职位</p>
@@ -58,7 +58,7 @@ import { Bounds, CropperSettings, ImageCropperComponent } from 'ng2-img-cropper'
         </div>
        
         <div nz-form-item nz-row>
-            <div nz-form-control nz-col [nzSpan]="20" [nzOffset]="4">
+            <div nz-form-control nz-col [nzSpan]="20" [nzOffset]="2" style="text-align:center">
                 <button nz-button [nzType]="'primary'" nzSize="large" [disabled]="form.invalid || waiting"> {{button_label}}</button>
             </div>
         </div>
