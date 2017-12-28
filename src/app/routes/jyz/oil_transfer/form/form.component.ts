@@ -43,7 +43,8 @@ export class OilTransferFormComponent implements OnInit {
         if (op == 'show') this.initShow();
         console.log(this.transfer)
         this.form = this.fb.group({
-            billno: [this.transfer? this.transfer.billno : '', [Validators.required, Validators.minLength(4)]],
+            billno: [this.transfer? this.transfer.billno : '', [Validators.required, ,Validators.maxLength(30), Validators.minLength(4),
+                                                               Validators.pattern('[a-zA-Z0-9_]*$') ]],
             date: [this.transfer? stringToDate(this.transfer.date) : '', [Validators.required]],
             stockplace: [this.transfer? this.transfer.stockplace : '', [Validators.required]],
             dispatcher : [this.transfer? this.transfer.dispatcher : '', [Validators.required,]],
