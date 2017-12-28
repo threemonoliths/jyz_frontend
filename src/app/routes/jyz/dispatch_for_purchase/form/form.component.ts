@@ -44,7 +44,7 @@ export class DispatchForPurchaseFormComponent implements OnInit {
         this.form = this.fb.group({
          
              billno: [this.dispatch? this.dispatch.billno : '', [Validators.required,Validators.maxLength(30), Validators.minLength(4),
-                                                               Validators.pattern('[a-zA-Z0-9_]*$') ]],
+                                                               Validators.pattern('[\u4E00-\u9FA5-a-zA-Z0-9_]*$') ]],
             date: [this.dispatch? stringToDate(this.dispatch.date):'', [Validators.required]],
             purchaser: [this.dispatch? this.dispatch.purchaser : '', [Validators.required]],
             stockplace : [this.dispatch? this.dispatch.stockplace : '', [Validators.required]],

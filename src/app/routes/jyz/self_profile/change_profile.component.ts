@@ -58,7 +58,7 @@ import { Bounds, CropperSettings, ImageCropperComponent } from 'ng2-img-cropper'
         </div>
        
         <div nz-form-item nz-row>
-            <div nz-form-control nz-col [nzSpan]="20" [nzOffset]="11">
+            <div nz-form-control nz-col [nzSpan]="20" [nzOffset]="2" style="text-align:center">
                 <button nz-button [nzType]="'primary'" nzSize="large" [disabled]="form.invalid || waiting"> {{button_label}}</button>
             </div>
         </div>

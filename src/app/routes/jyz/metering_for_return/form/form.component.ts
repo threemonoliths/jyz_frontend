@@ -45,7 +45,7 @@ export class MeteringForReturnFormComponent implements OnInit {
         if (op == 'show') this.initShow();
         this.form = this.fb.group({
             billno: [this.metering? this.metering.billno : '', [Validators.required, ,Validators.maxLength(30), Validators.minLength(4),
-                                                               Validators.pattern('[a-zA-Z0-9_]*$') ]],
+                                                               Validators.pattern('[\u4E00-\u9FA5-a-zA-Z0-9_]*$') ]],
             billdate: [this.metering? stringToDate(this.metering.billdate) : '', [Validators.required]],
             stockman: [this.metering? this.metering.stockman : '', [Validators.required]],
             accountingclerk : [this.metering? this.metering.accountingclerk : '', [Validators.required]],
