@@ -55,7 +55,7 @@
             <div nz-col nzMd="6" nzSm="12" nzXs="24">
                 <div nz-form-item nz-row>
                     <div nz-form-label nz-col><label>保管员</label></div>
-                    <div nz-form-control nz-col [nzValidateStatus]="stockman">
+                    <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="stockman">
                             <nz-input formControlName="stockman" nzPlaceHolder="请输入保管员" nzSize="large" [nzDisabled]="!editable"></nz-input>
                         
                         <p nz-form-explain *ngIf="form.controls['stockman'].invalid && (form.controls['stockman'].dirty || form.controls['stockman'].touched) && form.controls['stockman'].errors.required">
