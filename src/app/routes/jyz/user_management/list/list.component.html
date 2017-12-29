@@ -84,7 +84,7 @@
             <td nz-td>{{i.email}}</td>
             <td nz-td>{{i.position}}</td>
             
-            <td nz-td>{{i.permissions}}</td>
+            <td nz-td>{{i.permissions|permissionPipe}}</td>
             <td nz-td>{{i.active | userStatusPipe}}</td>
 
 
@@ -103,8 +103,4 @@
 </nz-table>
 </nz-card>
 
-<!-- <nz-modal [nzVisible]="modalVisible" [nzTitle]="'用户激活'" [nzConfirmLoading]="loading" [nzContent]="modalContent"
-(nzOnCancel)="modalVisible=false" (nzOnOk)="save(id)">
-
-</nz-modal> -->
 

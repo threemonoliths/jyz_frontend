@@ -7,7 +7,7 @@ import { GlobalService } from '../../../../services/global.service';
 import { UserManagementService } from '../../../../services/user_management.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
 
-import { UserStatusPipe, AuditPipe } from '../../pipes/pipes'; 
+import { UserStatusPipe, AuditPipe,PermissionPipe } from '../../pipes/pipes'; 
 
 @Component({
     selector: 'contract-table-list',
