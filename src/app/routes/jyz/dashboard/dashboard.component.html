@@ -1,66 +1,41 @@
-<!-- <div class="content__title">
-        <h1>
-            Dashboard
-            <small class="text-sm hidden-xs">Welcome !</small>
-        </h1>
-    </div> -->
-    <!-- <div class="quick-menu" [class.show]="quickMenu" (click)="quickMenu=!quickMenu">
-        <div class="quick-menu-inner">
-            <div class="settings-ctrl">
-                <i class="anticon anticon-question-circle-o"></i>
-            </div>
-            <div class="list-group list-group-flush">
-                <a (click)="msg.info('item 1')" class="list-group-item">How do i create account?</a>
-                <a (click)="msg.info('item 2')" class="list-group-item">How do i create account?</a>
-                <a (click)="msg.info('item 3')" class="list-group-item">How do i create account?</a>
-                <a (click)="msg.info('item 4')" class="list-group-item">How do i create account?</a>
-                <a (click)="msg.info('item 5')" class="list-group-item">How do i create account?</a>
-            </div>
-        </div>
-    </div> -->
-    <div nz-row nzGutter="16">
+   <div nz-row nzGutter="16">
         <div nz-col nzXs="24" nzSm="12" nzMd="6" class="mb-md">
             <div nz-row nzType="flex" nzAlign="middle" class="bg-primary rounded-md">
                 <div nz-col nzSpan="12" class="p-md text-white">
-                    <div class="h2 mt0">123,456</div>
-                    <p class="text-nowrap">Website Traffics</p>
+                    <div class="h2 mt0">￥123,456</div>
+                    <p class="text-nowrap">1号仓库销售额</p>
                 </div>
                 <div nz-col nzSpan="12">
-                    
-                    <!-- <mini-bar height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="webSite"></mini-bar> -->
                 </div>
             </div>
         </div>
         <div nz-col nzXs="24" nzSm="12" nzMd="6" class="mb-md">
             <div nz-row nzType="flex" nzAlign="middle" class="bg-success rounded-md">
                 <div nz-col nzSpan="12" class="p-md text-white">
-                    <div class="h2 mt0">234,567K</div>
-                    <p class="text-nowrap">Website Impressions</p>
+                    <div class="h2 mt0">￥234,567</div>
+                    <p class="text-nowrap">2号仓库销售额</p>
                 </div>
                 <div nz-col nzSpan="12">
-                    <!-- <mini-bar height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="webSite"></mini-bar> -->
                 </div>
             </div>
         </div>
         <div nz-col nzXs="24" nzSm="12" nzMd="6" class="mb-md">
             <div nz-row nzType="flex" nzAlign="middle" class="bg-orange rounded-md">
                 <div nz-col nzSpan="12" class="p-md text-white">
-                    <div class="h2 mt0">$458,778</div>
-                    <p class="text-nowrap">Total Sales</p>
+                    <div class="h2 mt0">￥458,778</div>
+                    <p class="text-nowrap">4号仓库销售额</p>
                 </div>
                 <div nz-col nzSpan="12">
-                    <!-- <mini-bar height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="webSite"></mini-bar> -->
                 </div>
             </div>
         </div>
         <div nz-col nzXs="24" nzSm="12" nzMd="6" class="mb-md">
             <div nz-row nzType="flex" nzAlign="middle" class="bg-pink rounded-md">
                 <div nz-col nzSpan="12" class="p-md text-white">
-                    <div class="h2 mt0">456</div>
-                    <p class="text-nowrap">Support Tickets</p>
+                    <div class="h2 mt0">￥6456</div>
+                    <p class="text-nowrap">4号仓库销售额</p>
                 </div>
                 <div nz-col nzSpan="12">
-                    <!-- <mini-bar height="35" color="#fff" borderWidth="3" [padding]="[36, 30, 30, 30]" [data]="webSite"></mini-bar> -->
                 </div>
             </div>
         </div>
@@ -88,16 +63,6 @@
                     [data]="salesData"></bar>
             </nz-card>
         </div>
-        <!-- <div nz-col nzXs="24" nzMd="12">
-            <nz-card [nzTitle]="nzTitle" [nzBordered]="false">
-                <ng-template #nzTitle>
-                    Growth Rate
-                    <small class="text-sm font-weight-normal">Business Expectations & Retail Sales Statistics</small>
-                </ng-template>
-                <!-- <timeline [data]="offlineChartData" [height]="239" [padding]="[0, 0, 0, 0]"
-                          [titleMap]="{ y1: '客流量', y2: '支付笔数' }"></timeline> -->
-            <!-- </nz-card>
-        </div> --> 
     </div>
     <div nz-row nzGutter="16">
             <div nz-col nzXs="24" nzMd="12">
@@ -122,74 +87,156 @@
                         [data]="salesData"></bar>
                 </nz-card>
             </div>
-            <!-- <div nz-col nzXs="24" nzMd="12">
-                <nz-card [nzTitle]="nzTitle" [nzBordered]="false">
-                    <ng-template #nzTitle>
-                        Growth Rate
-                        <small class="text-sm font-weight-normal">Business Expectations & Retail Sales Statistics</small>
-                    </ng-template>
-                    <!-- <timeline [data]="offlineChartData" [height]="239" [padding]="[0, 0, 0, 0]"
-                              [titleMap]="{ y1: '客流量', y2: '支付笔数' }"></timeline> -->
-                <!-- </nz-card>
-            </div> -->
-    <!-- <div nz-row nzGutter="16">
-        <div nz-col nzXs="24" nzMd="12">
-            <nz-card [nzBordered]="false" class="ant-card__img">
-                <img class="img" src="//os.alipayobjects.com/rmsportal/GhjqstwSgxBXrZS.png">
-                <div class="p-md">
-                    <h3>ANT DESIGN</h3>
-                    <p class="text-grey">A UI Design Language</p>
-                    <ol class="list-styled text-lg pt-md">
-                        <li>Designed by experienced team, and showcase dozens of inspiring projects.</li>
-                        <li>Provide solutions for usual problems that may be encountered while developing enterprise-like complex UIs.</li>
-                        <li>Dozens of flexible and practical reusable components that increase your productivity.</li>
-                    </ol>
-                    <p class="pt-md">
-                        <a class="text-grey" href="//ng.ant.design" target="_blank">View Site...</a>
-                    </p>
+    </div>
+
+ <div nz-row nzGutter="16">
+    <div nz-col nzXs="24" nzMd="12">
+        <nz-card [nzTitle]="nzTitle" [nzBordered]="false">
+            <ng-template #nzTitle>
+                1号仓库
+                <small class="text-sm font-weight-normal">油品出入库数量统计</small>
+            </ng-template>
+            <timeline [data]="offlineChartData" [height]="239" [margin]="[0, 0, 0, 0]"
+                      [titleMap]="{ y1: '出库数量', y2: '入库数量' }"></timeline>
+        </nz-card>
+    </div>
+     <div nz-col nzXs="24" nzSm="24" nzMd="24" nzLg="12">
+        <nz-card [nzLoading]="loading" [nzBordered]="false" nzTitle="油品销售额类别占比" [nzBodyStyle]="{'padding.px': 24}" class="sales-card" style="min-height: 482px;">
+            <ng-template #extra>
+                <div class="sales-card-extra">
+                    <div class="sales-type-radio">
+                        <nz-radio-group [(ngModel)]="salesType" (ngModelChange)="changeSaleType()" [nzSize]="'large'">
+                            <label nz-radio-button [nzValue]="'all'"><span>1号仓库</span></label>
+                            <label nz-radio-button [nzValue]="'online'"><span>2号仓库</span></label>
+                            <label nz-radio-button [nzValue]="'offline'"><span>3号仓库</span></label>
+                            <label nz-radio-button [nzValue]="'depot'"><span>4号仓库</span></label>
+                        </nz-radio-group>
+                    </div>
                 </div>
-            </nz-card>
-        </div>
-        <div nz-col nzXs="24" nzMd="12">
-            <nz-card [nzTitle]="nzTitle" [nzBordered]="false" nzNoPadding>
-                <ng-template #nzTitle>
-                    Recent Posts
-                    <small class="text-sm font-weight-normal">Venenatis portauam Inceptos ameteiam</small>
+            </ng-template>
+            <ng-template #body>
+                <h4 class="margin:8px 0 32px 0;">销售额</h4>
+                <pie
+                    [hasLegend]="true"
+                    subTitle="销售额"
+                    [height]="248"
+                    [lineWidth]="4"
+                    [total]="salesTotal"
+                    [data]="salesPieData"
+                    [valueFormat]="handlePieValueFormat">
+                </pie>
+            </ng-template>
+        </nz-card>
+    </div>
+</div>
+<nz-card [nzLoading]="loading" [nzBordered]="false" [nzBodyStyle]="{'padding': '0 0 32px'}" class="offline-card mt-lg">
+    <ng-template #body>
+        <nz-tabset [(nzSelectedIndex)]="_activeTab" (nzSelectChange)="_tabChange($event)">
+            <nz-tab *ngFor="let tab of data.offlineData; let i = index;">
+                <ng-template #nzTabHeading>
+                    <div nz-row [nzGutter]="8" style="width: 138px; margin: 8px 0">
+                        <div nz-col [nzSpan]="12">
+                            <number-info
+                                [title]="tab.name"
+                                subTitle="出库率"
+                                gap="2"
+                                [total]="(tab.cvr * 100) + '%'"
+                                [theme]="i !== _activeTab && 'light'"></number-info>
+                        </div>
+                        <div nz-col [nzSpan]="12" style="padding-top: 36px">
+                            <pie
+                                [animate]="false"
+                                [color]="i !== _activeTab && '#BDE4FF'"
+                                [inner]="0.55"
+                                [tooltip]="false"
+                                [margin]="[0, 0, 0, 0]"
+                                [percent]="tab.cvr * 100"
+                                [height]="64">
+                            </pie>
+                        </div>
+                    </div>
                 </ng-template>
-                <div nz-row [nzType]="'flex'" [nzJustify]="'center'" [nzAlign]="'middle'" class="py-sm bg-grey-lighter-h point"
-                    *ngFor="let item of todoData">
-                    <div nz-col [nzSpan]="4" class="text-center">
-                        <nz-avatar [nzSrc]="'./assets/img/' + item.avatar + '.png'" [nzSize]="'large'"></nz-avatar>
-                    </div>
-                    <div nz-col [nzSpan]="20">
-                        <strong>{{item.name}}</strong>
-                        <p>{{item.content}}</p>
-                    </div>
+                <div class="px-lg">
+                    <timeline [data]="data.offlineChartData"
+                              [titleMap]="{ y1: '出库数量', y2: '入库数量' }"></timeline>
                 </div>
-            </nz-card>
-        </div>
-        <div nz-col nzXs="24" nzMd="12">
-            <nz-card nzTitle="Todo lists" [nzBordered]="false" nzNoPadding>
-                <div nz-row [nzType]="'flex'" [nzJustify]="'center'" [nzAlign]="'middle'" class="py-sm bg-grey-lighter-h point"
-                    *ngFor="let item of todoData">
-                    <div nz-col [nzSpan]="4" class="text-center">
-                        <nz-avatar [nzSrc]="'./assets/img/' + item.avatar + '.png'" [nzSize]="'large'"></nz-avatar>
+            </nz-tab>
+        </nz-tabset>
+    </ng-template>
+</nz-card>
+<nz-card [nzLoading]="loading" [nzBordered]="false" nzNoPadding class="sales-card">
+    <ng-template #body>
+        <nz-tabset>
+            <nz-tab>
+                <ng-template #nzTabHeading>出库量</ng-template>
+                <div nz-row>
+                    <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="16">
+                        <div class="bar">
+                            <bar
+                                height="295"
+                                [title]="'出库量趋势'"
+                                [data]="data.salesData"></bar>
+                        </div>
                     </div>
-                    <div nz-col [nzSpan]="18">
-                        <strong>{{item.name}}</strong>
-                        <p [class.text-deleted]="item.completed">{{item.content}}</p>
-                    </div>
-                    <div nz-col [nzSpan]="2" class="text-right pr-md">
-                        <nz-dropdown [nzPlacement]="'topRight'">
-                            <i nz-dropdown class="icon-options-vertical"></i>
-                            <ul nz-menu>
-                                <li nz-menu-item *ngIf="item.completed" (click)="item.completed=false">Active</li>
-                                <li nz-menu-item *ngIf="!item.completed" (click)="item.completed=true">Completed</li>
-                                <li nz-menu-item (click)="todoData.splice(todoData.indexOf(item), 1)">Delted</li>
+                    <!-- <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8">
+                        <div class="rank-list">
+                            <h4 class="rank-title">门店销售额排名</h4>
+                            <ul>
+                                <li *ngFor="let i of rankingListData; let idx = index">
+                                    <div>
+                                        <span class="icon" [ngClass]="{'active': idx < 3}">{{idx+1}}</span>
+                                        {{i.title}}
+                                    </div>
+                                    <span>{{i.total | number: '3.0'}}</span>
+                                </li>
                             </ul>
-                        </nz-dropdown>
-                    </div>
+                        </div>
+                    </div> -->
                 </div>
-            </nz-card>
-        </div>
-    </div>  -->
+            </nz-tab>
+            <nz-tab>
+                <ng-template #nzTabHeading>入库量</ng-template>
+                <div nz-row>
+                    <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="16">
+                        <div class="bar">
+                            <bar
+                                height="295"
+                                [title]="'入库量趋势'"
+                                [data]="data.salesData"></bar>
+                        </div>
+                    </div>
+                   <!--  <div nz-col nzXs="24" nzSm="24" nzMd="12" nzLg="8">
+                        <div class="rank-list">
+                            <h4 class="rank-title">门店访问量排名</h4>
+                            <ul>
+                                <li *ngFor="let i of rankingListData; let idx = index">
+                                    <div>
+                                        <span class="icon" [ngClass]="{'active': idx < 3}">{{idx+1}}</span>
+                                        {{i.title}}
+                                    </div>
+                                    <span>{{i.total | number: '3.0'}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> -->
+                </div>
+            </nz-tab>
+           <!--  <ng-template #nzTabBarExtraContent>
+                <div class="sales-extra-wrap">
+                    <div class="sales-extra">
+                        <a (click)="setDate('today')">今日</a>
+                        <a (click)="setDate('week')">本周</a>
+                        <a (click)="setDate('month')">本月</a>
+                        <a (click)="setDate('year')">全年</a>
+                    </div>
+                    <nz-datepicker style="width:120px" class="mr-md" [(ngModel)]="q.start" [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="'开始日期'"></nz-datepicker>
+                    <nz-datepicker style="width:120px" [(ngModel)]="q.end" [nzFormat]="'YYYY-MM-DD'" [nzPlaceHolder]="'结束日期'"></nz-datepicker>
+                </div>
+            </ng-template> -->
+        </nz-tabset>
+    </ng-template>
+</nz-card>
+
+         
+            
+            
