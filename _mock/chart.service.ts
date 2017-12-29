@@ -46,50 +46,50 @@ for (let i = 0; i < 50; i += 1) {
 }
 const salesTypeData = [
 	{
-		x: "家用电器",
+		x: "90号汽油",
 		y: 4544
 	},
 	{
-		x: "食用酒水",
+		x: "93号汽油",
 		y: 3321
 	},
 	{
-		x: "个护健康",
+		x: "97号汽油",
 		y: 3113
 	},
 	{
-		x: "服饰箱包",
+		x: "50号柴油",
 		y: 2341
 	},
 	{
-		x: "母婴产品",
+		x: "0号柴油",
 		y: 1231
 	},
 	{
-		x: "其他",
+		x: "5号柴油",
 		y: 1231
 	}
 ];
 
 const salesTypeDataOnline = [
 	{
-		x: "家用电器",
+		x: "90号汽油",
 		y: 244
 	},
 	{
-		x: "食用酒水",
+		x: "93号汽油",
 		y: 321
 	},
 	{
-		x: "个护健康",
+		x: "97号汽油",
 		y: 311
 	},
 	{
-		x: "服饰箱包",
+		x: "50号柴油",
 		y: 41
 	},
 	{
-		x: "母婴产品",
+		x: "0号柴油",
 		y: 121
 	},
 	{
@@ -100,19 +100,19 @@ const salesTypeDataOnline = [
 
 const salesTypeDataOffline = [
 	{
-		x: '家用电器',
+		x: "93号汽油",
 		y: 99
 	},
 	{
-		x: '个护健康',
+		x: "97号汽油",
 		y: 188
 	},
 	{
-		x: '服饰箱包',
+		x: "50号柴油",
 		y: 344
 	},
 	{
-		x: '母婴产品',
+		x: "0号柴油",
 		y: 255
 	},
 	{
@@ -124,7 +124,7 @@ const salesTypeDataOffline = [
 const offlineData = [];
 for (let i = 0; i < 10; i += 1) {
 	offlineData.push({
-		name: `门店${i}`,
+		name: `仓库${i}`,
 		cvr: Math.ceil(Math.random() * 9) / 10
 	});
 }
