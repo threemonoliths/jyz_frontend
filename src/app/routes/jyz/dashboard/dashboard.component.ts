@@ -9,6 +9,7 @@ import { GlobalService } from '../../../services/global.service';
     templateUrl: './dashboard.component.html'
 })
 
+
 export class DashboardComponent{
     data: any = {
         salesData: [],
@@ -83,9 +84,4 @@ export class DashboardComponent{
 
     
 }
-
-
-
-
-
 

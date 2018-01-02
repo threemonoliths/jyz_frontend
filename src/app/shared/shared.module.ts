@@ -30,6 +30,7 @@ const HELPERS = [ ModalHelper ];
 import {
     // LoggerModule,
     // NzLocaleModule,
+    NzTransferModule,
     NzButtonModule,
     NzAlertModule,
     NzBadgeModule,
@@ -79,6 +80,7 @@ import {
     NzMessageService
 } from 'ng-zorro-antd';
 const ZORROMODULES = [
+    NzTransferModule,
     // LoggerModule,
     // NzLocaleModule,
     NzButtonModule,

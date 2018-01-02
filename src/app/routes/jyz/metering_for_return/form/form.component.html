@@ -101,15 +101,15 @@
         <nz-table formArrayName="details" [nzDataSource]="details.value" [nzIsPagination]="false">
             <thead nz-thead>
                 <tr>
-                    <th nz-th>回罐车号</th>
-                    <th nz-th>检测卡号</th>
-                    <th nz-th>油品名称</th>
-                    <th nz-th>计量单位</th>
-                    <th nz-th>回罐数量</th>
-                    <th nz-th>回罐库存地</th>
-                    <th nz-th>备注</th>
+                    <th nz-th [nzWidth]="'12%'"><span>回罐车号</span></th>
+                    <th nz-th [nzWidth]="'12%'"><span>检测卡号</span></th>
+                    <th nz-th [nzWidth]="'12%'"><span>油品名称</span></th>
+                    <th nz-th [nzWidth]="'12%'"><span>计量单位</span></th>
+                    <th nz-th [nzWidth]="'12%'"><span>回罐数量</span></th>
+                    <th nz-th [nzWidth]="'12%'"><span>回罐库存地</span></th>
+                    <th nz-th [nzWidth]="'12%'"><span>备注</span></th>
                     
-                    <th nz-th *ngIf="editable">操作</th>
+                    <th nz-th *ngIf="editable" [nzWidth]="'12%'"><span>操作</span></th>
                 </tr>
             </thead>
             <tbody nz-tbody>
