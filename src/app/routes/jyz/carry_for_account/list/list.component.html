@@ -13,7 +13,7 @@
                         <div nz-form-item class="d-flex">
                         <div nz-form-label><label for="no">审核状态</label></div>
                         <div nz-form-control class="flex-1">
-                        <nz-select [(ngModel)]="q.audited" name="audited" nzAllowClear>
+                        <nz-select [(ngModel)]="q.audited" name="audited" nzAllowClear [nzSize]="'large'" [nzPlaceHolder]="'审核状态'">
                             <nz-option
                                 *ngFor="let option of options"
                                 [nzLabel]="option.label"

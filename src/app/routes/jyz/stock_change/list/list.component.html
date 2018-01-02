@@ -13,7 +13,7 @@
                         <div nz-form-item class="d-flex">
                             <div nz-form-label><label for="no">仓库</label></div>
                             <div nz-form-control class="flex-1">
-                                    <nz-select [(ngModel)]="q.warehouse" name="warehouse"  [nzPlaceHolder]="'请选择仓库'" nzId="warehouse">                                                 
+                                    <nz-select [(ngModel)]="q.warehouse" name="warehouse"  [nzPlaceHolder]="'请选择仓库'" nzId="warehouse" [nzSize]="'large'">                                                 
                                             <nz-option
                                                     *ngFor="let option of depotdata" 
                                                     [nzLabel]="option.depotname"

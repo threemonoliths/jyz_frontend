@@ -22,7 +22,7 @@
                     <div nz-form-label nz-col><label>移出罐（车）号</label></div>
                     <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="stockplace">
                             <div nz-form-control class="flex-1">
-                                    <nz-select formControlName="stockplace" [nzPlaceHolder]="'移出存地'" nzAllowClear [nzDisabled]="!editable" >
+                                    <nz-select formControlName="stockplace" [nzPlaceHolder]="'移出存地'" [nzSize]="'large'" nzAllowClear [nzDisabled]="!editable" >
                                         <nz-option
                                             *ngFor="let option of depotdata"
                                             [nzLabel]="option.depotname"
@@ -87,10 +87,9 @@
                 <div nz-form-item nz-row>
                     <div nz-form-label nz-col><label>日期</label></div>
                     <div nz-form-control nz-col >
-                        
                             <div nz-form-item nz-row>
                                 <div nz-form-control [nzValidateStatus]="date">
-                                    <nz-datepicker style="width: 99%;" [nzSize]="'large'" formControlName="date" [nzPlaceHolder]="'日期'" nzFormat="YYYY-MM-DD" [nzDisabled]="!editable"></nz-datepicker>
+                                    <nz-datepicker style="width: 100%;" [nzSize]="'large'" formControlName="date" [nzPlaceHolder]="'日期'" nzFormat="YYYY-MM-DD" [nzDisabled]="!editable"></nz-datepicker>
                                     <p nz-form-explain *ngIf="form.controls['date'].invalid && (form.controls['date'].dirty || form.controls['date'].touched) && form.controls['date'].errors.required">
                                         请选择日期
                                     </p>
