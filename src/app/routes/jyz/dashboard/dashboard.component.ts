@@ -1,14 +1,16 @@
 import { NzMessageService } from 'ng-zorro-antd';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { getFakeChartData } from '../../../../../_mock/chart.service';
 import { getTimeDistance, yuan } from 'app/utils/utils';
+import { GlobalService } from '../../../services/global.service';
 
 @Component({
     selector: 'app-dashboard-v1',
     templateUrl: './dashboard.component.html'
 })
-export class DashboardComponent {
-     data: any = {
+
+export class DashboardComponent{
+    data: any = {
         salesData: [],
         offlineData: []
     };
@@ -17,24 +19,29 @@ export class DashboardComponent {
         start: null,
         end: null
     };
-    constructor(public msg: NzMessageService) {
-        console.log(this.offlineChartData);
-    }
+    rankingListData: any[] = Array(7).fill({}).map((item, i) => {
+        return {
+            title: ` ${i} 号仓库`,
+            total: 323234
+        };
+    });
 
-    quickMenu = false;
+    
 
+    constructor(public msg: NzMessageService, private globalService: GlobalService) {}
+     quickMenu = false;
     webSite = [ ...getFakeChartData.visitData.slice(0, 10) ];
     salesData =  [...getFakeChartData.salesData];
     offlineChartData = Object.assign([], getFakeChartData.offlineChartData);
 
-     ngOnInit() {
+    ngOnInit() {
         setTimeout(() => {
             this.data = getFakeChartData;
             this.loading = false;
             this.changeSaleType();
         }, 500);
-    }
 
+    }
     setDate(type: string) {
         const rank = getTimeDistance(type);
         this.q.start = rank[0];
@@ -45,35 +52,40 @@ export class DashboardComponent {
         this.data.searchData = [
             ...(<any[]>this.data.searchData).sort((a, b) => {
                 if (a[ sortName ] > b[ sortName ]) {
-                    return (sortValue === 'ascend') ? 2 : -1;
+                    return (sortValue === 'ascend') ? 1 : -1;
                 } else if (a[ sortName ] < b[ sortName ]) {
-                    return (sortValue === 'ascend') ? -1 : 2;
+                    return (sortValue === 'ascend') ? -1 : 1;
                 } else {
                     return 0;
                 }
             })
         ];
     }
+
     salesType = 'all';
     salesPieData: any;
     salesTotal = 0;
-    /* changeSaleType() {
-        this.salesPieData = this.salesType === 'all' ? this.data.salesTypeData : (
-            this.salesType === 'online' ? this.data.salesTypeDataOnline : this.data.salesTypeDataOffline  
-        );
-        this.salesTotal = this.salesPieData.reduce((pre, now) => now.y + pre, 0);
-    } */
     changeSaleType() {
         this.salesPieData = this.salesType === 'all' ? this.data.salesTypeData : (
-            this.salesType === 'online' ? this.data.salesTypeDataOnline :(
-            this.salesType === 'offline' ? this.data.salesTypeDataOffline :  
-            this.data.salesTypeDatadepot)
+            this.salesType === 'online' ? this.data.salesTypeDataOnline : this.data.salesTypeDataOffline
         );
         this.salesTotal = this.salesPieData.reduce((pre, now) => now.y + pre, 0);
     }
+
     handlePieValueFormat(value: any) {
         return yuan(value);
     }
 
+    _activeTab = 0;
+    _tabChange(value: any) {
+        console.log('tab', this._activeTab, value);
+    }
+
+    
 }
+
+
+
+
+
 

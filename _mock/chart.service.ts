@@ -46,80 +46,78 @@ for (let i = 0; i < 50; i += 1) {
 }
 const salesTypeData = [
 	{
-		x: "92#汽油",
+		x: "90号汽油",
 		y: 4544
 	},
 	{
-		x: "95#柴油",
+		x: "93号汽油",
 		y: 3321
 	},
 	{
-		x: "97#汽油",
+		x: "97号汽油",
 		y: 3113
 	},
 	{
-		x: "其他",
+		x: "50号柴油",
+		y: 2341
+	},
+	{
+		x: "0号柴油",
+		y: 1231
+	},
+	{
+		x: "5号柴油",
 		y: 1231
 	}
 ];
 
 const salesTypeDataOnline = [
 	{
-		x: '0#柴油',
-		y: 774
+		x: "90号汽油",
+		y: 244
 	},
 	{
-		x: '92#汽油',
-		y: 865
+		x: "93号汽油",
+		y: 321
 	},
 	{
-		x: '95#汽油',
-		y: 234
+		x: "97号汽油",
+		y: 311
 	},
 	{
-		x: '97#汽油',
-		y: 542
+		x: "50号柴油",
+		y: 41
+	},
+	{
+		x: "0号柴油",
+		y: 121
 	},
 	{
 		x: '其他',
-		y: 754
+		y: 111
 	}
 ];
 
 const salesTypeDataOffline = [
 	{
-		x: '0#柴油',
-		y: 994
+		x: "93号汽油",
+		y: 99
 	},
 	{
-		x: '92#汽油',
+		x: "97号汽油",
 		y: 188
 	},
 	{
-		x: '95#汽油',
+		x: "50号柴油",
 		y: 344
 	},
 	{
-		x: '其他',
-		y: 654
-	}
-];
-const salesTypeDatadepot = [
-	{
-		x: '0#柴油',
-		y: 994
-	},
-	{
-		x: '92#汽油',
-		y: 188
-	},
-	{
-		x: '95#汽油',
-		y: 344
+		x: "0号柴油",
+		y: 255
 	},
 	{
 		x: '其他',
-		y: 654
+		y: 65
 	}
 ];
 
@@ -127,11 +125,11 @@ const offlineData = [];
 for (let i = 1; i < 5; i += 1) {
 	offlineData.push({
 		name: `仓库${i}`,
-		cvr: Math.ceil(Math.random() * 3) / 4
+		cvr: Math.ceil(Math.random() * 4) / 5
 	});
 }
 const offlineChartData = [];
-for (let i = 0; i < 25; i += 1) {
+for (let i = 0; i < 20; i += 1) {
 	offlineChartData.push({
 		x: new Date().getTime() + 1000 * 60 * 30 * i,
 		y1: Math.floor(Math.random() * 100) + 10,
