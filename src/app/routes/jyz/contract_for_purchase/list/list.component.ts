@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { GlobalService } from '../../../../services/global.service';
 import { ContractForPurchaseService } from '../../../../services/contract_for_purchase.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
@@ -53,7 +53,7 @@ export class ContractForPurchaseListComponent implements OnInit {
     description = '';
 
     constructor(public msg: NzMessageService, private globalService: GlobalService,
-                private contractForPurchaseService: ContractForPurchaseService, private router: Router) {}
+                private contractForPurchaseService: ContractForPurchaseService, private router: Router,  private confirmserv:NzModalService) {}
 
     ngOnInit() {
         console.log(this.q);
@@ -156,6 +156,10 @@ export class ContractForPurchaseListComponent implements OnInit {
     }
 
     delete(id) {
+        this.confirmserv.confirm({
+            title : '您是否要删除这项内容',
+            content :'点击OK删除该条记录',
+            onOk : () =>{
         this.contractForPurchaseService.delete(id).then(resp =>  {
             if ('error' in resp) { 
                 this.msg.error(resp.error);
@@ -163,7 +167,10 @@ export class ContractForPurchaseListComponent implements OnInit {
                 this.msg.success('删除采购合同：'+resp.cno + '成功！');
             }
             this.getData()}).catch(error => this.msg.error(error));
-    }
+    },
+    onCancel(){}
+});
+}
 
     //更新按钮事件
     update(id): void {

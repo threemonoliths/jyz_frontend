@@ -144,9 +144,7 @@
                     <span nz-table-divider></span>
                     <a (click)="update(i.id)">修改</a>
                     <span nz-table-divider></span>
-                    <nz-popconfirm (nzOnConfirm)="delete(i.id)" [nzTitle]="'确定要删除吗？'">
-                        <a nz-popconfirm>删除</a>
-                    </nz-popconfirm>
+                    <a (click)="delete(i.id)">删除</a>
                 </td>
                 <td nz-td *ngIf="i.audited">
                     <a (click)="show(i.id)" >查看</a> 

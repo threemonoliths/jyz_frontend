@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 import { GlobalService } from '../../../../services/global.service';
 import { CarryForAccountService } from '../../../../services/carry_for_account.service';
 import { getRule, saveRule, removeRule } from '../../../../../../_mock/rule.service';
@@ -47,7 +47,7 @@ export class CarryForAccountListComponent implements OnInit {
     description = '';
 
     constructor(public msg: NzMessageService, private globalService: GlobalService,
-                private contractForPurchaseService: CarryForAccountService, private router: Router) {}
+                private carryForAccountService: CarryForAccountService, private router: Router, private confirmserv:NzModalService) {}
 
     ngOnInit() {
         console.log(this.q);
@@ -60,13 +60,13 @@ export class CarryForAccountListComponent implements OnInit {
         console.log("in getData")
         console.log(this.q)
         this.loading = true;   
-        this.contractForPurchaseService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
+        this.carryForAccountService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
                                                      .catch((error) => {this.msg.error(error); this.loading = false;})                                           
     }
 
     add() {
          //新增按钮事件
-        this.contractForPurchaseService.formOperation = 'create';
+        this.carryForAccountService.formOperation = 'create';
         this.router.navigateByUrl('/layout/content/carry_for_account/form');
     }
     
@@ -78,9 +78,9 @@ export class CarryForAccountListComponent implements OnInit {
     }
 
     remove() {
-        this.selectedRows.forEach(i => removeRule(i.no));
-        this.getData();
-        this.clear();
+                this.selectedRows.forEach(i => removeRule(i.no));
+                this.getData();
+                this.clear();
     }
 
     approval() {
@@ -146,40 +146,47 @@ export class CarryForAccountListComponent implements OnInit {
     }
 
     delete(id) {
-        this.contractForPurchaseService.delete(id).then(resp =>  {
-            if ('error' in resp) { 
-                this.msg.error(resp.error);
-            } else {
-                this.msg.success('删除销售油品提用表：'+resp.companyname + '成功！');
-            }
-            this.getData()}).catch(error => this.msg.error(error));
+        this.confirmserv.confirm({
+            title : '您是否要删除这项内容',
+            content :'点击OK删除该条记录',
+            onOk : () => {this.carryForAccountService.delete(id).then(resp =>  {
+                if ('error' in resp) { 
+                    this.msg.error(resp.error);
+                } else {
+                    this.msg.success('删除销售油品提用表：'+resp.companyname + '成功！');
+                }
+                this.getData()}).catch(error => this.msg.error(error));},
+            onCancel(){
+                }       
+            });
     }
+
 
     //更新按钮事件
     update(id): void {
-        this.contractForPurchaseService.formOperation='update';
-        this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateCarryAccount = result; 
-                                this.contractForPurchaseService.updateCarryAccount.details = result.carry_for_account_details})
+        this.carryForAccountService.formOperation='update';
+        this.carryForAccountService.initUpdate(id)
+            .then(result => { this.carryForAccountService.updateCarryAccount = result; 
+                                this.carryForAccountService.updateCarryAccount.details = result.carry_for_account_details})
             .then(() => this.router.navigateByUrl('/layout/content/carry_for_account/form')).catch((error)=>
             console.log(error)); 
     }
 
     //审核按钮事件
     audit(id) :void {
-        this.contractForPurchaseService.formOperation='audit';
-        this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateCarryAccount = result; 
-                              this.contractForPurchaseService.updateCarryAccount.details = result.carry_for_account_details})
+        this.carryForAccountService.formOperation='audit';
+        this.carryForAccountService.initUpdate(id)
+            .then(result => { this.carryForAccountService.updateCarryAccount = result; 
+                              this.carryForAccountService.updateCarryAccount.details = result.carry_for_account_details})
             .then(() => this.router.navigateByUrl('/layout/content/carry_for_account/form')).catch((error)=>
             console.log(error)); 
     }
 
     show(id) :void {
-        this.contractForPurchaseService.formOperation='show';
-        this.contractForPurchaseService.initUpdate(id)
-            .then(result => { this.contractForPurchaseService.updateCarryAccount = result; 
-                              this.contractForPurchaseService.updateCarryAccount.details = result.carry_for_account_details})
+        this.carryForAccountService.formOperation='show';
+        this.carryForAccountService.initUpdate(id)
+            .then(result => { this.carryForAccountService.updateCarryAccount = result; 
+                              this.carryForAccountService.updateCarryAccount.details = result.carry_for_account_details})
             .then(() => this.router.navigateByUrl('/layout/content/carry_for_account/form')).catch((error)=>
             console.log(error));
     }
