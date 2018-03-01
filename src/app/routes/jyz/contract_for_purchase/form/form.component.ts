@@ -72,6 +72,7 @@ export class ContractForPurchaseFormComponent implements OnInit {
             model: [ null, [ Validators.required ] ],
             producer: [ null, [ Validators.required ] ],
             amount: [ null, [ Validators.required, this.validateNumber.bind(this)] ],
+            stockin_amount: [ 0, [ Validators.required ] ],
             unit: [ null, [ Validators.required ] ],
             price: [ null, [ Validators.required, this.validateNumber.bind(this)] ],
             totalprice: [ 0, [ Validators.required ] ]
@@ -83,6 +84,7 @@ export class ContractForPurchaseFormComponent implements OnInit {
     get date() { return this.form.controls.date; }
     get location() { return this.form.controls.location; }
     get amount() { return this.form.controls.amount; }
+    // get stockin_amount() { return this.form.controls.stockin_amount; }
     get partya() { return this.form.controls.partya; }
     get partyb() { return this.form.controls.partyb; }
     get audited() { return this.form.controls.audited; }

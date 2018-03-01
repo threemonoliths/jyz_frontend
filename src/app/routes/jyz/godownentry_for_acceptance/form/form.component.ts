@@ -9,6 +9,7 @@ import { GodownentryForAcceptance } from '../../../../domains/godownentry_for_ac
 import { GlobalService } from '../../../../services/global.service';
 import { OilDepotService } from '../../../../services/oil_depot.service';
 import { DictService } from '../../../../services/dict.service';
+import { ContractForPurchaseService } from '../../../../services/contract_for_purchase.service';
 import { stringToDate} from '../../../../utils/utils';
 
 @Component({
@@ -16,6 +17,7 @@ import { stringToDate} from '../../../../utils/utils';
     templateUrl: './form.component.html'
 })
 export class GodownentryForAcceptanceFormComponent implements OnInit {
+
     editIndex = -1;
     editObj = {};
     form: FormGroup;
@@ -28,12 +30,24 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
 
     // 自定义验证器，验证失败时，需要手工添加class：has-error
     amout_error = ''
-     constructor(private fb: FormBuilder, private router: Router, private godownentryForAcceptanceService: GodownentryForAcceptanceService, 
-                private globalService: GlobalService, private msg: NzMessageService,private oilDepotService:OilDepotService,private dictService: DictService ) {}
+    
+    constructor(
+        private fb: FormBuilder, 
+        private router: Router, 
+        private godownentryForAcceptanceService: GodownentryForAcceptanceService, 
+        private globalService: GlobalService, 
+        private msg: NzMessageService,
+        private oilDepotService:OilDepotService,
+        private dictService: DictService,
+        private cfpService: ContractForPurchaseService
+    ) {
+        
+    }
 
     ngOnInit() {
         this.getDepot();
         this.getDictOil();
+        this.getContractNo();
         let op = this.godownentryForAcceptanceService.formOperation;
         if (op == 'create') this.initCreate();
         if (op == 'update') this.initUpdate();
@@ -68,8 +82,13 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
     createDetail(): FormGroup {
         return this.fb.group({
             oilname: [ null, [ Validators.required ] ],
+
             planquantity: [ null, [ Validators.required , this.validateNumber.bind(this)] ],
-            realquantity: [null, [ Validators.required , this.validateNumber.bind(this)] ],
+
+            weight: [ null, [ Validators.required , this.validateNumber.bind(this)] ],
+            density: [null, [ Validators.required , this.validateNumber.bind(this)] ],
+
+            realquantity: [0, [ Validators.required ] ],
             stockplace: [ null, [ Validators.required ] ],
             comment: [ null, [ Validators.required ] ],
             price: [ null, [ Validators.required, this.validateNumber.bind(this)] ],
@@ -112,8 +131,10 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
     save(index: number) {
         this.details.at(index).markAsDirty();
         if (this.details.at(index).invalid) return;
-        let total = this.details.at(index)['controls']['price'].value * this.details.at(index)['controls']['realquantity'].value
+        let total = this.details.at(index)['controls']['price'].value * this.details.at(index)['controls']['weight'].value
         this.details.at(index)['controls']['totalprice'].setValue(total)
+        let realquantity = this.details.at(index)['controls']['weight'].value * this.details.at(index)['controls']['density'].value * 1000
+        this.details.at(index)['controls']['realquantity'].setValue(realquantity)
         this.editIndex = -1;
 
     }
@@ -203,6 +224,7 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
     
     depotdata: any[] = [];
     oildata: any[]=[];
+    cnodata: any[]=[];
     p: any = 
     {
         name: "fuel_type",
@@ -210,15 +232,15 @@ export class GodownentryForAcceptanceFormComponent implements OnInit {
 
    
     getDepot() {
-        console.log("in getDepot")
-    this.oilDepotService.listAll().then(resp =>  {this.depotdata = resp.entries;})
-                                                     .catch((error) => {this.msg.error(error);})                                           
+        this.oilDepotService.listAll().then(resp =>  {this.depotdata = resp.entries;}).catch((error) => {this.msg.error(error);})                                           
     }
    
     getDictOil() {
-        console.log("in getOil")
-    this.dictService.listAll(this.p).then(resp =>  {this.oildata = resp.entries;})
-                                                     .catch((error) => {this.msg.error(error);})                                           
+        this.dictService.listAll(this.p).then(resp =>  {this.oildata = resp.entries;}).catch((error) => {this.msg.error(error);})                                           
+    }
+
+    getContractNo() {
+        this.cfpService.listCno().then(resp =>  {this.cnodata = resp;}).catch((error) => {this.msg.error(error);})
     }
     
 

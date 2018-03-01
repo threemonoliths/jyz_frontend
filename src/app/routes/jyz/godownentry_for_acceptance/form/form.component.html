@@ -33,7 +33,13 @@
                 <div nz-form-item nz-row>
                     <div nz-form-label nz-col><label>合同编号</label></div>
                     <div nz-form-control nz-col nzHasFeedback [nzValidateStatus]="cno">
-                        <nz-input formControlName="cno" nzPlaceHolder="请输入合同编号" nzSize="large" [nzDisabled]="!editable"></nz-input>
+                        <nz-select formControlName="cno" nzSize="large" nzShowSearch='true' nzPlaceHolder="请输入合同编号">
+                            <nz-option
+                              *ngFor="let option of cnodata"
+                              [nzLabel]="option"
+                              [nzValue]="option">
+                            </nz-option>
+                        </nz-select>
                         
                         <p nz-form-explain *ngIf="form.controls['cno'].invalid && (form.controls['cno'].dirty || form.controls['cno'].touched) && form.controls['cno'].errors.required">
                             请输合同编号
@@ -98,13 +104,17 @@
         <nz-table formArrayName="details" [nzDataSource]="details.value" [nzIsPagination]="false">
             <thead nz-thead>
                 <tr>
-                    <th nz-th [nzWidth]="'12%'"><span>油品名称</span></th>
-                    <th nz-th [nzWidth]="'12%'"><span>计划采购量</span></th>
-                    <th nz-th [nzWidth]="'12%'"><span>实收数量</span></th>
-                    <th nz-th [nzWidth]="'12%'"><span>入库单价</span></th>
-                    <th nz-th [nzWidth]="'12%'"><span>库存地</span></th>
-                    <th nz-th [nzWidth]="'12%'"><span>备注</span></th>
-                    <th nz-th [nzWidth]="'12%'"><span>入库金额</span></th>
+                    <th nz-th [nzWidth]="'10%'"><span>油品名称</span></th>
+                    <th nz-th [nzWidth]="'10%'"><span>计划采购量(吨)</span></th>
+
+                    <th nz-th [nzWidth]="'10%'"><span>实收数量(吨)</span></th>
+                    <th nz-th [nzWidth]="'10%'"><span>密度</span></th>
+
+                    <th nz-th [nzWidth]="'10%'"><span>实收数量(升)</span></th>
+                    <th nz-th [nzWidth]="'10%'"><span>入库单价</span></th>
+                    <th nz-th [nzWidth]="'10%'"><span>库存地</span></th>
+                    <th nz-th [nzWidth]="'10%'"><span>备注</span></th>
+                    <th nz-th [nzWidth]="'10%'"><span>入库金额</span></th>
                     
                     <th nz-th *ngIf="editable"><span>操作</span></th>
                 </tr>
@@ -115,7 +125,7 @@
                         <span *ngIf="editIndex!==i">{{details.value[i].oilname}}</span>
                         <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.oilname">
                             <div nz-form-control class="flex-1">
-                                <nz-select  formControlName="oilname" [nzPlaceHolder]="'油品名称'" nzAllowClear  >
+                                <nz-select  formControlName="oilname" [nzPlaceHolder]="'油品名称'" nzSize="large" nzAllowClear  >
                                     <nz-option
                                         *ngFor="let options of oildata"
                                         [nzLabel]="options.parm"
@@ -132,10 +142,24 @@
                             <nz-input formControlName="planquantity" nzPlaceHolder="请输入计划采购量" nzSize="large"></nz-input>
                         </span>
                     </td>
+
+                    <td nz-td>
+                        <span *ngIf="editIndex!==i">{{details.value[i].weight}}</span>
+                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.weight">
+                            <nz-input formControlName="weight" nzPlaceHolder="请输入实收数量(吨)" nzSize="large"></nz-input>
+                        </span>
+                    </td>
+                    <td nz-td>
+                        <span *ngIf="editIndex!==i">{{details.value[i].density}}</span>
+                        <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.density">
+                            <nz-input formControlName="density" nzPlaceHolder="请输入密度" nzSize="large"></nz-input>
+                        </span>
+                    </td>
+
                     <td nz-td>
                         <span *ngIf="editIndex!==i">{{details.value[i].realquantity}}</span>
                         <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.realquantity">
-                            <nz-input formControlName="realquantity" nzPlaceHolder="请输入实收数量" nzSize="large"></nz-input>
+                            <nz-input formControlName="realquantity" nzPlaceHolder="实收数量(升)" nzSize="large" nzDisabled="true"></nz-input>
                         </span>
                     </td>
                     <td nz-td>
@@ -148,7 +172,7 @@
                             <span *ngIf="editIndex!==i">{{details.value[i].stockplace}}</span>
                             <span *ngIf="editIndex===i" nz-form-control [nzValidateStatus]="item.controls.stockplace">
                                 <!-- <nz-input formControlName="stockplace" nzPlaceHolder="请输入仓库地址" nzSize="large"></nz-input>                                                      -->
-                                    <nz-select [(ngModel)]="selected" formControlName="stockplace"  [nzPlaceHolder]="'请输入仓库地址'">                                                 
+                                    <nz-select [(ngModel)]="selected" formControlName="stockplace" [nzPlaceHolder]="'请输入仓库地址'" nzSize="large">                                                 
                                     <nz-option
                                             *ngFor="let option of depotdata" 
                                             [nzLabel]="option.depotname"

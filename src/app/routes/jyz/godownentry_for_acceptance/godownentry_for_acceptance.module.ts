@@ -12,6 +12,7 @@ import { GodownentryForAcceptanceListComponent } from './list/list.component';
 import { godownentryForAcceptanceRoutes} from './godownentry_for_acceptance.routes';
 import { GodownentryForAcceptanceService } from '../../../services/godownentry_for_acceptance.service';
 import { DictService } from '../../../services/dict.service';
+import { ContractForPurchaseService } from '../../../services/contract_for_purchase.service';
 import { MainPipe } from '../pipes/pipe.module';
 
  
@@ -33,6 +34,7 @@ import { MainPipe } from '../pipes/pipe.module';
     OilDepotService,
     DictService,
     GodownentryForAcceptanceService,
+    ContractForPurchaseService
     // ConfirmationService
   ]
 })

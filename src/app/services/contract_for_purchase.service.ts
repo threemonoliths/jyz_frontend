@@ -23,6 +23,11 @@ export class ContractForPurchaseService {
                .toPromise().then(res => {return res.json()})           
   }
 
+  listCno() {
+    return this.http.get(baseUrl + "purchase_contract_no")
+               .toPromise().then(res => {return res.json()})           
+  }
+
   add(v): Promise<any>{ 
     this.getDate(v);
     
