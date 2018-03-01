@@ -156,10 +156,8 @@
                     <a (click)="audit(i.id)">审核</a>
                     <span nz-table-divider></span>
                     <a (click)="update(i.id)">修改</a>
-                    <span nz-table-divider></span>
-                    <nz-popconfirm (nzOnConfirm)="delete(i.id)" [nzTitle]="'确定要删除吗？'">
-                        <a nz-popconfirm>删除</a>
-                    </nz-popconfirm>
+                    <span nz-table-divider></span>       
+                    <a (click)="delete(i.id)">删除</a>
                 </td>
                  <td nz-td *ngIf="i.audited">
                     <a (click)="show(i.id)" >查看</a> 
@@ -168,16 +166,4 @@
         </tbody>
     </nz-table>
 </nz-card>
-<!--
-<nz-modal [nzVisible]="modalVisible" [nzTitle]="'新建规则'" [nzConfirmLoading]="loading" [nzContent]="modalContent"
-    (nzOnCancel)="modalVisible=false" (nzOnOk)="save()">
-    <ng-template #modalContent>
-        <div nz-form-item class="d-flex">
-            <div nz-form-label><label for="no">描述</label></div>
-            <div nz-form-control class="flex-1">
-                <nz-input [(ngModel)]="description" name="description" [nzSize]="'large'" [nzPlaceHolder]="'请输入'" nzId="no"></nz-input>
-            </div>
-        </div>
-    </ng-template>
-</nz-modal>
--->
+

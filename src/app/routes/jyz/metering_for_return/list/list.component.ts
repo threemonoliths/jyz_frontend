@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 
 import { GlobalService } from '../../../../services/global.service';
 import { MeteringForReturnService } from '../../../../services/metering_for_return.service';
@@ -54,7 +54,7 @@ export class MeteringForReturnListComponent implements OnInit {
     description = '';
 
     constructor(public msg: NzMessageService, private globalService: GlobalService, 
-                private meteringForReturnService: MeteringForReturnService, private router: Router) {}
+                private meteringForReturnService: MeteringForReturnService, private router: Router,  private confirmserv:NzModalService) {}
 
     ngOnInit() {
         console.log(this.q);
@@ -174,6 +174,10 @@ export class MeteringForReturnListComponent implements OnInit {
     }
 
     delete(id) {
+        this.confirmserv.confirm({
+            title : '您是否要删除这项内容',
+            content :'点击OK删除该条记录',
+            onOk : () =>{
         this.meteringForReturnService.delete(id).then(resp =>  {
             if ('error' in resp) { 
                 this.msg.error(resp.error);
@@ -181,7 +185,9 @@ export class MeteringForReturnListComponent implements OnInit {
                 this.msg.success('删除油品回罐单：'+resp.billno + '成功！');
             }
             this.getData()}).catch(error => this.msg.error(error));
-    }
+             } 
+  });
+}
 
     //更新按钮事件
     update(id): void {

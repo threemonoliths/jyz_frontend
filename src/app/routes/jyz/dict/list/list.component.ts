@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 
 import { GlobalService } from '../../../../services/global.service';
 import { DictService } from '../../../../services/dict.service';
@@ -48,7 +48,7 @@ export class DictListComponent implements OnInit {
     description = '';
 
     constructor(public msg: NzMessageService, private globalService: GlobalService,
-                private dictService: DictService, private router: Router) {}
+                private dictService: DictService, private router: Router, private confirmserv:NzModalService) {}
 
     ngOnInit() {
         console.log(this.q);
@@ -60,8 +60,7 @@ export class DictListComponent implements OnInit {
     getData() {
         console.log("in getData")
         console.log(this.q)
-        this.loading = true;
-        
+        this.loading = true;   
         this.dictService.listOnePage(this.q).then(resp =>  {this.data = resp.entries;this.total = resp.total_entries; this.loading = false;})
                                                      .catch((error) => {this.msg.error(error); this.loading = false;})                                           
     }
@@ -69,7 +68,6 @@ export class DictListComponent implements OnInit {
     add() {
          //新增按钮事件
         this.dictService.formOperation = 'create';
-        //this.dictService.isUpdate=false;
         this.router.navigateByUrl('/layout/content/dict/form');
     }
     
@@ -87,10 +85,7 @@ export class DictListComponent implements OnInit {
         this.clear();
     }
 
-    // approval() {
-    //     this.msg.success(`审批了 ${this.selectedRows.length} 笔`);
-    // }
-
+   
     clear() {
         this.selectedRows = [];
         this.totalCallNo = 0;
@@ -114,12 +109,7 @@ export class DictListComponent implements OnInit {
         this.totalCallNo = this.selectedRows.reduce((total, cv) => total + cv.callNo, 0);
     }
 
-    sort(field: string, value: any) {
-        // this.sortMap = {};
-        // this.sortMap[field] = value;
-        // this.q.sorter = value ? `${field}_${value}` : '';
-        // this.sortMap
-        //this.loading = true;
+    sort(field: string, value: any) {  
         console.log("sort value is:")
         console.log(value);
         this.q.sf = field;
@@ -136,18 +126,11 @@ export class DictListComponent implements OnInit {
 
     pageChange(pi: number) {
         this.q.pi = pi;
-        //this.loading = true;
         this.getData();
-        // return new Promise((resolve) => {
-        //     setTimeout(() => {
-        //         this.loading = false;
-        //         resolve();
-        //     }, 500);
-        // });
+     
     }
 
     search() {
-        //this.loading = true;
         this.q.pi = 1;
         this.getData()
     }
@@ -168,6 +151,10 @@ export class DictListComponent implements OnInit {
     }
 
     delete(id) {
+        this.confirmserv.confirm({
+            title : '您是否要删除该数据字典',
+            content :'点击 OK 删除',
+            onOk : () =>{
         this.dictService.delete(id).then(resp =>  {
             if ('error' in resp) { 
                 this.msg.error(resp.error);
@@ -175,6 +162,8 @@ export class DictListComponent implements OnInit {
                 this.msg.success('删除数据字典：'+resp.depotname + '成功！');
             }
             this.getData()}).catch(error => this.msg.error(error));
+            }
+        });
     }
 
     //更新按钮事件
@@ -187,16 +176,7 @@ export class DictListComponent implements OnInit {
 
     }
 
-    // //审核按钮事件
-    // audit(id) :void {
-    //     this.dictService.formOperation='audit';
-    //     this.dictService.initUpdate(id)
-    //         .then(result => { this.dictService.updateDict = result; 
-    //                           this.dictService.updateDict.details = result.dict_details})
-    //         .then(() => this.router.navigateByUrl('/layout/content/dict/form')).catch((error)=>
-    //         console.log(error)); 
-    // }
-
+   
     show(id) :void {
         this.dictService.formOperation='show';
         this.dictService.initUpdate(id)

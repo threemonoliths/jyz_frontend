@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 
 import { GlobalService } from '../../../../services/global.service';
 import { UserManagementService } from '../../../../services/user_management.service';
@@ -52,7 +52,7 @@ export class UserManagementListComponent implements OnInit {
     description = '';
 
     constructor(public msg: NzMessageService, private globalService: GlobalService,
-                private userManagementService: UserManagementService, private router: Router) {}
+                private userManagementService: UserManagementService, private router: Router, private confirmserv:NzModalService) {}
 
     ngOnInit() {
         console.log(this.q);
@@ -160,6 +160,10 @@ export class UserManagementListComponent implements OnInit {
     }
 
     delete(id) {
+        this.confirmserv.confirm({
+            title : '您是否要删除该用户',
+            content :'点击OK删除',
+            onOk : () =>{
         this.userManagementService.delete(id).then(resp =>  {
             if ('error' in resp) { 
                 this.msg.error(resp.error);
@@ -167,6 +171,8 @@ export class UserManagementListComponent implements OnInit {
                 this.msg.success('删除用户：'+resp.username + '成功！');
             }
             this.getData()}).catch(error => this.msg.error(error));
+            }
+        });
     }
 
     //更新按钮事件

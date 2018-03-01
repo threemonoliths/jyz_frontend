@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService  } from 'ng-zorro-antd';
 
 import { GlobalService } from '../../../../services/global.service';
 import { DispatchForPurchaseService } from '../../../../services/dispatch_for_purchase.service';
@@ -64,7 +64,7 @@ export class DispatchForPurchaseListComponent implements OnInit {
     description = '';
 
     constructor(public msg: NzMessageService, private globalService: GlobalService, 
-                private dispatchForPurchaseService: DispatchForPurchaseService, private router: Router) {}
+                private dispatchForPurchaseService: DispatchForPurchaseService, private router: Router, private confirmserv:NzModalService) {}
 
     ngOnInit() {
         console.log(this.q);
@@ -184,8 +184,19 @@ export class DispatchForPurchaseListComponent implements OnInit {
     }
 
     delete(id) {
-        this.dispatchForPurchaseService.delete(id).then(resp =>
-            this.getData());
+        this.confirmserv.confirm({
+            title : '您是否要删除这项内容',
+            content :'点击OK删除该条记录',
+            onOk : () =>{
+        this.dispatchForPurchaseService.delete(id).then(resp =>  {
+            if ('error' in resp) { 
+                this.msg.error(resp.error);
+            } else {
+                this.msg.success('删除油品出库表：'+resp.billno + '成功！');
+            }
+            this.getData()}).catch(error => this.msg.error(error));
+    }
+        });
     }
     //更新按钮事件
     update(id): void {

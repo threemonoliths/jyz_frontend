@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { NzMessageService } from 'ng-zorro-antd';
+import { NzMessageService, NzModalService } from 'ng-zorro-antd';
 
 import { GlobalService } from '../../../../services/global.service';
 import { GodownentryForAcceptanceService } from '../../../../services/godownentry_for_acceptance.service';
@@ -57,7 +57,7 @@ export class GodownentryForAcceptanceListComponent implements OnInit {
     description = '';
 
     constructor(public msg: NzMessageService, private globalService: GlobalService,
-                private godownentryForAcceptanceService: GodownentryForAcceptanceService, private router: Router) {}
+                private godownentryForAcceptanceService: GodownentryForAcceptanceService, private router: Router,  private confirmserv:NzModalService) {}
 
     ngOnInit() {
         console.log(this.q);
@@ -166,6 +166,10 @@ export class GodownentryForAcceptanceListComponent implements OnInit {
     }
 
     delete(id) {
+        this.confirmserv.confirm({
+            title : '您是否要删除这项内容',
+            content :'点击OK删除该条记录',
+            onOk : () =>{
         this.godownentryForAcceptanceService.delete(id).then(resp =>  {
             if ('error' in resp) { 
                 this.msg.error(resp.error);
@@ -174,6 +178,8 @@ export class GodownentryForAcceptanceListComponent implements OnInit {
             }
             this.getData()}).catch(error => this.msg.error(error));
     }
+});
+}
 
     //更新按钮事件
     update(id): void {
